@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { montserrat } from "../fonts";
-import { GoogleLoginButton } from "./google-login-button";
+import GoogleLoginButton from "./google-login-button";
 
 // mms_B_Bìa (Figma 662:14393): key-visual logo + heading + Google login button,
 // stacked with a 80px gap; heading/button group indented 16px (Frame 550 padding-left).

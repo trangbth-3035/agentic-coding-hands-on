@@ -10,6 +10,7 @@
   --color-saa-gold-muted: #998c5f;
   --color-saa-cream: #dbd1c1;
   --color-saa-red: #d4271d;
+  --color-saa-divider: #2e3940;
 
   --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --font-dseg: "DSEG7 Classic", ui-monospace, monospace;
@@ -35,6 +36,8 @@
 
 html {
   background-color: var(--color-saa-bg);
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* clear the fixed header on anchor jumps */
 }
 
 body {
@@ -47,4 +50,10 @@ body {
 /* Hide scrollbar chrome on the language/account popovers but keep scroll */
 .saa-no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Justified Vietnamese body copy (Awards System page) reads better inter-word. */
+.saa-justify {
+  text-align: justify;
+  text-justify: inter-word;
 }

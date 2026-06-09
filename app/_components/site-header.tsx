@@ -18,18 +18,20 @@ export default function SiteHeader({
   user,
   dict,
   locale,
+  activeKey = "about",
 }: {
   user: HeaderUser;
   dict: Dictionary;
   locale: Locale;
+  activeKey?: "about" | "awards" | "kudos";
 }) {
   const [accountOpen, setAccountOpen] = useState(false);
 
   const nav = [
-    { label: dict.nav.about, href: NAV_HREFS.about, selected: true },
-    { label: dict.nav.awards, href: NAV_HREFS.awards, selected: false },
-    { label: dict.nav.kudos, href: NAV_HREFS.kudos, selected: false },
-  ];
+    { key: "about", label: dict.nav.about, href: NAV_HREFS.about },
+    { key: "awards", label: dict.nav.awards, href: NAV_HREFS.awards },
+    { key: "kudos", label: dict.nav.kudos, href: NAV_HREFS.kudos },
+  ].map((item) => ({ ...item, selected: item.key === activeKey }));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-gradient-to-b from-saa-bg/95 to-saa-bg/40 backdrop-blur-md">
