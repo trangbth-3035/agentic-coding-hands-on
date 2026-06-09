@@ -1,26 +1,50 @@
 @import "tailwindcss";
 
+@theme {
+  /* SAA 2025 palette (sampled from Figma styles) */
+  --color-saa-bg: #00101a;
+  --color-saa-bg-2: #001320;
+  --color-saa-panel: #0f1417;
+  --color-saa-gold: #fae287;
+  --color-saa-gold-light: #ffea9e;
+  --color-saa-gold-muted: #998c5f;
+  --color-saa-cream: #dbd1c1;
+  --color-saa-red: #d4271d;
+
+  --font-sans: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-dseg: "DSEG7 Classic", ui-monospace, monospace;
+}
+
+/* 7-segment LCD font for the prelaunch countdown (keshikan/DSEG, SIL OFL) */
+@font-face {
+  font-family: "DSEG7 Classic";
+  src: url("/fonts/DSEG7Classic-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DSEG7 Classic";
+  src: url("/fonts/DSEG7Classic-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background-color: var(--color-saa-bg);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-saa-bg);
+  color: #ffffff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hide scrollbar chrome on the language/account popovers but keep scroll */
+.saa-no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

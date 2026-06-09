@@ -1,0 +1,55 @@
+# Local Supabase config for the SAA 2025 app.
+# Start the stack with `supabase start` (requires Docker). See README.
+project_id = "saa-2025"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[studio]
+enabled = true
+port = 54323
+api_url = "http://127.0.0.1:54321"
+
+[inbucket]
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+
+[auth]
+enabled = true
+# The Next.js app runs on :3000. site_url is where users return after auth flows.
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = [
+  "http://127.0.0.1:3000",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000/auth/callback",
+  "http://localhost:3000/auth/callback",
+]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+
+[auth.email]
+# Enabled so the dev email/password sign-in on /login works locally without
+# Google credentials. Confirmations are off in local dev for fast iteration.
+enable_signup = true
+enable_confirmations = false
+double_confirm_changes = true
+
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_GOOGLE_SECRET)"
+# Supabase handles the provider redirect; the app's callback is /auth/callback.
+redirect_uri = "http://127.0.0.1:54321/auth/v1/callback"
