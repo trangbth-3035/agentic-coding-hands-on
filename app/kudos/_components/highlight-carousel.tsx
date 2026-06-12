@@ -1,0 +1,102 @@
+"use client";
+
+import { useRef, useState } from "react";
+import type { KudosPost } from "@/lib/saa/kudos";
+import { KudosCard, type CardLabels } from "./kudos-card";
+
+function Chevron({ dir, className }: { dir: "left" | "right"; className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2">
+      <path
+        d={dir === "left" ? "M15 5 8 12l7 7" : "M9 5l7 7-7 7"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function HighlightCarousel({
+  posts,
+  labels,
+}: {
+  posts: KudosPost[];
+  labels: CardLabels;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [page, setPage] = useState(1);
+
+  const step = () => {
+    const el = trackRef.current;
+    if (!el) return 552;
+    const card = el.querySelector("article");
+    return card ? card.getBoundingClientRect().width + 24 : 552;
+  };
+
+  const onScroll = () => {
+    const el = trackRef.current;
+    if (!el) return;
+    setPage(Math.min(posts.length, Math.round(el.scrollLeft / step()) + 1));
+  };
+
+  const go = (delta: number) => {
+    trackRef.current?.scrollBy({ left: delta * step(), behavior: "smooth" });
+  };
+
+  return (
+    <div className="flex flex-col gap-8">
+      <div className="relative">
+        <div
+          ref={trackRef}
+          onScroll={onScroll}
+          className="saa-no-scrollbar flex gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]"
+        >
+          {posts.map((post) => (
+            <KudosCard key={post.id} post={post} labels={labels} variant="highlight" />
+          ))}
+        </div>
+
+        {/* edge fades + big arrows */}
+        <button
+          type="button"
+          aria-label="Previous"
+          onClick={() => go(-1)}
+          className="absolute inset-y-0 left-0 hidden w-28 items-center justify-start bg-gradient-to-r from-saa-bg via-saa-bg/80 to-transparent pl-2 text-white/80 transition hover:text-white md:flex"
+        >
+          <Chevron dir="left" className="h-12 w-12" />
+        </button>
+        <button
+          type="button"
+          aria-label="Next"
+          onClick={() => go(1)}
+          className="absolute inset-y-0 right-0 hidden w-28 items-center justify-end bg-gradient-to-l from-saa-bg via-saa-bg/80 to-transparent pr-2 text-white/80 transition hover:text-white md:flex"
+        >
+          <Chevron dir="right" className="h-12 w-12" />
+        </button>
+      </div>
+
+      {/* pager */}
+      <div className="flex items-center justify-center gap-8">
+        <button
+          type="button"
+          aria-label="Previous"
+          onClick={() => go(-1)}
+          className="grid h-12 w-12 place-items-center text-[#999] transition hover:text-white"
+        >
+          <Chevron dir="left" className="h-7 w-7" />
+        </button>
+        <span className="text-[28px] font-bold leading-9 text-[#999]">
+          {page}/{posts.length}
+        </span>
+        <button
+          type="button"
+          aria-label="Next"
+          onClick={() => go(1)}
+          className="grid h-12 w-12 place-items-center text-[#999] transition hover:text-white"
+        >
+          <Chevron dir="right" className="h-7 w-7" />
+        </button>
+      </div>
+    </div>
+  );
+}

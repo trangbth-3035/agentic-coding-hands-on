@@ -1,12 +1,15 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { signOut } from "@/app/auth/actions";
-import { NAV_HREFS } from "@/lib/saa/content";
+import { NAV_HREFS, isNavActive } from "@/lib/saa/content";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import LanguageSwitcher from "./language-switcher";
+import { SaaDropdownPanel, SaaDropdownItem } from "./saa-dropdown";
 
 export type HeaderUser = {
   email: string;
@@ -18,20 +21,19 @@ export default function SiteHeader({
   user,
   dict,
   locale,
-  activeKey = "about",
 }: {
   user: HeaderUser;
   dict: Dictionary;
   locale: Locale;
-  activeKey?: "about" | "awards" | "kudos";
 }) {
   const [accountOpen, setAccountOpen] = useState(false);
+  const pathname = usePathname();
 
   const nav = [
     { key: "about", label: dict.nav.about, href: NAV_HREFS.about },
     { key: "awards", label: dict.nav.awards, href: NAV_HREFS.awards },
     { key: "kudos", label: dict.nav.kudos, href: NAV_HREFS.kudos },
-  ].map((item) => ({ ...item, selected: item.key === activeKey }));
+  ].map((item) => ({ ...item, selected: isNavActive(item.href, pathname) }));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-gradient-to-b from-saa-bg/95 to-saa-bg/40 backdrop-blur-md">
@@ -46,7 +48,7 @@ export default function SiteHeader({
 
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
         <div className="flex items-center gap-8">
-          <a href={NAV_HREFS.about} className="shrink-0" aria-label="Sun* Annual Awards">
+          <Link href={NAV_HREFS.about} className="shrink-0" aria-label="Sun* Annual Awards">
             <Image
               src="/saa/logo-header.png"
               alt="Sun* Annual Awards"
@@ -55,12 +57,13 @@ export default function SiteHeader({
               className="h-10 w-auto"
               priority
             />
-          </a>
+          </Link>
           <nav className="hidden items-center gap-7 lg:flex">
             {nav.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
+                aria-current={item.selected ? "page" : undefined}
                 className={
                   item.selected
                     ? "relative text-sm font-semibold text-saa-gold after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-saa-gold"
@@ -68,7 +71,7 @@ export default function SiteHeader({
                 }
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
@@ -102,31 +105,42 @@ export default function SiteHeader({
               )}
             </button>
             {accountOpen && (
-              <div
-                role="menu"
-                className="absolute right-0 mt-2 w-60 overflow-hidden rounded-xl border border-white/10 bg-saa-panel/95 shadow-2xl backdrop-blur"
-              >
-                <div className="border-b border-white/10 px-4 py-3">
-                  <p className="truncate text-sm font-semibold text-white">{user.name}</p>
-                  <p className="truncate text-xs text-white/50">{user.email}</p>
-                </div>
-                <a
+              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-52">
+                <SaaDropdownItem
                   href="#profile"
-                  role="menuitem"
-                  className="block px-4 py-2.5 text-sm text-white/80 transition hover:bg-white/5"
+                  onClick={() => setAccountOpen(false)}
+                  icon={
+                    <Image src="/saa/icon-user.svg" alt="" width={24} height={24} className="h-6 w-6" />
+                  }
                 >
                   {dict.header.profile}
-                </a>
-                <form action={signOut}>
-                  <button
+                </SaaDropdownItem>
+                <SaaDropdownItem
+                  href="/dashboard"
+                  onClick={() => setAccountOpen(false)}
+                  icon={
+                    <Image src="/saa/icon-grid.svg" alt="" width={24} height={24} className="h-6 w-6" />
+                  }
+                >
+                  {dict.header.dashboard}
+                </SaaDropdownItem>
+                <form action={signOut} className="contents">
+                  <SaaDropdownItem
                     type="submit"
-                    role="menuitem"
-                    className="block w-full px-4 py-2.5 text-left text-sm text-saa-red transition hover:bg-white/5"
+                    icon={
+                      <Image
+                        src="/saa/icon-chevron-right.svg"
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="h-6 w-6"
+                      />
+                    }
                   >
                     {dict.header.signOut}
-                  </button>
+                  </SaaDropdownItem>
                 </form>
-              </div>
+              </SaaDropdownPanel>
             )}
           </div>
         </div>

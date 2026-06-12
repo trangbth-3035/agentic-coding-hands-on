@@ -37,7 +37,7 @@ export default async function AwardInformationPage() {
 
   return (
     <>
-      <SiteHeader user={headerUser} dict={dict} locale={locale} activeKey="awards" />
+      <SiteHeader user={headerUser} dict={dict} locale={locale} />
 
       <main className="pt-16">
         <KeyvisualHero />
