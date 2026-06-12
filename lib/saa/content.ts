@@ -24,10 +24,18 @@ export const AWARDS: Award[] = [
   { slug: "mvp", titleImage: "/saa/award-mvp.png" },
 ];
 
-/** Header/footer navigation hrefs (labels come from the dictionary). */
+/** Header/footer navigation hrefs (labels come from the dictionary). Each tab
+ * targets its dedicated route so the nav works from any page. */
 export const NAV_HREFS = {
-  about: "#about",
-  awards: "#awards",
-  kudos: "#kudos",
-  standards: "#standards",
+  about: "/",
+  awards: "/award-information",
+  kudos: "/kudos",
+  standards: "/award-information",
 } as const;
+
+/** Whether a nav href is the active route for the current pathname. The
+ * homepage ("/") matches exactly; section pages also match their sub-routes. */
+export function isNavActive(href: string, pathname: string): boolean {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
