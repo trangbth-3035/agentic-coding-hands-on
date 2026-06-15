@@ -13,6 +13,7 @@ import { HighlightSection } from "./_components/highlight-section";
 import { SpotlightBoard } from "./_components/spotlight-board";
 import { StatsSidebar } from "./_components/stats-sidebar";
 import { KudosCard } from "./_components/kudos-card";
+import { LiveKudosList } from "./_components/live-kudos-list";
 
 export default async function KudosPage() {
   const supabase = await createClient();
@@ -42,7 +43,7 @@ export default async function KudosPage() {
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
 
       <main>
-        <KudosHero dict={k} />
+        <KudosHero dict={k} senderName={headerUser.name} />
 
         {/* B — Highlight Kudos */}
         <section className="mx-auto max-w-[1200px] px-6 py-12">
@@ -67,10 +68,11 @@ export default async function KudosPage() {
         </section>
 
         {/* C — All kudos + right rail */}
-        <section className="mx-auto max-w-[1200px] px-6 pb-20 pt-12">
+        <section id="all-kudos" className="mx-auto max-w-[1200px] px-6 pb-20 pt-12">
           <SectionHeading caption={k.awardsCaption} title={k.all} />
           <div className="mt-10 flex flex-col gap-6 lg:flex-row">
             <div className="flex min-w-0 flex-1 flex-col gap-6">
+              <LiveKudosList labels={cardLabels} />
               {KUDOS_POSTS.slice(0, 4).map((post) => (
                 <Fragment key={post.id}>
                   <KudosCard post={post} labels={cardLabels} />
