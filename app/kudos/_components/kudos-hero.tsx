@@ -1,9 +1,16 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { WriteKudosLauncher } from "./write-kudos-launcher";
 
 /** Keyvisual hero: feather artwork band (sits behind the fixed header) with the
  * subtitle + KUDOS lockup, then the two function search bars. */
-export function KudosHero({ dict }: { dict: Dictionary["kudosBoard"] }) {
+export function KudosHero({
+  dict,
+  senderName,
+}: {
+  dict: Dictionary["kudosBoard"];
+  senderName: string;
+}) {
   return (
     <section className="relative isolate overflow-hidden">
       {/* feather artwork, biased to the top-right; extends under the header */}
@@ -34,16 +41,12 @@ export function KudosHero({ dict }: { dict: Dictionary["kudosBoard"] }) {
 
         {/* Function bars (A.1 write kudos · search Sunner) */}
         <div className="mt-10 flex flex-col gap-4 lg:flex-row">
-          <button
-            type="button"
-            className="flex flex-1 items-center gap-4 rounded-[68px] border border-saa-gold-muted bg-saa-gold-light/10 px-5 py-5 text-left transition hover:bg-saa-gold-light/20"
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/kudos-ic-pen.svg" alt="" className="h-6 w-6 shrink-0" />
-            <span className="text-sm font-bold tracking-[0.15px] text-white sm:text-base">
-              {dict.writePrompt}
-            </span>
-          </button>
+          <WriteKudosLauncher
+            label={dict.writePrompt}
+            t={dict.writeKudos}
+            senderName={senderName}
+            className="flex-1"
+          />
           <button
             type="button"
             className="flex items-center gap-4 rounded-[68px] border border-saa-gold-muted bg-saa-gold-light/10 px-5 py-5 text-left transition hover:bg-saa-gold-light/20 lg:w-[381px]"

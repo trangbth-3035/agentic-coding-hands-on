@@ -106,6 +106,18 @@ export const HASHTAGS = [
   "#Grateful",
 ];
 
+/** Selectable recipients for the "Viết Kudo" Người nhận dropdown. */
+export const SUNNERS = [
+  "Huỳnh Dương Xuân Nhật",
+  "Nguyễn Hoàng Linh",
+  "Mai Phương Thúy",
+  "Đỗ Hoàng Hiệp",
+  "Lê Kiều Trang",
+  "Nguyễn Văn Quy",
+  "Nguyễn Bá Chức",
+  "Dương Thúy An",
+];
+
 /** Overview stats for the right rail (D.1). */
 export const KUDOS_STATS = {
   received: 25,

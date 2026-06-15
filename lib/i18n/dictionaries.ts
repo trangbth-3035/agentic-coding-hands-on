@@ -118,6 +118,30 @@ const vi = {
     },
     recipientsTitle: "10 SUNNER NHẬN QUÀ MỚI NHẤT",
     recipientGift: "Nhận được 1 áo phòng SAA",
+    // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
+    writeKudos: {
+      title: "Gửi lời cám ơn và ghi nhận đến đồng đội",
+      recipientLabel: "Người nhận",
+      recipientPlaceholder: "Tìm kiếm",
+      titleLabel: "Danh hiệu",
+      titlePlaceholder: "Dành tặng một danh hiệu cho đồng đội",
+      titleHint:
+        "Ví dụ: Người truyền động lực cho tôi.\nDanh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
+      communityStandards: "Tiêu chuẩn cộng đồng",
+      bodyPlaceholder:
+        "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
+      mentionHint: "Bạn có thể “@ + tên” để nhắc tới đồng nghiệp khác",
+      hashtagLabel: "Hashtag",
+      maxFive: "Tối đa 5",
+      imageLabel: "Image",
+      anonymous: "Gửi lời cám ơn và ghi nhận ẩn danh",
+      cancel: "Hủy",
+      submit: "Gửi",
+      anonymousName: "Ẩn danh",
+      justNow: "Vừa xong",
+      recipientRequired: "Vui lòng chọn người nhận",
+      noResults: "Không tìm thấy",
+    },
   },
   footer: {
     copyright: "Bản quyền thuộc về Sun* © 2025",
@@ -138,8 +162,8 @@ const vi = {
     minutes: "Minutes",
   },
   widget: {
-    writeKudos: "Viết Kudos",
-    rules: "Thể lệ SAA",
+    writeKudos: "Viết KUDOS",
+    rules: "Thể lệ",
   },
 };
 
@@ -248,6 +272,30 @@ const en: typeof vi = {
     },
     recipientsTitle: "10 LATEST SUNNERS TO RECEIVE GIFTS",
     recipientGift: "Received 1 SAA team shirt",
+    // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
+    writeKudos: {
+      title: "Send thanks and recognition to teammates",
+      recipientLabel: "Recipient",
+      recipientPlaceholder: "Search",
+      titleLabel: "Title",
+      titlePlaceholder: "Gift a title to a teammate",
+      titleHint:
+        "Example: The person who motivates me.\nThe title will appear as your Kudos heading.",
+      communityStandards: "Community Standards",
+      bodyPlaceholder:
+        "Please send your thanks and recognition to your teammates here!",
+      mentionHint: "You can “@ + name” to mention another colleague",
+      hashtagLabel: "Hashtag",
+      maxFive: "Max 5",
+      imageLabel: "Image",
+      anonymous: "Send thanks and recognition anonymously",
+      cancel: "Cancel",
+      submit: "Send",
+      anonymousName: "Anonymous",
+      justNow: "Just now",
+      recipientRequired: "Please select a recipient",
+      noResults: "No results",
+    },
   },
   footer: {
     copyright: "Copyright © Sun* 2025",
@@ -268,8 +316,8 @@ const en: typeof vi = {
     minutes: "Minutes",
   },
   widget: {
-    writeKudos: "Write Kudos",
-    rules: "SAA Rules",
+    writeKudos: "Write KUDOS",
+    rules: "Rules",
   },
 };
 
