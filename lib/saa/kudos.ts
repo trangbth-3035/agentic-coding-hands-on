@@ -14,6 +14,27 @@ export const RANK_BADGE: Record<KudosRank, { src: string; label: string }> = {
   legend: { src: "/saa/kudos-badge-legend.png", label: "Legend Hero" },
 };
 
+/** "Thể lệ" rules drawer (Figma screenId b1Filzi9i6). Hero-rank pill badges in
+ * receiver-tier order (New / Rising / Super / Legend) and the 6 collectible
+ * Secret-Box icons for senders. Each PNG bakes in its own styled label (brand
+ * names, identical in both locales), so they render as-is — same convention as
+ * RANK_BADGE above. */
+export const RULE_HERO_BADGES = [
+  "/saa/kudos-rule-hero-new.png",
+  "/saa/kudos-rule-hero-rising.png",
+  "/saa/kudos-rule-hero-super.png",
+  "/saa/kudos-rule-hero-legend.png",
+];
+
+export const RULE_ICONS = [
+  "/saa/kudos-rule-revival.png",
+  "/saa/kudos-rule-touch-of-light.png",
+  "/saa/kudos-rule-stay-gold.png",
+  "/saa/kudos-rule-flow-to-horizon.png",
+  "/saa/kudos-rule-beyond-the-boundary.png",
+  "/saa/kudos-rule-root-further.png",
+];
+
 export type KudosPerson = {
   name: string;
   role: string;
@@ -70,12 +91,12 @@ type PostSeed = {
 // One seed per department so every "Phòng ban" option yields a result; hashtags
 // overlap across posts so every "Hashtag" option does too.
 const POST_SEEDS: PostSeed[] = [
-  { id: "k1", department: "CEVC2", hashtags: ["#Dedicated", "#Inspring"], sender: ["Huỳnh Dương Xuân Nhật", "new", AV1], receiver: ["Huỳnh Dương Xuân", "legend", AV2] },
-  { id: "k2", department: "CEVC3", hashtags: ["#Inspring", "#Creative"], sender: ["Nguyễn Hoàng Linh", "rising", AV1], receiver: ["Mai Phương Thúy", "legend", AV2] },
-  { id: "k3", department: "CEVC4", hashtags: ["#Dedicated", "#Teamwork"], sender: ["Đỗ Hoàng Hiệp", "legend", AV1], receiver: ["Dương Thúy An", "rising", AV2] },
-  { id: "k4", department: "CEVC1", hashtags: ["#Supportive", "#Grateful"], sender: ["Nguyễn Văn Quy", "new", AV1], receiver: ["Lê Kiều Trang", "legend", AV2] },
-  { id: "k5", department: "OPD", hashtags: ["#Creative", "#Dedicated"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Huỳnh Dương Xuân Nhật", "legend", AV2] },
-  { id: "k6", department: "Infra", hashtags: ["#Teamwork", "#Supportive"], sender: ["Dương Thúy An", "new", AV1], receiver: ["Đỗ Hoàng Hiệp", "legend", AV2] },
+  { id: "k1", department: "CEVC2", hashtags: ["#High-performing", "#BE PROFESSIONAL"], sender: ["Huỳnh Dương Xuân Nhật", "new", AV1], receiver: ["Huỳnh Dương Xuân", "legend", AV2] },
+  { id: "k2", department: "CEVC3", hashtags: ["#BE PROFESSIONAL", "#BE OPTIMISTIC"], sender: ["Nguyễn Hoàng Linh", "rising", AV1], receiver: ["Mai Phương Thúy", "legend", AV2] },
+  { id: "k3", department: "CEVC4", hashtags: ["#BE A TEAM", "#THINK OUTSIDE THE BOX"], sender: ["Đỗ Hoàng Hiệp", "legend", AV1], receiver: ["Dương Thúy An", "rising", AV2] },
+  { id: "k4", department: "CEVC1", hashtags: ["#GET RISKY", "#GO FAST"], sender: ["Nguyễn Văn Quy", "new", AV1], receiver: ["Lê Kiều Trang", "legend", AV2] },
+  { id: "k5", department: "OPD", hashtags: ["#WASSHOI", "#High-performing"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Huỳnh Dương Xuân Nhật", "legend", AV2] },
+  { id: "k6", department: "Infra", hashtags: ["#THINK OUTSIDE THE BOX", "#WASSHOI"], sender: ["Dương Thúy An", "new", AV1], receiver: ["Đỗ Hoàng Hiệp", "legend", AV2] },
 ];
 
 export const KUDOS_POSTS: KudosPost[] = POST_SEEDS.map((s) => ({
@@ -92,18 +113,21 @@ export const KUDOS_POSTS: KudosPost[] = POST_SEEDS.map((s) => ({
   hashtags: s.hashtags,
 }));
 
-/** Highlight-section filter options. Department codes and hashtags are
- * user-generated content kept verbatim in both locales (Figma screenIds
- * WXK5AYB_rG "Dropdown Phòng ban" and JWpsISMAaM "Dropdown Hashtag filter"). */
+/** Filter / picker options. Department codes and hashtags are user-generated
+ * content kept verbatim in both locales. Hashtags are the SAA value-tags from
+ * the Figma hashtag dropdown (screenId p9zO-c4a4x); departments from the
+ * "Dropdown Phòng ban" (WXK5AYB_rG). */
 export const DEPARTMENTS = ["CEVC2", "CEVC3", "CEVC4", "CEVC1", "OPD", "Infra"];
 
 export const HASHTAGS = [
-  "#Dedicated",
-  "#Inspring",
-  "#Creative",
-  "#Teamwork",
-  "#Supportive",
-  "#Grateful",
+  "#High-performing",
+  "#BE PROFESSIONAL",
+  "#BE OPTIMISTIC",
+  "#BE A TEAM",
+  "#THINK OUTSIDE THE BOX",
+  "#GET RISKY",
+  "#GO FAST",
+  "#WASSHOI",
 ];
 
 /** Selectable recipients for the "Viết Kudo" Người nhận dropdown. */

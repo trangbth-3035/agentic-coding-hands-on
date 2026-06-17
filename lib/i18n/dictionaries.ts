@@ -71,6 +71,64 @@ const vi = {
         "Vinh danh người quản lý có năng lực quản lý tốt, dẫn dắt đội nhóm",
     },
   },
+  // Full award-detail copy for the /award-information page. Structural data
+  // (slugs, prize amounts, layout) lives in lib/saa/awards.ts; `awards` below is
+  // keyed by the same slug and `notes` is index-aligned to that award's prizes.
+  awardInfo: {
+    subtitle: "Sun* Annual Awards 2025",
+    heading: "Hệ thống giải thưởng SAA 2025",
+    navAriaLabel: "Danh mục giải thưởng",
+    medalAltPrefix: "Giải thưởng",
+    quantityLabel: "Số lượng giải thưởng:",
+    valueLabel: "Giá trị giải thưởng:",
+    or: "Hoặc",
+    awards: {
+      "top-talent": {
+        paragraphs: [
+          "Giải thưởng Top Talent vinh danh những cá nhân xuất sắc toàn diện – những người không ngừng khẳng định năng lực chuyên môn vững vàng, hiệu suất công việc vượt trội, luôn mang lại giá trị vượt kỳ vọng, được đánh giá cao bởi khách hàng và đồng đội. Với tinh thần sẵn sàng nhận mọi nhiệm vụ tổ chức giao phó, họ luôn là nguồn cảm hứng, thúc đẩy động lực và tạo ảnh hưởng tích cực đến cả tập thể.",
+        ],
+        unit: "Cá nhân",
+        notes: ["cho mỗi giải thưởng"],
+      },
+      "top-project": {
+        paragraphs: [
+          "Giải thưởng Top Project vinh danh các tập thể dự án xuất sắc với kết quả kinh doanh vượt kỳ vọng, hiệu quả vận hành tối ưu và tinh thần làm việc tận tâm. Đây là các dự án có độ phức tạp kỹ thuật cao, hiệu quả tối ưu hóa nguồn lực và chi phí tốt, đề xuất các ý tưởng có giá trị cho khách hàng, đem lại lợi nhuận vượt trội và nhận được phản hồi tích cực từ khách hàng. Các thành viên tuân thủ nghiêm ngặt các tiêu chuẩn phát triển nội bộ trong phát triển dự án, tạo nên một hình mẫu về sự xuất sắc và chuyên nghiệp.",
+        ],
+        unit: "Tập thể",
+        notes: ["cho mỗi giải thưởng"],
+      },
+      "top-project-leader": {
+        paragraphs: [
+          "Giải thưởng Top Project Leader vinh danh những nhà quản lý dự án xuất sắc – những người hội tụ năng lực quản lý vững vàng, khả năng truyền cảm hứng mạnh mẽ, và tư duy “Aim High – Be Agile” trong mọi bài toán và bối cảnh. Dưới sự dẫn dắt của họ, các thành viên không chỉ cùng nhau vượt qua thử thách và đạt được mục tiêu đề ra, mà còn giữ vững ngọn lửa nhiệt huyết, tinh thần Wasshoi, và trưởng thành để trở thành phiên bản tinh hoa – hạnh phúc hơn của chính mình.",
+        ],
+        unit: "Cá nhân",
+        notes: ["cho mỗi giải thưởng"],
+      },
+      "best-manager": {
+        paragraphs: [
+          "Giải thưởng Best Manager vinh danh những nhà lãnh đạo tiêu biểu – người đã dẫn dắt đội ngũ của mình tạo ra kết quả vượt kỳ vọng, tác động nổi bật đến hiệu quả kinh doanh và sự phát triển bền vững của tổ chức. Dưới sự lãnh đạo của họ, đội ngũ luôn chinh phục và làm chủ mọi mục tiêu bằng năng lực đa nhiệm, khả năng phối hợp hiệu quả, và tư duy ứng dụng công nghệ linh hoạt trong kỷ nguyên số. Họ truyền cảm hứng để tập thể trở nên tự tin tràn đầy năng lượng, sẵn sàng đón nhận, thậm chí dẫn dắt tạo ra những thay đổi có tính cách mạng.",
+        ],
+        unit: "Cá nhân",
+        notes: [""],
+      },
+      "signature-2025-creator": {
+        paragraphs: [
+          "Giải thưởng Signature vinh danh cá nhân hoặc tập thể thể hiện tinh thần đặc trưng mà Sun* hướng tới trong từng thời kỳ.",
+          "Trong năm 2025, giải thưởng Signature vinh danh Creator - cá nhân/tập thể mang tư duy chủ động và nhạy bén, luôn nhìn thấy cơ hội trong thách thức và tiên phong trong hành động. Họ là những người nhạy bén với vấn đề, nhanh chóng nhận diện và đưa ra những giải pháp thực tiễn, mang lại giá trị rõ rệt cho dự án, khách hàng hoặc tổ chức. Với tư duy kiến tạo và tinh thần “Creator” đặc trưng của Sun*, họ không chỉ phản ứng tích cực trước sự thay đổi mà còn chủ động tạo ra cải tiến, góp phần định hình chuẩn mực mới cho cách mà người Sun* tạo giá trị.",
+        ],
+        unit: "Cá nhân hoặc tập thể",
+        notes: ["cho giải cá nhân", "cho giải tập thể"],
+      },
+      mvp: {
+        paragraphs: [
+          "Giải thưởng MVP vinh danh cá nhân xuất sắc nhất năm – gương mặt tiêu biểu đại diện cho toàn bộ tập thể Sun*. Họ là người đã thể hiện năng lực vượt trội, tinh thần cống hiến bền bỉ, và tầm ảnh hưởng sâu rộng, để lại dấu ấn mạnh mẽ trong hành trình của Sun* suốt năm qua.",
+          "Không chỉ nổi bật bởi hiệu suất và kết quả công việc, họ còn là nguồn cảm hứng lan tỏa – thông qua suy nghĩ, hành động và ảnh hưởng tích cực của mình đối với tập thể. MVP là người hội tụ đầy đủ phẩm chất của người Sun* ưu tú, đồng thời mang trên mình trọng trách lớn lao: trở thành hình mẫu đại diện cho con người và tinh thần Sun*, góp phần dẫn dắt tập thể vươn tới những đỉnh cao mới.",
+        ],
+        unit: "Cá nhân hoặc tập thể",
+        notes: [""],
+      },
+    },
+  },
   rootFurther: {
     intro: [
       "Đứng trước bối cảnh thay đổi như vũ bão của thời đại AI và yêu cầu ngày càng cao từ khách hàng, Sun* lựa chọn chiến lược đa dạng hóa năng lực để không chỉ nỗ lực trở thành tinh anh trong lĩnh vực của mình, mà còn hướng đến một cái đích cao hơn, nơi mọi Sunner đều là “problem-solver” - chuyên gia trong việc giải quyết mọi vấn đề, tìm lời giải cho mọi bài toán của dự án, khách hàng và xã hội.",
@@ -116,6 +174,11 @@ const vi = {
       boxUnopened: "Số Secret Box chưa mở:",
       openBox: "Mở Secret Box",
     },
+    secretBox: {
+      title: "KHÁM PHÁ SECRET BOX CỦA BẠN",
+      hint: "Click vào box để mở",
+      unopenedLabel: "Secretbox chưa mở",
+    },
     recipientsTitle: "10 SUNNER NHẬN QUÀ MỚI NHẤT",
     recipientGift: "Nhận được 1 áo phòng SAA",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
@@ -160,10 +223,53 @@ const vi = {
     days: "Days",
     hours: "Hours",
     minutes: "Minutes",
+    seconds: "Seconds",
   },
   widget: {
     writeKudos: "Viết KUDOS",
     rules: "Thể lệ",
+  },
+  rules: {
+    title: "Thể lệ",
+    close: "Đóng",
+    writeKudos: "Viết KUDOS",
+    receiverHeading:
+      "NGƯỜI NHẬN KUDOS: HUY HIỆU HERO CHO NHỮNG ẢNH HƯỞNG TÍCH CỰC",
+    receiverIntro:
+      "Dựa trên số lượng đồng đội gửi trao Kudos, bạn sẽ sở hữu Huy hiệu Hero tương ứng, được hiển thị trực tiếp cạnh tên profile",
+    tiers: [
+      {
+        count: "Có 1-4 người gửi Kudos cho bạn",
+        desc: "Hành trình lan tỏa điều tốt đẹp bắt đầu – những lời cảm ơn và ghi nhận đầu tiên đã tìm đến bạn.",
+      },
+      {
+        count: "Có 5-9 người gửi Kudos cho bạn",
+        desc: "Hình ảnh bạn đang lớn dần trong trái tim đồng đội bằng sự tử tế và cống hiến của mình.",
+      },
+      {
+        count: "Có 10–20 người gửi Kudos cho bạn",
+        desc: "Bạn đã trở thành biểu tượng được tin tưởng và yêu quý, người luôn sẵn sàng hỗ trợ và được nhiều đồng đội nhớ đến.",
+      },
+      {
+        count: "Có hơn 20 người gửi Kudos cho bạn",
+        desc: "Bạn đã trở thành huyền thoại – người để lại dấu ấn khó quên trong tập thể bằng trái tim và hành động của mình.",
+      },
+    ],
+    senderHeading:
+      "NGƯỜI GỬI KUDOS: SƯU TẬP TRỌN BỘ 6 ICON, NHẬN NGAY PHẦN QUÀ BÍ ẨN",
+    senderIntro:
+      "Mỗi lời Kudos bạn gửi sẽ được đăng tải trên hệ thống và nhận về những lượt ❤️ từ cộng đồng Sunner. Cứ mỗi 5 lượt ❤️, bạn sẽ được mở 1 Secret Box, với cơ hội nhận về một trong 6 icon độc quyền của SAA.",
+    senderFootnote:
+      "Những Sunner thu thập trọn bộ 6 icon sẽ nhận về một phần quà bí ẩn từ SAA 2025.",
+    nationalHeading: "KUDOS QUỐC DÂN",
+    nationalBody:
+      "5 Kudos nhận về nhiều ❤️ nhất toàn Sun* sẽ chính thức trở thành Kudos Quốc Dân và được trao phần quà đặc biệt từ SAA 2025: Root Further.",
+  },
+  profile: {
+    collectionTitle: "Bộ sưu tập icon của tôi",
+    sent: "Đã gửi",
+    received: "Đã nhận",
+    spam: "Spam",
   },
 };
 
@@ -225,6 +331,63 @@ const en: typeof vi = {
       description: "Honoring managers with strong skills who lead their teams",
     },
   },
+  // English counterpart of the award-detail copy (translated faithfully from the
+  // Vietnamese source). Same shape/keys as the vi `awardInfo`.
+  awardInfo: {
+    subtitle: "Sun* Annual Awards 2025",
+    heading: "SAA 2025 Awards System",
+    navAriaLabel: "Award categories",
+    medalAltPrefix: "Award",
+    quantityLabel: "Number of awards:",
+    valueLabel: "Award value:",
+    or: "Or",
+    awards: {
+      "top-talent": {
+        paragraphs: [
+          "The Top Talent award honors all-around outstanding individuals – those who continuously affirm their solid expertise and exceptional performance, consistently deliver value beyond expectations, and are highly regarded by clients and teammates. With a spirit ready to take on every task the organization entrusts to them, they are always a source of inspiration, driving motivation and creating a positive impact on the whole team.",
+        ],
+        unit: "Individuals",
+        notes: ["per award"],
+      },
+      "top-project": {
+        paragraphs: [
+          "The Top Project award honors outstanding project teams with business results that exceed expectations, optimal operational efficiency and a dedicated working spirit. These are projects of high technical complexity that optimize resources and costs effectively, propose valuable ideas for clients, deliver outstanding profits and earn positive client feedback. Their members strictly follow internal development standards throughout the project, setting a model of excellence and professionalism.",
+        ],
+        unit: "Teams",
+        notes: ["per award"],
+      },
+      "top-project-leader": {
+        paragraphs: [
+          "The Top Project Leader award honors outstanding project managers – those who combine solid management capability, a powerful ability to inspire, and an “Aim High – Be Agile” mindset in every problem and context. Under their leadership, members not only overcome challenges together and achieve the set goals, but also keep their fire of enthusiasm and Wasshoi spirit burning, growing into the finest – and happier – version of themselves.",
+        ],
+        unit: "Individuals",
+        notes: ["per award"],
+      },
+      "best-manager": {
+        paragraphs: [
+          "The Best Manager award honors exemplary leaders – those who have led their teams to results beyond expectations, with a standout impact on business performance and the organization’s sustainable growth. Under their leadership, the team conquers and masters every goal through multitasking capability, effective coordination, and a flexible mindset for applying technology in the digital era. They inspire the team to become confident and full of energy, ready to embrace – and even lead – revolutionary change.",
+        ],
+        unit: "Individual",
+        notes: [""],
+      },
+      "signature-2025-creator": {
+        paragraphs: [
+          "The Signature award honors the individual or team that embodies the distinctive spirit Sun* aims for in each era.",
+          "In 2025, the Signature award honors the Creator – the individual/team with a proactive and sharp mindset, always seeing opportunity in challenges and pioneering in action. They are keenly attuned to problems, quickly identifying them and offering practical solutions that bring clear value to the project, client or organization. With the creative thinking and “Creator” spirit characteristic of Sun*, they not only respond positively to change but also proactively drive improvements, helping shape new standards for how Sunners create value.",
+        ],
+        unit: "Individual or team",
+        notes: ["for the individual award", "for the team award"],
+      },
+      mvp: {
+        paragraphs: [
+          "The MVP award honors the most outstanding individual of the year – the representative face of the entire Sun* community. They are the one who has demonstrated exceptional ability, enduring dedication and far-reaching influence, leaving a strong mark on Sun*’s journey throughout the past year.",
+          "Beyond standing out for performance and results, they are also a far-reaching source of inspiration – through their thinking, actions and positive influence on the team. The MVP embodies all the qualities of an elite Sunner while carrying a great responsibility: to become the role model representing Sun*’s people and spirit, helping lead the team to reach new heights.",
+        ],
+        unit: "Individual or team",
+        notes: [""],
+      },
+    },
+  },
   rootFurther: {
     intro: [
       "Facing the whirlwind changes of the AI era and ever-higher demands from clients, Sun* has chosen a strategy of diversifying capabilities — not only striving to be the elite in its field, but aiming for a higher goal where every Sunner is a “problem-solver”: an expert at solving every problem and finding the answer to every challenge of projects, clients and society.",
@@ -270,6 +433,11 @@ const en: typeof vi = {
       boxUnopened: "Number of Secret Boxes unopened:",
       openBox: "Open Secret Box",
     },
+    secretBox: {
+      title: "DISCOVER YOUR SECRET BOX",
+      hint: "Click on the box to open",
+      unopenedLabel: "Unopened Secret Box",
+    },
     recipientsTitle: "10 LATEST SUNNERS TO RECEIVE GIFTS",
     recipientGift: "Received 1 SAA team shirt",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
@@ -314,10 +482,52 @@ const en: typeof vi = {
     days: "Days",
     hours: "Hours",
     minutes: "Minutes",
+    seconds: "Seconds",
   },
   widget: {
     writeKudos: "Write KUDOS",
     rules: "Rules",
+  },
+  rules: {
+    title: "Rules",
+    close: "Close",
+    writeKudos: "Write KUDOS",
+    receiverHeading: "KUDOS RECEIVER: HERO BADGES FOR POSITIVE INFLUENCE",
+    receiverIntro:
+      "Based on the number of Kudos sent by teammates, you will earn the corresponding Hero badge, displayed right next to your profile name.",
+    tiers: [
+      {
+        count: "1-4 people send you Kudos",
+        desc: "The journey of spreading goodness begins – the first words of thanks and recognition have reached you.",
+      },
+      {
+        count: "5-9 people send you Kudos",
+        desc: "Your image is growing in your teammates' hearts through your kindness and dedication.",
+      },
+      {
+        count: "10–20 people send you Kudos",
+        desc: "You have become a trusted and beloved icon, someone always ready to help and remembered by many teammates.",
+      },
+      {
+        count: "More than 20 people send you Kudos",
+        desc: "You have become a legend – leaving an unforgettable mark on the team through your heart and your actions.",
+      },
+    ],
+    senderHeading:
+      "KUDOS SENDER: COLLECT ALL 6 ICONS AND GET AN INSTANT MYSTERY GIFT",
+    senderIntro:
+      "Every Kudos you send is posted on the system and earns ❤️ from the Sunner community. For every 5 ❤️, you open 1 Secret Box, with a chance to receive one of SAA's 6 exclusive icons.",
+    senderFootnote:
+      "Sunners who collect all 6 icons will receive a mystery gift from SAA 2025.",
+    nationalHeading: "NATIONAL KUDOS",
+    nationalBody:
+      "The 5 Kudos with the most ❤️ across all of Sun* will officially become National Kudos and receive a special gift from SAA 2025: Root Further.",
+  },
+  profile: {
+    collectionTitle: "My icon collection",
+    sent: "Sent",
+    received: "Received",
+    spam: "Spam",
   },
 };
 

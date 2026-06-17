@@ -316,15 +316,13 @@ export function WriteKudosModal({
                         onClick={() => setTagOpen(false)}
                         className="fixed inset-0 z-10 cursor-default"
                       />
-                      <SaaDropdownPanel className="absolute left-0 z-20 mt-2 max-h-72 min-w-44 overflow-y-auto saa-no-scrollbar">
+                      <SaaDropdownPanel className="absolute left-0 z-20 mt-2 max-h-72 min-w-56 overflow-y-auto saa-no-scrollbar">
                         {hashtags.map((opt) => (
                           <SaaDropdownItem
                             key={opt}
-                            active={tags.includes(opt)}
-                            onClick={() => {
-                              toggleTag(opt);
-                              setTagOpen(false);
-                            }}
+                            size="compact"
+                            checked={tags.includes(opt)}
+                            onClick={() => toggleTag(opt)}
                           >
                             {opt}
                           </SaaDropdownItem>

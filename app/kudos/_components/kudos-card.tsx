@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { RANK_BADGE, type KudosPerson, type KudosPost } from "@/lib/saa/kudos";
+import { LikeButton } from "./like-button";
 
 export type CardLabels = {
   copyLink: string;
@@ -34,10 +35,13 @@ export function KudosCard({
   post,
   labels,
   variant = "full",
+  status,
 }: {
   post: KudosPost;
   labels: CardLabels;
   variant?: "full" | "highlight";
+  /** Optional corner ribbon (e.g. "Spam" on the profile's sent kudos). */
+  status?: string;
 }) {
   const highlight = variant === "highlight";
 
@@ -45,10 +49,16 @@ export function KudosCard({
     <article
       className={
         highlight
-          ? "flex w-[300px] shrink-0 flex-col gap-4 rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
-          : "flex flex-col gap-4 rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4"
+          ? "relative flex w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
+          : "relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4"
       }
     >
+      {status && (
+        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-saa-red px-4 py-1.5 text-sm font-bold text-white">
+          {status}
+        </span>
+      )}
+
       {/* Info user — sender · send icon · receiver */}
       <div className="flex items-start justify-between gap-4 sm:gap-6">
         <PersonBlock person={post.sender} />
@@ -113,11 +123,7 @@ export function KudosCard({
 
       {/* Action row */}
       <div className="flex items-center justify-between gap-6">
-        <div className="flex items-center gap-1">
-          <span className="text-2xl font-bold text-saa-bg">{post.hearts}</span>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/saa/kudos-ic-heart.svg" alt="" className="h-8 w-8" />
-        </div>
+        <LikeButton hearts={post.hearts} />
         <div className="flex items-center gap-1 sm:gap-3">
           {highlight && (
             <a

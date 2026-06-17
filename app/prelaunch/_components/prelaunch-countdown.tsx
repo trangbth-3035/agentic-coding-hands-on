@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { computeRemaining, pad2, type Remaining } from "@/lib/saa/countdown";
 
 export type PrelaunchLabels = {
@@ -8,6 +9,7 @@ export type PrelaunchLabels = {
   days: string;
   hours: string;
   minutes: string;
+  seconds: string;
 };
 
 function DigitBox({ char }: { char: string }) {
@@ -48,19 +50,37 @@ function Unit({ value, label }: { value: string; label: string }) {
 
 export default function PrelaunchCountdown({
   target,
+  seconds,
+  redirectTo,
   labels,
 }: {
-  target: string;
+  /** Absolute launch date (ISO). Used when `seconds` is not given. */
+  target?: string;
+  /** Demo mode: count down this many seconds from when the page loads. */
+  seconds?: number;
+  /** If set, navigate here once the countdown reaches zero. */
+  redirectTo?: string;
   labels: PrelaunchLabels;
 }) {
-  const targetMs = new Date(target).getTime();
+  const router = useRouter();
   const [remaining, setRemaining] = useState<Remaining | null>(null);
 
   useEffect(() => {
-    setRemaining(computeRemaining(targetMs));
-    const id = setInterval(() => setRemaining(computeRemaining(targetMs)), 1_000);
+    const targetMs =
+      seconds != null ? Date.now() + seconds * 1_000 : new Date(target ?? "").getTime();
+    let navigated = false;
+    const tick = () => {
+      const r = computeRemaining(targetMs);
+      setRemaining(r);
+      if (r.done && redirectTo && !navigated) {
+        navigated = true;
+        router.push(redirectTo);
+      }
+    };
+    tick();
+    const id = setInterval(tick, 1_000);
     return () => clearInterval(id);
-  }, [targetMs]);
+  }, [target, seconds, redirectTo, router]);
 
   const r = remaining;
 
@@ -69,10 +89,11 @@ export default function PrelaunchCountdown({
       <p className="mb-6 text-center text-xl font-medium text-white sm:text-2xl">
         {labels.title}
       </p>
-      <div className="flex items-start gap-4 sm:gap-7">
+      <div className="flex flex-wrap items-start justify-center gap-4 sm:gap-7">
         <Unit value={r ? pad2(r.days) : "00"} label={labels.days} />
         <Unit value={r ? pad2(r.hours) : "00"} label={labels.hours} />
         <Unit value={r ? pad2(r.minutes) : "00"} label={labels.minutes} />
+        <Unit value={r ? pad2(r.seconds) : "00"} label={labels.seconds} />
       </div>
     </div>
   );

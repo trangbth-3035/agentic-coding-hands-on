@@ -7,7 +7,16 @@ import type { Award } from "@/lib/saa/awards";
  * the curated `/saa/award-<slug>.png` set (same assets the homepage uses).
  * Sizing mirrors the homepage treatment: centred, 64% wide, 3:1, contained.
  */
-export function AwardMedal({ award, priority }: { award: Award; priority?: boolean }) {
+export function AwardMedal({
+  award,
+  altPrefix,
+  priority,
+}: {
+  award: Award;
+  /** Localized "Award"/"Giải thưởng" prefix for the orb alt text. */
+  altPrefix: string;
+  priority?: boolean;
+}) {
   return (
     <div
       className="relative aspect-square w-full max-w-[336px] overflow-hidden rounded-3xl border border-saa-gold/60"
@@ -15,7 +24,7 @@ export function AwardMedal({ award, priority }: { award: Award; priority?: boole
     >
       <Image
         src="/saa/award-bg.png"
-        alt={`Giải thưởng ${award.title}`}
+        alt={`${altPrefix} ${award.title}`}
         fill
         sizes="336px"
         priority={priority}

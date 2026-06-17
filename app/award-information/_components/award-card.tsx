@@ -1,8 +1,23 @@
 import type { Award } from "@/lib/saa/awards";
+import type { Dictionary } from "@/lib/i18n/dictionaries";
 import { AwardMedal } from "./award-medal";
 
+type AwardInfo = Dictionary["awardInfo"];
+
 /** One award entry: medal on one side, content (title, copy, prize stats) on the other. */
-export function AwardCard({ award, priority }: { award: Award; priority?: boolean }) {
+export function AwardCard({
+  award,
+  copy,
+  labels,
+  priority,
+}: {
+  award: Award;
+  /** Localized copy for this award (paragraphs, unit, prize notes), keyed by slug. */
+  copy: AwardInfo["awards"][Award["slug"]];
+  /** Shared section labels (quantity/value headings, "or", medal alt prefix). */
+  labels: AwardInfo;
+  priority?: boolean;
+}) {
   const medalFirst = award.medalSide === "left";
 
   return (
@@ -13,7 +28,7 @@ export function AwardCard({ award, priority }: { award: Award; priority?: boolea
         }`}
       >
         <div className="flex w-full shrink-0 justify-center lg:w-[336px]">
-          <AwardMedal award={award} priority={priority} />
+          <AwardMedal award={award} altPrefix={labels.medalAltPrefix} priority={priority} />
         </div>
 
         <div className="flex-1">
@@ -23,7 +38,7 @@ export function AwardCard({ award, priority }: { award: Award; priority?: boolea
                 <Icon src="/saa/ic-target.svg" />
                 <h3 className="text-2xl font-bold text-saa-gold">{award.title}</h3>
               </div>
-              {award.paragraphs.map((p, i) => (
+              {copy.paragraphs.map((p, i) => (
                 <p key={i} className="saa-justify text-base font-semibold leading-6 tracking-[0.5px] text-white">
                   {p}
                 </p>
@@ -36,11 +51,11 @@ export function AwardCard({ award, priority }: { award: Award; priority?: boolea
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Icon src="/saa/ic-diamond.svg" />
-                <span className="text-2xl font-bold text-saa-gold">Số lượng giải thưởng:</span>
+                <span className="text-2xl font-bold text-saa-gold">{labels.quantityLabel}</span>
               </div>
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl font-bold leading-none text-white">{award.quantity.value}</span>
-                <span className="text-sm font-bold text-white/70">{award.quantity.unit}</span>
+                <span className="text-sm font-bold text-white/70">{copy.unit}</span>
               </div>
             </div>
 
@@ -50,14 +65,14 @@ export function AwardCard({ award, priority }: { award: Award; priority?: boolea
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3">
                 <Icon src="/saa/ic-license.svg" />
-                <span className="text-2xl font-bold text-saa-gold">Giá trị giải thưởng:</span>
+                <span className="text-2xl font-bold text-saa-gold">{labels.valueLabel}</span>
               </div>
               <div className="flex flex-col gap-3">
                 {award.prizes.map((prize, i) => (
                   <div key={i} className="flex flex-col gap-1">
-                    {i > 0 && <span className="text-sm font-bold text-white/60">Hoặc</span>}
+                    {i > 0 && <span className="text-sm font-bold text-white/60">{labels.or}</span>}
                     <span className="text-4xl font-bold leading-none text-white">{prize.value}</span>
-                    {prize.note && <span className="text-sm font-bold text-white/70">{prize.note}</span>}
+                    {copy.notes[i] && <span className="text-sm font-bold text-white/70">{copy.notes[i]}</span>}
                   </div>
                 ))}
               </div>

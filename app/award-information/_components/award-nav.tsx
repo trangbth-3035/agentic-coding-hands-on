@@ -8,7 +8,7 @@ type NavItem = { slug: string; label: string };
  * Left-rail award navigation (design item C). Highlights the entry whose section
  * is currently in view and smooth-scrolls to it on click (anchor + CSS smooth).
  */
-export function AwardNav({ items }: { items: NavItem[] }) {
+export function AwardNav({ items, ariaLabel }: { items: NavItem[]; ariaLabel: string }) {
   const [active, setActive] = useState(items[0]?.slug);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function AwardNav({ items }: { items: NavItem[] }) {
   }, [items]);
 
   return (
-    <nav aria-label="Danh mục giải thưởng" className="flex flex-col gap-1">
+    <nav aria-label={ariaLabel} className="flex flex-col gap-1">
       {items.map((item) => {
         const isActive = item.slug === active;
         return (

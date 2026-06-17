@@ -107,7 +107,7 @@ export default function SiteHeader({
             {accountOpen && (
               <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-52">
                 <SaaDropdownItem
-                  href="#profile"
+                  href="/profile"
                   onClick={() => setAccountOpen(false)}
                   icon={
                     <Image src="/saa/icon-user.svg" alt="" width={24} height={24} className="h-6 w-6" />

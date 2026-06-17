@@ -42,7 +42,12 @@ export default async function HomePage() {
         <KudosBanner />
       </main>
       <SiteFooter />
-      <WidgetButton labels={dict.widget} />
+      <WidgetButton
+        labels={dict.widget}
+        rules={dict.rules}
+        compose={dict.kudosBoard.writeKudos}
+        senderName={headerUser.name}
+      />
     </>
   );
 }

@@ -25,6 +25,7 @@ export default async function AwardInformationPage() {
   if (!user && !hasDemoSession) redirect("/login");
 
   const { locale, dict } = await getDict();
+  const t = dict.awardInfo;
 
   const meta = user?.user_metadata ?? {};
   const headerUser: HeaderUser = {
@@ -45,10 +46,10 @@ export default async function AwardInformationPage() {
         {/* Title block (design item A) */}
         <section className="mx-auto max-w-[1200px] px-6 pb-4 pt-2">
           <div className="flex flex-col items-center gap-4">
-            <p className="text-2xl font-bold text-white">Sun* Annual Awards 2025</p>
+            <p className="text-2xl font-bold text-white">{t.subtitle}</p>
             <div className="h-px w-full bg-saa-divider" />
             <h1 className="text-center text-4xl font-bold leading-tight tracking-tight text-saa-gold md:text-[57px] md:leading-[64px]">
-              Hệ thống giải thưởng SAA 2025
+              {t.heading}
             </h1>
           </div>
         </section>
@@ -57,14 +58,14 @@ export default async function AwardInformationPage() {
         <section className="mx-auto max-w-[1200px] px-6 py-12">
           <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
             <aside className="lg:sticky lg:top-24 lg:h-fit lg:w-56 lg:shrink-0">
-              <AwardNav items={navItems} />
+              <AwardNav items={navItems} ariaLabel={t.navAriaLabel} />
             </aside>
 
             <div className="min-w-0 flex-1">
               {AWARDS.map((award, i) => (
                 <Fragment key={award.slug}>
                   {i > 0 && <div className="my-14 h-px w-full bg-saa-divider" />}
-                  <AwardCard award={award} priority={i === 0} />
+                  <AwardCard award={award} copy={t.awards[award.slug]} labels={t} priority={i === 0} />
                 </Fragment>
               ))}
             </div>
