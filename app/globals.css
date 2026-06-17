@@ -72,3 +72,42 @@ body {
 .saa-fab-in {
   animation: saa-fab-in 0.18s ease-out both;
 }
+
+/* "Thể lệ" rules drawer — slides in from the right over a dimmed page. */
+@keyframes saa-drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+.saa-drawer-in {
+  animation: saa-drawer-in 0.25s ease-out both;
+}
+@keyframes saa-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.saa-fade-in {
+  animation: saa-fade-in 0.25s ease-out both;
+}
+
+/* Centered modals (e.g. Secret Box) — gentle zoom + fade on open. */
+@keyframes saa-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.saa-zoom-in {
+  animation: saa-zoom-in 0.2s ease-out both;
+}

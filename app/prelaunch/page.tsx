@@ -3,7 +3,9 @@ import Link from "next/link";
 import PrelaunchCountdown from "./_components/prelaunch-countdown";
 import { getDict } from "@/lib/i18n/server";
 
-const LAUNCH_AT = process.env.NEXT_PUBLIC_LAUNCH_AT ?? "2026-12-26T18:30:00+07:00";
+// Temporary demo: a short visible countdown that lands on the homepage, rather
+// than counting to the real far-future launch date.
+const DEMO_COUNTDOWN_SECONDS = 10;
 
 export default async function PrelaunchPage() {
   const { dict } = await getDict();
@@ -23,12 +25,14 @@ export default async function PrelaunchPage() {
 
       <div className="relative -mt-10">
         <PrelaunchCountdown
-          target={LAUNCH_AT}
+          seconds={DEMO_COUNTDOWN_SECONDS}
+          redirectTo="/"
           labels={{
             title: t.title,
             days: t.days,
             hours: t.hours,
             minutes: t.minutes,
+            seconds: t.seconds,
           }}
         />
       </div>

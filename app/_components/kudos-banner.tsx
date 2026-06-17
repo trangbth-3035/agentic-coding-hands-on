@@ -1,5 +1,6 @@
 import Image from "next/image";
 import ArrowUpRight from "./arrow-up-right";
+import { NAV_HREFS } from "@/lib/saa/content";
 import { getDict } from "@/lib/i18n/server";
 
 export default async function KudosBanner() {
@@ -37,7 +38,7 @@ export default async function KudosBanner() {
           </p>
           <p className="mt-3 text-sm leading-7 text-white/60">{t.description}</p>
           <a
-            href="#kudos-detail"
+            href={NAV_HREFS.kudos}
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-saa-gold px-6 py-2.5 text-sm font-bold text-[#1a1300] transition hover:bg-saa-gold-light"
           >
             {t.detail}
