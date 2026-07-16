@@ -1,0 +1,133 @@
+# Design Style: Dropdown Hashtag filter
+
+**Frame ID**: `JWpsISMAaM`
+**Figma Frame ID**: `721:5580`
+**Frame Name**: `Dropdown Hashtag filter`
+**Figma Link**: https://www.figma.com/design/9ypp4enmFmdK3YAFJLIu6C?node-id=721:5580
+**Frame Image**: see [`assets/frame.url.txt`](./assets/frame.url.txt)
+**Extracted At**: 2026-07-16
+**Status**: Implemented
+
+---
+
+## Design Tokens
+
+Tokens live in `app/globals.css` (`@theme`). The panel uses the shared Dropdown-List shell
+(`app/_components/saa-dropdown.tsx`). The hashtag filter and the department filter (screen
+`WXK5AYB_rG`) share every token below; they differ only in data + label.
+
+### Colors
+
+| Token / Value | Hex | Usage |
+|---------------|-----|-------|
+| `#00070C` (literal in shell) | #00070C | Panel background |
+| `--color-saa-gold-muted` | #998C5F | 1px panel border; default pill border |
+| `--color-saa-gold` | #FAE287 | Active pill border; text-glow color |
+| `--color-saa-gold-light` | #FFEA9E | Active/hover row wash (`/10`); pill fills (`/10`,`/20`) |
+| text | #FFFFFF | Row + pill label text |
+
+### Typography
+
+| Element | Font | Size | Weight | Tracking |
+|---------|------|------|--------|----------|
+| Hashtag option row | Montserrat (`--font-sans`) | 16px (`text-base`) | 700 | 0.5px (`tracking-[0.5px]`) |
+| Trigger pill label | Montserrat (`--font-sans`) | 14px (`text-sm`) | 600 (`font-semibold`) | — |
+
+### Spacing
+
+| Value | Utility | Usage |
+|-------|---------|-------|
+| 6px | `p-1.5` | Panel inner padding |
+| 16px | `px-4` | Row horizontal padding |
+| 16px / 12px | `px-4 py-3` | Pill padding |
+| 8px | `mt-2` | Panel offset below the pill |
+| 8px | `gap-2` | Pill icon/label gap |
+
+### Radius
+
+| Value | Utility | Usage |
+|-------|---------|-------|
+| 8px | `rounded-lg` | Panel corners |
+| 4px | `rounded` | Row corners; pill corners |
+
+### Shadows / Effects
+
+| Value | Usage |
+|-------|-------|
+| `shadow-2xl` | Panel drop shadow |
+| `0 4px 4px rgba(0,0,0,0.25), 0 0 6px #FAE287` | Row text-glow on hover / active |
+
+---
+
+## Layout Specifications
+
+### Panel (A_Dropdown-List — `SaaDropdownPanel`)
+
+| Property | Value |
+|----------|-------|
+| Position | `absolute right-0 mt-2`, aligned to the pill; `z-50` |
+| Min width | `min-w-full` (grows to content) |
+| Background | #00070C |
+| Border | 1px `--color-saa-gold-muted` |
+| Radius | 8px |
+| Padding | 6px |
+| Overflow | vertical scroll on overflow |
+
+### Hashtag Row (`SaaDropdownItem`, `size="default"`)
+
+| Property | Value |
+|----------|-------|
+| Height | 56px (`h-14`) |
+| Selected tag (A.1) | Figma 131×56 text-only tag |
+| Padding | `px-4` |
+| Font | Montserrat 16px / 700, `tracking-[0.5px]`, white |
+| Hover / Active | `bg-saa-gold-light/10` + text-glow |
+
+### Trigger Pill ("Hashtag" — `kudos-filters.tsx`)
+
+| Property | Value |
+|----------|-------|
+| Layout | `inline-flex items-center gap-2 rounded border px-4 py-3` |
+| Font | `text-sm font-semibold text-white` |
+| Default | `border-saa-gold-muted bg-saa-gold-light/10 hover:bg-saa-gold-light/20` |
+| Active | `border-saa-gold bg-saa-gold-light/20` |
+| Chevron | `/saa/chevron-down.svg`, `h-4 w-4`, `rotate-180` when open |
+
+---
+
+## Layout Structure (ASCII)
+
+```
+        ┌───────────────────────────┐
+        │ Hashtag                ▾  │  ← trigger pill (active: gold border)
+        └───────────────────────────┘
+        ┌───────────────────────────┐  ← A_Dropdown-List
+        │  #Dedicated               │  ← A.1 selected: gold/10 wash + glow (131×56)
+        │  #Inspiring               │
+        │  #High-performing         │   rows: h-14, px-4, Montserrat 16/700
+        │  #BE PROFESSIONAL         │
+        │  …(scroll)                │
+        └───────────────────────────┘
+   bg:#00070C · border:1px #998C5F · radius:8px · pad:6px · shadow-2xl
+```
+
+---
+
+## Implementation Mapping
+
+| Design Element | Figma Node ID | Tailwind / CSS | Source |
+|----------------|---------------|----------------|--------|
+| Panel | 563:8026 | `flex flex-col rounded-lg border border-saa-gold-muted bg-[#00070C] p-1.5 shadow-2xl` | `SaaDropdownPanel` |
+| Positioned panel | — | `absolute right-0 z-50 mt-2 min-w-full` | `kudos-filters.tsx` |
+| Hashtag row | 563:8026 › row | `flex items-center gap-2 h-14 rounded px-4 text-base font-bold tracking-[0.5px] text-white hover:bg-saa-gold-light/10` | `SaaDropdownItem` |
+| Active tag (A.1) | 563:8026 › active | `bg-saa-gold-light/10 [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287]` | `SaaDropdownItem active` |
+| Trigger pill | N/A (board) | `inline-flex items-center gap-2 rounded border px-4 py-3 text-sm font-semibold text-white` | `kudos-filters.tsx` |
+
+---
+
+## Notes
+
+- Dark-mode only — no light overrides.
+- Panel background `#00070C` is the same intentional literal used across all SAA dropdowns.
+- Single-select filter: exactly one row is `active` at a time (no check badge — the check badge is
+  reserved for the multi-select compose picker, screen `p9zO-c4a4x`).
