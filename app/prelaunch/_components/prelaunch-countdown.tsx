@@ -2,46 +2,50 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { computeRemaining, pad2, type Remaining } from "@/lib/saa/countdown";
+import { computeRemaining, type Remaining } from "@/lib/saa/countdown";
 
 export type PrelaunchLabels = {
   title: string;
   days: string;
   hours: string;
   minutes: string;
-  seconds: string;
 };
+
+/** Two digits, capped at 99 — the design has only two digit boxes per unit. */
+function cap2(value: number): string {
+  const safe = Number.isFinite(value) && value >= 0 ? Math.min(value, 99) : 0;
+  return String(safe).padStart(2, "0");
+}
 
 function DigitBox({ char }: { char: string }) {
   return (
-    <span className="relative flex h-[88px] w-[60px] items-center justify-center rounded-xl border border-white/10 bg-gradient-to-b from-white/[0.12] to-white/[0.02] sm:h-[104px] sm:w-[72px]">
-      {/* unlit "off" segments (DSEG '8' lights every segment) */}
-      <span
+    <div className="relative h-[123px] w-[77px]">
+      {/* Frosted-glass panel — gold border, blurs the key visual behind it */}
+      <div
         aria-hidden
-        className="absolute inset-0 flex items-center justify-center font-dseg text-5xl text-white/[0.07] sm:text-6xl"
-      >
-        8
-      </span>
-      {/* lit digit */}
-      <span
-        className="relative font-dseg text-5xl text-[#e6edf1] sm:text-6xl"
-        style={{ textShadow: "0 0 16px rgba(220,235,245,0.45)" }}
-      >
+        className="absolute inset-0 rounded-xl border-[0.75px] border-saa-gold-light opacity-50 backdrop-blur-[25px]"
+        style={{
+          background:
+            "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.10) 100%)",
+        }}
+      />
+      {/* LED digit (DSEG7) on top */}
+      <span className="absolute inset-0 flex items-center justify-center font-dseg text-[44px] leading-none text-white">
         {char}
       </span>
-    </span>
+    </div>
   );
 }
 
 function Unit({ value, label }: { value: string; label: string }) {
+  const [d0, d1] = value.split("");
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex gap-2">
-        {value.split("").map((c, i) => (
-          <DigitBox key={i} char={c} />
-        ))}
+    <div className="flex flex-col items-start gap-[21px]">
+      <div className="flex items-center gap-[21px]" role="img" aria-label={value}>
+        <DigitBox char={d0} />
+        <DigitBox char={d1} />
       </div>
-      <span className="text-sm font-bold uppercase tracking-[0.25em] text-white sm:text-base">
+      <span className="text-2xl font-bold uppercase text-white sm:text-4xl">
         {label}
       </span>
     </div>
@@ -50,14 +54,11 @@ function Unit({ value, label }: { value: string; label: string }) {
 
 export default function PrelaunchCountdown({
   target,
-  seconds,
   redirectTo,
   labels,
 }: {
-  /** Absolute launch date (ISO). Used when `seconds` is not given. */
-  target?: string;
-  /** Demo mode: count down this many seconds from when the page loads. */
-  seconds?: number;
+  /** Absolute launch date (ISO). */
+  target: string;
   /** If set, navigate here once the countdown reaches zero. */
   redirectTo?: string;
   labels: PrelaunchLabels;
@@ -66,8 +67,7 @@ export default function PrelaunchCountdown({
   const [remaining, setRemaining] = useState<Remaining | null>(null);
 
   useEffect(() => {
-    const targetMs =
-      seconds != null ? Date.now() + seconds * 1_000 : new Date(target ?? "").getTime();
+    const targetMs = new Date(target).getTime();
     let navigated = false;
     const tick = () => {
       const r = computeRemaining(targetMs);
@@ -80,21 +80,20 @@ export default function PrelaunchCountdown({
     tick();
     const id = setInterval(tick, 1_000);
     return () => clearInterval(id);
-  }, [target, seconds, redirectTo, router]);
+  }, [target, redirectTo, router]);
 
   const r = remaining;
 
   return (
-    <div className="flex flex-col items-center">
-      <p className="mb-6 text-center text-xl font-medium text-white sm:text-2xl">
+    <section className="flex flex-col items-center gap-6">
+      <h1 className="text-center text-3xl font-bold leading-tight text-white sm:text-4xl">
         {labels.title}
-      </p>
-      <div className="flex flex-wrap items-start justify-center gap-4 sm:gap-7">
-        <Unit value={r ? pad2(r.days) : "00"} label={labels.days} />
-        <Unit value={r ? pad2(r.hours) : "00"} label={labels.hours} />
-        <Unit value={r ? pad2(r.minutes) : "00"} label={labels.minutes} />
-        <Unit value={r ? pad2(r.seconds) : "00"} label={labels.seconds} />
+      </h1>
+      <div className="flex flex-wrap items-start justify-center gap-8 sm:gap-[60px]">
+        <Unit value={r ? cap2(r.days) : "00"} label={labels.days} />
+        <Unit value={r ? cap2(r.hours) : "00"} label={labels.hours} />
+        <Unit value={r ? cap2(r.minutes) : "00"} label={labels.minutes} />
       </div>
-    </div>
+    </section>
   );
 }

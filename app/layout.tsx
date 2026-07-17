@@ -22,7 +22,7 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   return (
-    <html lang={locale} className={`${montserrat.variable} h-full`}>
+    <html lang={locale} data-scroll-behavior="smooth" className={`${montserrat.variable} h-full`}>
       <body className="min-h-full bg-saa-bg text-white antialiased">
         {children}
       </body>
