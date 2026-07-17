@@ -36,8 +36,37 @@ export default async function HomePage() {
     <>
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
       <main>
-        <Hero />
-        <RootFurtherSection />
+        {/* The key-visual art flows down out of the hero and behind the ROOT
+            FURTHER essay, fading into the page background. Both layers track
+            the art's own height (aspect 1512/1392, the asset's native ratio)
+            so the fade stays anchored to the image when the copy reflows —
+            rendered once here behind both sections instead of being clipped
+            inside Hero. Plain CSS background: the grain-heavy asset must skip
+            the image optimizer, whose re-encode smooths the noise into blur. */}
+        <div className="relative bg-saa-bg">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 aspect-[1512/1392]"
+            style={{
+              backgroundImage: "url(/saa/keyvisual-bg.png)",
+              backgroundSize: "100% auto",
+              backgroundPosition: "50% 0%",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-0 top-0 aspect-[1512/1392]"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(0,16,26,0) 40%, rgba(0,16,26,0.55) 62%, #00101A 82%)",
+            }}
+          />
+          <Hero />
+          <div className="relative z-[1]">
+            <RootFurtherSection />
+          </div>
+        </div>
         <AwardSystem />
         <KudosBanner />
       </main>
