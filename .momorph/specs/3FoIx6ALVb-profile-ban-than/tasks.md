@@ -118,9 +118,9 @@ locale, EN via `saa_lang`.
 **Purpose**: No test runner is configured yet; these are the tests to add. All PENDING.
 
 - [ ] T029 [P] Route test: unauthenticated (no user, no demo cookie) → redirect `/login`; authenticated → renders | `app/profile/__tests__/page.test.tsx`
-- [ ] T030 [P] `ProfileKudos` test: defaults to "Đã gửi (n)"; clicking the filter toggles `aria-expanded`; selecting "Đã nhận" swaps the list and updates the button label | `app/profile/__tests__/profile-kudos.test.tsx`
-- [ ] T031 [P] `ProfileKudos` test: first two "sent" cards render the "Spam" ribbon; "received" cards render none | `app/profile/__tests__/profile-kudos.test.tsx`
-- [ ] T032 [P] `ProfileKudos` test: outside-click backdrop closes the dropdown without changing selection | `app/profile/__tests__/profile-kudos.test.tsx`
+- [x] T030 [P] `ProfileKudos` test: defaults to "Đã gửi (n)"; clicking the filter toggles `aria-expanded`; selecting "Đã nhận" swaps the list and updates the button label | `app/profile/_components/profile-kudos.test.tsx`
+- [x] T031 [P] `ProfileKudos` test: first two "sent" cards render the "Spam" ribbon; "received" cards render none | `app/profile/_components/profile-kudos.test.tsx`
+- [ ] T032 [P] `ProfileKudos` test: outside-click backdrop closes the dropdown without changing selection | `app/profile/_components/profile-kudos.test.tsx`
 - [ ] T033 [P] `StatsCard` test: renders all five stat rows + the 🔥×2 badge on the likes row; "Mở Secret Box" present | `app/kudos/__tests__/stats-card.test.tsx`
 - [ ] T034 [P] i18n test: `dict.profile` keys (`collectionTitle`, `sent`, `received`, `spam`) exist and differ across VN/EN | `lib/i18n/__tests__/dictionaries.test.ts`
 

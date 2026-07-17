@@ -44,11 +44,11 @@
 
 ## Phase 5: Tests (PENDING — "unit test làm sau")
 
-- [ ] T014 [P] Test: clicking a picker row toggles it in `tags` (add then remove) | `app/kudos/_components/__tests__/write-kudos-modal.test.tsx`
-- [ ] T015 [P] Test: a selected row shows the `CheckBadge` and gold/20 wash | `app/kudos/_components/__tests__/write-kudos-modal.test.tsx`
-- [ ] T016 [P] Test: at five selections, adding a sixth is a no-op and the add button is not rendered | `app/kudos/_components/__tests__/write-kudos-modal.test.tsx`
-- [ ] T017 [P] Test: removing a chip de-selects the hashtag and restores the add button | `app/kudos/_components/__tests__/write-kudos-modal.test.tsx`
-- [ ] T018 [P] Test: submit carries the selected hashtags onto the new `KudosPost` | `app/kudos/_components/__tests__/write-kudos-modal.test.tsx`
+- [ ] T014 [P] Test: clicking a picker row toggles it in `tags` (add then remove) | `app/kudos/_components/write-kudos-modal.test.tsx`
+- [ ] T015 [P] Test: a selected row shows the `CheckBadge` and gold/20 wash | `app/kudos/_components/write-kudos-modal.test.tsx`
+- [x] T016 [P] Test: at five selections, adding a sixth is a no-op and the add button is not rendered | `app/kudos/_components/write-kudos-modal.test.tsx`
+- [ ] T017 [P] Test: removing a chip de-selects the hashtag and restores the add button | `app/kudos/_components/write-kudos-modal.test.tsx`
+- [ ] T018 [P] Test: submit carries the selected hashtags onto the new `KudosPost` | `app/kudos/_components/write-kudos-modal.test.tsx`
 
 ---
 

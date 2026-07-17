@@ -58,5 +58,8 @@ dictionaries. Files live under `app/` (not `src/`).
 
 ## Testing
 
-Unit tests are **not yet added** (deferred — "unit test làm sau"). Every `tasks.md` marks its
-test tasks `[ ]` PENDING; implementation tasks are `[x]` with real file citations.
+Unit tests **shipped** via [`plans/unit-tests/`](./unit-tests/) (Vitest + React Testing Library,
+one branch/PR per suite): 14 co-located suites — 8 over `lib/` + 6 over client components — with
+coverage floors and CI (`.github/workflows/test.yml`) gating every PR. Test tasks in each
+`tasks.md` are flipped `[x]` where a shipped suite genuinely covers them; route-level/e2e tasks
+stay `[ ]` for the future Playwright plan.

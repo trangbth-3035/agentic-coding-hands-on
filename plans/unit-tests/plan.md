@@ -1,6 +1,6 @@
 ---
 title: Unit Tests — SAA 2025 (mock-api)
-status: ready
+status: completed
 work_type: deliverable
 spec_waived: "Testing deliverable — exercises already-shipped SAA code; no new product feature, so no F### spec. Targets are existing lib/ modules + client components."
 created: 2026-07-16
@@ -35,10 +35,10 @@ TailwindCSS 4. New test deps: `vitest`, `@vitejs/plugin-react`, `jsdom`, `vite-t
 
 | # | Phase | File | Depends on | Status |
 |---|-------|------|-----------|--------|
-| 01 | Test harness setup (Vitest + RTL + jsdom) | [phase-01-test-harness-setup.md](./phase-01-test-harness-setup.md) | — | ready |
-| 02 | `lib/` unit tests (pure + stateful + mocked) | [phase-02-lib-unit-tests.md](./phase-02-lib-unit-tests.md) | 01 | ready |
-| 03 | Client component tests (RTL) | [phase-03-component-tests.md](./phase-03-component-tests.md) | 01 | ready |
-| 04 | Coverage gate + CI + docs sync | [phase-04-coverage-ci-docs.md](./phase-04-coverage-ci-docs.md) | 02, 03 | ready |
+| 01 | Test harness setup (Vitest + RTL + jsdom) | [phase-01-test-harness-setup.md](./phase-01-test-harness-setup.md) | — | done — merged (PR #8) |
+| 02 | `lib/` unit tests (pure + stateful + mocked) | [phase-02-lib-unit-tests.md](./phase-02-lib-unit-tests.md) | 01 | done — merged (PRs #10–#23) |
+| 03 | Client component tests (RTL) | [phase-03-component-tests.md](./phase-03-component-tests.md) | 01 | done — merged (PRs #10–#23) |
+| 04 | Coverage gate + CI + docs sync | [phase-04-coverage-ci-docs.md](./phase-04-coverage-ci-docs.md) | 02, 03 | done — this branch (test/coverage-ci) |
 
 Phases 02 and 03 both depend only on 01 and are **independent of each other** — run them in
 parallel. Phase 04 gates on both.

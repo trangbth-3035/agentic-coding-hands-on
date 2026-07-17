@@ -64,4 +64,5 @@ Cross-screen open questions and design↔implementation decisions surfaced while
 ---
 
 > Detailed per-screen specs, design tokens, plans and tasks live under `.momorph/specs/<screen>/`.
-> Unit tests are deferred ("unit test làm sau") — tracked as `[ ]` PENDING in each `tasks.md`.
+> Unit tests shipped 2026-07-17 via `plans/unit-tests/` (Vitest + RTL, 14 suites, coverage-gated
+> CI). Covered test tasks are flipped `[x]` in each `tasks.md`; e2e/route-level tasks remain `[ ]`.
