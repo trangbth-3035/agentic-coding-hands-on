@@ -10,13 +10,18 @@ const LANGS: { code: string; locale: Locale; flag: string }[] = [
   { code: "EN", locale: "en", flag: "/saa/flag-en.svg" },
 ];
 
+/** Module-scope so the React Compiler doesn't flag the global mutation. */
+function writeLocaleCookie(next: Locale) {
+  document.cookie = `${LOCALE_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const current = LANGS.find((l) => l.locale === locale) ?? LANGS[0];
 
   function selectLocale(next: Locale) {
-    document.cookie = `${LOCALE_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
+    writeLocaleCookie(next);
     setOpen(false);
     router.refresh();
   }
