@@ -18,7 +18,23 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["lib/**", "app/**/_components/**"],
-      exclude: ["**/*.test.*", ".momorph/**", "plans/**", ".next/**"],
+      // lib/supabase is thin infra glue (out of unit-test scope — see
+      // plans/unit-tests/clarifications.md); it belongs to the e2e plan.
+      exclude: ["**/*.test.*", "lib/supabase/**", ".momorph/**", "plans/**", ".next/**"],
+      // Floors ratchet UP as more components gain tests — never lower one to
+      // go green; add the missing test instead (plans/unit-tests/phase-04).
+      thresholds: {
+        lines: 45,
+        functions: 38,
+        branches: 45,
+        statements: 45,
+        "lib/**": {
+          lines: 90,
+          functions: 90,
+          branches: 90,
+          statements: 90,
+        },
+      },
     },
   },
 });

@@ -47,10 +47,10 @@
 
 ## Phase 6: Tests (PENDING — "unit test làm sau")
 
-- [ ] T014 [P] Unit test: opening the FAB renders both pills and the red × circle (`aria-expanded="true"`) | `app/_components/__tests__/widget-button.test.tsx`
-- [ ] T015 [P] Unit test: clicking "Viết KUDOS" collapses the menu and opens the compose modal | `app/_components/__tests__/widget-button.test.tsx`
-- [ ] T016 [P] Unit test: clicking "Thể lệ" collapses the menu and opens the rules drawer | `app/_components/__tests__/widget-button.test.tsx`
-- [ ] T017 [P] Unit test: red × click, outside click, and `Escape` each collapse the menu | `app/_components/__tests__/widget-button.test.tsx`
+- [ ] T014 [P] Unit test: opening the FAB renders both pills and the red × circle (`aria-expanded="true"`) | `app/_components/widget-button.test.tsx`
+- [x] T015 [P] Unit test: clicking "Viết KUDOS" collapses the menu and opens the compose modal | `app/_components/widget-button.test.tsx`
+- [x] T016 [P] Unit test: clicking "Thể lệ" collapses the menu and opens the rules drawer | `app/_components/widget-button.test.tsx`
+- [ ] T017 [P] Unit test: red × click, outside click, and `Escape` each collapse the menu | `app/_components/widget-button.test.tsx`
 
 ---
 

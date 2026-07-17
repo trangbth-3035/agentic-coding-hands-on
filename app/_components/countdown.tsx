@@ -34,9 +34,15 @@ export default function Countdown({
   const [remaining, setRemaining] = useState<Remaining | null>(null);
 
   useEffect(() => {
-    setRemaining(computeRemaining(targetMs));
-    const id = setInterval(() => setRemaining(computeRemaining(targetMs)), 1_000);
-    return () => clearInterval(id);
+    const tick = () => setRemaining(computeRemaining(targetMs));
+    // First paint via rAF (not synchronously in the effect) to avoid
+    // cascading renders; the UI shows "--" until then, same as before.
+    const raf = requestAnimationFrame(tick);
+    const id = setInterval(tick, 1_000);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearInterval(id);
+    };
   }, [targetMs]);
 
   const r = remaining;

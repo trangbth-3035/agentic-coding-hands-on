@@ -35,8 +35,8 @@
 
 ## Phase 4: Tests (PENDING — "unit test làm sau")
 
-- [ ] T008 [P] Unit test: closed pill renders with `aria-expanded="false"` and both icons present | `app/_components/__tests__/widget-button.test.tsx`
-- [ ] T009 [P] Unit test: clicking the pill sets `aria-expanded="true"` and reveals the open-state pills | `app/_components/__tests__/widget-button.test.tsx`
+- [ ] T008 [P] Unit test: closed pill renders with `aria-expanded="false"` and both icons present | `app/_components/widget-button.test.tsx`
+- [x] T009 [P] Unit test: clicking the pill sets `aria-expanded="true"` and reveals the open-state pills | `app/_components/widget-button.test.tsx`
 
 ---
 

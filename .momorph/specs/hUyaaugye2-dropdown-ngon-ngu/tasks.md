@@ -45,7 +45,7 @@
 ## Phase 6: Polish (PENDING)
 
 - [ ] T011 [P] Add keyboard support: `Escape` closes and returns focus to the toggle; arrow keys rove between rows | `app/_components/language-switcher.tsx`
-- [ ] T012 [P] Unit test: clicking a row writes `saa_lang` and calls `router.refresh()`; active row is `aria-checked` (PENDING — no test runner yet) | `app/_components/__tests__/language-switcher.test.tsx`
+- [x] T012 [P] Unit test: clicking a row writes `saa_lang` and calls `router.refresh()`| `app/_components/language-switcher.test.tsx`
 
 ---
 

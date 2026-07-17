@@ -20,6 +20,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Testing
+
+Unit tests run on [Vitest](https://vitest.dev) + [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) (jsdom):
+
+```bash
+npm test           # run the suite once
+npm run test:watch # watch mode
+npm run test:coverage # suite + coverage floors (global + lib/**)
+```
+
+Conventions (see `plans/unit-tests/` for the full plan and decisions):
+
+- **Co-located tests** — `foo.test.ts(x)` sits next to `foo.ts(x)`; no separate `tests/` tree.
+- **Unit target = `lib/` module or client component**, never an `app/**/page.tsx` Server
+  Component (those pull `cookies()`/Supabase and belong to a future Playwright e2e plan,
+  as does `lib/supabase/*`).
+- **Mock only the `next/*` boundary** (`next/image`, `next/navigation`, `next/headers`) —
+  the component/module under test always runs for real.
+- CI (`.github/workflows/test.yml`) runs lint + the coverage-gated suite on every PR and
+  push to `main`. Coverage floors in `vitest.config.ts` only ratchet up — add the missing
+  test instead of lowering a floor.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

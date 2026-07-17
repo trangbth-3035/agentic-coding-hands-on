@@ -44,9 +44,9 @@
 
 ## Phase 5: Tests (PENDING — "unit test làm sau")
 
-- [ ] T011 [P] Test: clicking the "Hashtag" pill toggles the panel; opening it closes the Department panel | `app/kudos/_components/__tests__/kudos-filters.test.tsx`
-- [ ] T012 [P] Test: selecting a hashtag calls `onChange("hashtag", value)` and closes the panel | `app/kudos/_components/__tests__/kudos-filters.test.tsx`
-- [ ] T013 [P] Test: reselecting the active hashtag calls `onChange("hashtag", null)` | `app/kudos/_components/__tests__/kudos-filters.test.tsx`
+- [ ] T011 [P] Test: clicking the "Hashtag" pill toggles the panel; opening it closes the Department panel | `app/kudos/_components/kudos-filters.test.tsx`
+- [x] T012 [P] Test: selecting a hashtag calls `onChange("hashtag", value)` and closes the panel | `app/kudos/_components/kudos-filters.test.tsx`
+- [x] T013 [P] Test: reselecting the active hashtag calls `onChange("hashtag", null)` | `app/kudos/_components/kudos-filters.test.tsx`
 - [ ] T014 [P] Test: `HighlightSection` shows only kudos whose `hashtags` include the selection | `app/kudos/_components/__tests__/highlight-section.test.tsx`
 
 ---
