@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { KudosPost } from "@/lib/saa/kudos";
 import { KudosCard, type CardLabels } from "./kudos-card";
 
@@ -43,6 +43,14 @@ export function HighlightCarousel({
     trackRef.current?.scrollBy({ left: delta * step(), behavior: "smooth" });
   };
 
+  // Open on the second slide so cards peek in from BOTH edges (the design's
+  // resting state); at slide 1 the left half of the bleed would sit empty.
+  useEffect(() => {
+    const el = trackRef.current;
+    if (el && posts.length > 1) el.scrollLeft = step();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="flex flex-col gap-8">
       {/* Full-bleed centre-mode carousel: the active card snaps to the
@@ -55,7 +63,7 @@ export function HighlightCarousel({
           style={{ paddingInline: "max(16px, calc(50vw - 276px))" }}
         >
           {posts.map((post) => (
-            <div key={post.id} className="shrink-0 snap-center">
+            <div key={post.id} className="flex shrink-0 snap-center">
               <KudosCard post={post} labels={labels} variant="highlight" />
             </div>
           ))}

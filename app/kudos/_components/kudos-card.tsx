@@ -49,7 +49,7 @@ export function KudosCard({
     <article
       className={
         highlight
-          ? "relative flex w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
+          ? "relative flex h-full w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
           : "relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4"
       }
     >

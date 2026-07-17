@@ -97,6 +97,14 @@ const POST_SEEDS: PostSeed[] = [
   { id: "k4", department: "CEVC1", hashtags: ["#GET RISKY", "#GO FAST"], sender: ["Nguyễn Văn Quy", "new", AV1], receiver: ["Lê Kiều Trang", "legend", AV2] },
   { id: "k5", department: "OPD", hashtags: ["#WASSHOI", "#High-performing"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Huỳnh Dương Xuân Nhật", "legend", AV2] },
   { id: "k6", department: "Infra", hashtags: ["#THINK OUTSIDE THE BOX", "#WASSHOI"], sender: ["Dương Thúy An", "new", AV1], receiver: ["Đỗ Hoàng Hiệp", "legend", AV2] },
+  // Second lap so the Highlight carousel has enough slides to run and every
+  // filter option returns more than one card.
+  { id: "k7", department: "CEVC2", hashtags: ["#BE OPTIMISTIC", "#GO FAST"], sender: ["Mai Phương Thúy", "rising", AV1], receiver: ["Nguyễn Hoàng Linh", "legend", AV2] },
+  { id: "k8", department: "CEVC3", hashtags: ["#High-performing", "#BE A TEAM"], sender: ["Lê Kiều Trang", "new", AV1], receiver: ["Nguyễn Văn Quy", "rising", AV2] },
+  { id: "k9", department: "CEVC4", hashtags: ["#GET RISKY", "#WASSHOI"], sender: ["Huỳnh Dương Xuân", "legend", AV1], receiver: ["Nguyễn Bá Chức", "new", AV2] },
+  { id: "k10", department: "CEVC1", hashtags: ["#BE PROFESSIONAL", "#THINK OUTSIDE THE BOX"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Dương Thúy An", "legend", AV2] },
+  { id: "k11", department: "OPD", hashtags: ["#BE A TEAM", "#GO FAST"], sender: ["Đỗ Hoàng Hiệp", "new", AV1], receiver: ["Mai Phương Thúy", "rising", AV2] },
+  { id: "k12", department: "Infra", hashtags: ["#BE OPTIMISTIC", "#GET RISKY"], sender: ["Nguyễn Văn Quy", "legend", AV1], receiver: ["Lê Kiều Trang", "new", AV2] },
 ];
 
 export const KUDOS_POSTS: KudosPost[] = POST_SEEDS.map((s) => ({
