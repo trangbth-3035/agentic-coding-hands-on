@@ -54,7 +54,7 @@ export function KudosCard({
       }
     >
       {status && (
-        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-saa-red px-4 py-1.5 text-sm font-bold text-white">
+        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-[#FF8412] px-4 py-1.5 text-sm font-bold text-white">
           {status}
         </span>
       )}

@@ -98,11 +98,13 @@ export default async function ProfilePage() {
 
         {/* My KUDOS — sent / received with a filter dropdown */}
         <section className="mx-auto max-w-[1200px] px-6 pb-20 pt-4">
+          {/* Design shows "Đã gửi (5)" — a short personal list, not the whole
+              board feed; take disjoint slices so the two tabs differ. */}
           <ProfileKudos
             caption={k.awardsCaption}
             title={k.kudosUnit}
-            sent={KUDOS_POSTS}
-            received={KUDOS_POSTS}
+            sent={KUDOS_POSTS.slice(0, 5)}
+            received={KUDOS_POSTS.slice(5, 10)}
             cardLabels={cardLabels}
             t={{ sent: p.sent, received: p.received, spam: p.spam }}
           />

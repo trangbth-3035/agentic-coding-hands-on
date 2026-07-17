@@ -81,7 +81,7 @@ export function ProfileKudos({
   return (
     <div className="flex flex-col gap-10">
       <SectionHeading caption={caption} title={title} right={filter} />
-      <div className="mx-auto flex w-full max-w-[752px] flex-col gap-6">
+      <div className="mx-auto flex w-full max-w-[680px] flex-col gap-6">
         {list.map((post, i) => (
           <KudosCard
             key={post.id}
