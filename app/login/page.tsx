@@ -68,29 +68,32 @@ export default async function LoginPage({
         }}
       />
 
-      {/* Fixed header — logo (left) + language switcher (right), transparent
-          so the art reads through (per design). */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between px-6 sm:px-12 lg:px-36">
-        <Image
-          src="/saa/logo-header.png"
-          alt="Sun* Annual Awards 2025"
-          width={52}
-          height={48}
-          priority
-          className="h-12 w-auto"
-        />
-        <LanguageSwitcher locale={locale} />
+      {/* Sticky header bar — translucent dark strip; logo (left) + language
+          switcher (right) sit in the same centred 1152px column as the hero. */}
+      <header className="sticky top-0 z-50 shrink-0 bg-[#0b0f12]/80">
+        <div className="mx-auto flex h-20 w-full max-w-[1152px] items-center justify-between px-4 sm:px-8 xl:px-0">
+          <Image
+            src="/saa/logo-header.png"
+            alt="Sun* Annual Awards 2025"
+            width={52}
+            height={48}
+            priority
+            className="h-12 w-auto"
+          />
+          <LanguageSwitcher locale={locale} />
+        </div>
       </header>
 
-      {/* Main content — vertically centred between header and footer */}
-      <main className="relative z-10 flex flex-1 flex-col justify-center px-6 pb-16 pt-24 sm:px-12 lg:px-36">
+      {/* Main content — vertically centred, same 1152px column as the header */}
+      <main className="relative z-10 flex flex-1 flex-col justify-center px-4 pb-16 sm:px-8">
+        <div className="mx-auto w-full max-w-[1152px]">
         {error && (
           <p className="mb-6 max-w-md rounded-lg border border-saa-red/60 bg-saa-red/15 px-4 py-3 text-sm text-[#fca5a5]">
             {t.error}
           </p>
         )}
 
-        <section className="flex flex-col gap-14 pl-4">
+        <section className="flex flex-col gap-14">
           <Image
             src="/saa/root-further-logo.png"
             alt="Root Further"
@@ -130,6 +133,7 @@ export default async function LoginPage({
             </form>
           </div>
         </section>
+        </div>
       </main>
 
       {/* Footer — centered bold copyright over the art, no divider (design) */}
