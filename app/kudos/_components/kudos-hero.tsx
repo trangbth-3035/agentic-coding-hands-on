@@ -26,7 +26,7 @@ export function KudosHero({
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-saa-bg via-saa-bg/70 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-saa-bg" />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-10 pt-28 sm:pt-32">
+      <div className="mx-auto max-w-[1200px] px-6 pb-10 pt-8 sm:pt-12">
         <div className="flex flex-col gap-3">
           <p className="text-2xl font-bold text-saa-gold-light sm:text-[36px] sm:leading-[44px]">
             {dict.heroTitle}

@@ -41,7 +41,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex h-10 items-center gap-2 rounded-full px-3 transition hover:bg-white/10"
+        className="flex items-center gap-1 rounded p-3 transition-colors hover:bg-white/10 sm:p-4"
       >
         <Image
           src={current.flag}
@@ -50,8 +50,14 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
           height={18}
           className="h-[18px] w-6 rounded-[3px] object-cover"
         />
-        <span className="text-sm font-medium text-white">{current.code}</span>
-        <Image src="/saa/chevron-down.svg" alt="" width={12} height={12} className="h-3 w-3" />
+        <span className="text-base font-bold tracking-[0.15px] text-white">{current.code}</span>
+        <Image
+          src="/saa/chevron-down.svg"
+          alt=""
+          width={16}
+          height={16}
+          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+        />
       </button>
 
       {open && (

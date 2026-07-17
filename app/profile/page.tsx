@@ -56,7 +56,7 @@ export default async function ProfilePage() {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-saa-bg/50 to-saa-bg" />
           </div>
 
-          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 px-6 pb-14 pt-36">
+          <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 px-6 pb-14 pt-16">
             {/* Avatar + name + department/badge */}
             <div className="flex flex-col items-center gap-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}

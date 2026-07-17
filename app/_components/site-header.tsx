@@ -36,7 +36,9 @@ export default function SiteHeader({
   ].map((item) => ({ ...item, selected: isNavActive(item.href, pathname) }));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-gradient-to-b from-saa-bg/95 to-saa-bg/40 backdrop-blur-md">
+    // Sticky translucent strip; on <lg the nav wraps to its own full-width
+    // row under the logo/controls row (per reference).
+    <header className="sticky top-0 z-50 shrink-0 bg-[#101417]/80 px-4 py-2 sm:px-8 lg:py-0">
       {accountOpen && (
         <button
           aria-hidden
@@ -46,19 +48,20 @@ export default function SiteHeader({
         />
       )}
 
-      <div className="mx-auto flex h-20 w-full max-w-[1152px] items-center justify-between gap-4 px-4 sm:px-8 xl:px-0">
-        <div className="flex items-center gap-8">
-          <Link href={NAV_HREFS.about} className="shrink-0" aria-label="Sun* Annual Awards">
-            <Image
-              src="/saa/logo-header.png"
-              alt="Sun* Annual Awards"
-              width={64}
-              height={60}
-              className="h-10 w-auto"
-              priority
-            />
-          </Link>
-          <nav className="hidden items-center gap-7 lg:flex">
+      <div className="mx-auto flex w-full max-w-[1152px] flex-wrap items-center justify-between gap-x-4 lg:h-20">
+        <Link href={NAV_HREFS.about} className="order-1 shrink-0" aria-label="Sun* Annual Awards">
+          <Image
+            src="/saa/logo-header.png"
+            alt="Sun* Annual Awards"
+            width={52}
+            height={48}
+            className="h-12 w-auto"
+            priority
+          />
+        </Link>
+
+        <div className="order-3 w-full overflow-x-auto lg:order-2 lg:ml-16 lg:mr-auto lg:w-auto">
+          <nav className="flex items-center gap-1 sm:gap-6">
             {nav.map((item) => (
               <Link
                 key={item.label}
@@ -66,8 +69,8 @@ export default function SiteHeader({
                 aria-current={item.selected ? "page" : undefined}
                 className={
                   item.selected
-                    ? "relative text-sm font-semibold text-saa-gold after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-saa-gold"
-                    : "text-sm font-medium text-white/80 transition hover:text-white"
+                    ? "flex items-center gap-1 whitespace-nowrap border-b border-saa-gold-light px-3 py-3 text-sm font-bold tracking-[0.1px] text-saa-gold-light [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287] sm:p-4"
+                    : "flex items-center gap-1 whitespace-nowrap rounded px-3 py-3 text-sm font-bold tracking-[0.1px] text-white transition-colors hover:bg-white/10 sm:p-4"
                 }
               >
                 {item.label}
@@ -76,14 +79,14 @@ export default function SiteHeader({
           </nav>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="order-2 flex items-center gap-2 sm:gap-4 lg:order-3">
           <button
             type="button"
             aria-label={dict.header.notifications}
-            className="relative grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
+            className="relative flex h-10 w-10 items-center justify-center rounded p-2 text-white transition-colors hover:bg-white/10"
           >
-            <Image src="/saa/icon-bell.svg" alt="" width={20} height={20} className="h-5 w-5" />
-            <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-saa-red ring-2 ring-saa-bg" />
+            <Image src="/saa/icon-bell.svg" alt="" width={24} height={24} className="h-6 w-6" />
+            <span className="absolute right-[9px] top-[9px] h-2 w-2 rounded-full bg-saa-red" />
           </button>
 
           <LanguageSwitcher locale={locale} />
@@ -95,7 +98,7 @@ export default function SiteHeader({
               aria-haspopup="menu"
               aria-expanded={accountOpen}
               aria-label={dict.header.account}
-              className="grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center overflow-hidden rounded border border-saa-gold-muted bg-transparent p-2 transition-colors hover:bg-white/10"
             >
               {user.avatarUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
