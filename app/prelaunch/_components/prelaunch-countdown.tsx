@@ -30,7 +30,7 @@ function DigitBox({ char }: { char: string }) {
         }}
       />
       {/* LED digit (DSEG7) on top */}
-      <span className="absolute inset-0 flex items-center justify-center font-dseg text-[44px] leading-none text-white">
+      <span className="absolute inset-0 flex items-center justify-center font-dseg text-[74px] font-bold leading-none text-white">
         {char}
       </span>
     </div>

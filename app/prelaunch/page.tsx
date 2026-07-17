@@ -41,11 +41,9 @@ export default async function PrelaunchPage() {
         }}
       />
 
-      {/* Temporary demo flow: tap anywhere to continue to the Homepage. */}
+      {/* Temporary demo flow: tap anywhere to continue to the Homepage.
+          Invisible per design — the hint copy stays as the accessible name. */}
       <Link href="/" aria-label={t.enterHint} className="absolute inset-0 z-20" />
-      <p className="pointer-events-none absolute bottom-10 left-1/2 z-30 -translate-x-1/2 text-sm text-white/50">
-        {t.enterHint}
-      </p>
     </main>
   );
 }
