@@ -57,34 +57,34 @@ export default async function Hero() {
           />
         </div>
 
-        <div className="mt-8 space-y-1.5 text-sm text-white sm:text-base">
-          <p className="flex flex-wrap gap-x-8 gap-y-1.5">
+        <div className="mt-8 flex flex-col gap-2 text-sm font-semibold leading-6 text-white sm:text-base">
+          <p className="flex flex-col gap-1.5 sm:flex-row sm:gap-15">
             <span>
-              <span className="text-white/60">{t.timeLabel} </span>
-              <span className="font-semibold">{eventDate}</span>
+              <span className="text-saa-gold-light">{t.timeLabel} </span>
+              {eventDate}
             </span>
             <span>
-              <span className="text-white/60">{t.locationLabel} </span>
-              <span className="font-semibold">{t.location}</span>
+              <span className="text-saa-gold-light">{t.locationLabel} </span>
+              {t.location}
             </span>
           </p>
-          <p className="text-white/70">{t.livestream}</p>
+          <p className="tracking-[0.5px] text-white/80">{t.livestream}</p>
         </div>
 
-        <div className="mt-9 flex flex-wrap items-center gap-4">
+        <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:gap-10">
           <a
             href={NAV_HREFS.awards}
-            className="inline-flex items-center gap-2 rounded-full bg-saa-gold px-6 py-3 text-sm font-bold uppercase tracking-wide text-[#1a1300] transition hover:bg-saa-gold-light"
+            className="group inline-flex h-15 items-center justify-center gap-2 rounded-lg bg-saa-gold-light px-6 text-sm font-bold text-saa-bg transition hover:bg-saa-gold"
           >
             {t.aboutAwards}
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
           <a
             href={NAV_HREFS.kudos}
-            className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:border-white hover:bg-white/5"
+            className="group inline-flex h-15 items-center justify-center gap-2 rounded-lg border border-saa-gold-muted bg-saa-gold-light/10 px-6 text-sm font-bold text-saa-gold-light transition hover:bg-saa-gold-light/20"
           >
             {t.aboutKudos}
-            <ArrowUpRight className="h-4 w-4" />
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
       </div>
