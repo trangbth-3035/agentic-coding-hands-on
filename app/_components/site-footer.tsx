@@ -17,7 +17,7 @@ export default async function SiteFooter() {
 
   return (
     <footer className="border-t border-white/10 bg-saa-bg">
-      <div className="mx-auto flex max-w-7xl flex-col items-center gap-6 px-4 py-8 sm:px-6 lg:flex-row lg:justify-between lg:px-10">
+      <div className="mx-auto flex max-w-[1152px] flex-col items-center gap-6 px-4 py-8 sm:px-8 lg:flex-row lg:justify-between xl:px-0">
         <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-10">
           <Link href={NAV_HREFS.about} aria-label="Sun* Annual Awards">
             <Image

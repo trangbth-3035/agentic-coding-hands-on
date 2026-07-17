@@ -46,7 +46,7 @@ export default function SiteHeader({
         />
       )}
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto flex h-20 w-full max-w-[1152px] items-center justify-between gap-4 px-4 sm:px-8 xl:px-0">
         <div className="flex items-center gap-8">
           <Link href={NAV_HREFS.about} className="shrink-0" aria-label="Sun* Annual Awards">
             <Image

@@ -40,7 +40,7 @@ export default async function AwardInformationPage() {
     <>
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
 
-      <main className="pt-16">
+      <main className="pt-20">
         {/* Title block (design item A) overlaid on the keyvisual band */}
         <KeyvisualHero>
           <div className="flex flex-col items-center gap-4">

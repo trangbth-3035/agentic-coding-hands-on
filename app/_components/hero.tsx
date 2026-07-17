@@ -14,7 +14,7 @@ export default async function Hero() {
     // The key-visual background lives on the page-level wrapper (app/page.tsx)
     // so it can flow past this hero and behind the ROOT FURTHER essay.
     <section id="about" className="relative">
-      <div className="mx-auto flex min-h-[760px] max-w-7xl flex-col justify-center px-4 pb-20 pt-28 sm:px-6 lg:px-10">
+      <div className="mx-auto flex min-h-[760px] w-full max-w-[1152px] flex-col justify-center px-4 pb-20 pt-28 sm:px-8 xl:px-0">
         <Image
           src="/saa/root-further-logo.png"
           alt="Root Further"
