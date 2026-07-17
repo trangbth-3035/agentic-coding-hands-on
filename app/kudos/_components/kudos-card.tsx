@@ -125,6 +125,14 @@ export function KudosCard({
       <div className="flex items-center justify-between gap-6">
         <LikeButton hearts={post.hearts} />
         <div className="flex items-center gap-1 sm:gap-3">
+          <button
+            type="button"
+            className="inline-flex items-center gap-1 rounded px-2 py-2 text-base font-bold text-saa-bg transition hover:opacity-70"
+          >
+            {labels.copyLink}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/saa/kudos-ic-link.svg" alt="" className="h-6 w-6" />
+          </button>
           {highlight && (
             <a
               href="#"
@@ -136,14 +144,6 @@ export function KudosCard({
               </svg>
             </a>
           )}
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 rounded px-2 py-2 text-base font-bold text-saa-bg transition hover:opacity-70"
-          >
-            {labels.copyLink}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/kudos-ic-link.svg" alt="" className="h-6 w-6" />
-          </button>
         </div>
       </div>
     </article>

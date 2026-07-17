@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
 import {
   SPOTLIGHT_NAMES,
@@ -11,15 +10,8 @@ import {
 export function SpotlightBoard({ dict }: { dict: Dictionary["kudosBoard"] }) {
   return (
     <div className="relative isolate h-[460px] w-full overflow-hidden rounded-[32px] border border-saa-gold-muted bg-[#00070C] sm:h-[548px] sm:rounded-[47px]">
-      {/* faint feather art glow on the left */}
-      <Image
-        src="/saa/kudos-kv-bg.png"
-        alt=""
-        fill
-        sizes="1200px"
-        className="-z-10 object-cover opacity-40 mix-blend-screen"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#00070C]/30 via-[#00070C]/85 to-[#00070C]" />
+      {/* Design board is a plain near-black panel (no key-visual bleed) — the
+          word-cloud and ticker provide all the texture. */}
 
       {/* search pill (top-left) */}
       <div className="absolute left-6 top-6 flex w-56 items-center gap-2 rounded-full border border-saa-gold-muted bg-saa-gold-light/10 px-3 py-2">

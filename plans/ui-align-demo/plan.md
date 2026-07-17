@@ -19,9 +19,10 @@ to the demo's — deltas are CSS/markup/copy, plus 2 new assets (login art, DSEG
 | Prelaunch | DSEG digits render thin — Regular weight picked; force **bold** (demo uses DSEG7 Bold) · drop visible "Nhấn vào màn hình…" hint (keep click-through Link) |
 | Home | keyvisual must flow past hero behind ROOT FURTHER essay (`aspect-[1512/1392]`, 100% auto, top-anchored + fade), not clipped in hero · hero countdown tiles → demo md spec (DSEG bold digits, 2 tiles/unit, #FFEA9E border) · dict: "Comming soon"→"Coming soon", livestream "Tường thuật trực tiếp…", event date hard "26/12/2025" (decoupled from countdown target) · CTAs uppercase · essay max-w-[1152px] bold text-base→2xl justify |
 | Awards | `KeyvisualHero` is a documented CSS-blob placeholder → replace with real art band per demo (`aspect-[1440/547]`, cover 50% 62%, bottom fade, logo + title overlaid) |
+| Kudos board | aligned to the MoMorph design render (screenId `MaZUn5xHXZ` — demo app has no kudos page): solid white Sun*KUDOS hero wordmark + white title · full-bleed centre-snap Highlight carousel with edge peek · Copy Link before Xem chi tiết · Spotlight board on a plain near-black panel (no key-visual bleed) |
 
 Non-bugs found: homepage Kudos banner swoosh only missing in JS-off screenshots (lazy image) — no change.
-Out of scope: /kudos (demo ships a placeholder page only), /profile, /dashboard (no demo counterpart).
+Out of scope: /profile, /dashboard (no demo counterpart; /kudos aligned against the MoMorph render instead).
 
 Verify: re-screenshot 4 routes on :3000 vs demo · `npm test` (48) · lint · build.
 Branch `fix/ui-align-demo`, one commit per screen.

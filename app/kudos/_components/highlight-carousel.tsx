@@ -45,14 +45,19 @@ export function HighlightCarousel({
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="relative">
+      {/* Full-bleed centre-mode carousel: the active card snaps to the
+          viewport centre and the neighbours peek in from both edges. */}
+      <div className="relative left-1/2 w-screen -translate-x-1/2">
         <div
           ref={trackRef}
           onScroll={onScroll}
-          className="saa-no-scrollbar flex gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]"
+          className="saa-no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]"
+          style={{ paddingInline: "max(16px, calc(50vw - 276px))" }}
         >
           {posts.map((post) => (
-            <KudosCard key={post.id} post={post} labels={labels} variant="highlight" />
+            <div key={post.id} className="shrink-0 snap-center">
+              <KudosCard post={post} labels={labels} variant="highlight" />
+            </div>
           ))}
         </div>
 
