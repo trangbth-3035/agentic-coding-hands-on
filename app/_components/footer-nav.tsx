@@ -15,7 +15,7 @@ export type FooterNavItem = {
 export function FooterNav({ items }: { items: FooterNavItem[] }) {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
+    <nav className="flex flex-wrap items-center gap-x-6 gap-y-1 xl:flex-nowrap xl:gap-12">
       {items.map((item) => {
         const active = !item.noActive && isNavActive(item.href, pathname);
         return (
@@ -25,8 +25,8 @@ export function FooterNav({ items }: { items: FooterNavItem[] }) {
             aria-current={active ? "page" : undefined}
             className={
               active
-                ? "text-sm font-semibold text-saa-gold"
-                : "text-sm text-white/70 transition hover:text-white"
+                ? "whitespace-nowrap bg-saa-gold-light/10 px-3 py-3 text-base font-bold leading-6 tracking-[0.15px] text-white [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287] lg:p-4"
+                : "whitespace-nowrap px-3 py-3 text-base font-bold leading-6 tracking-[0.15px] text-white lg:p-4"
             }
           >
             {item.label}

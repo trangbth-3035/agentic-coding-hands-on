@@ -8,7 +8,7 @@ export default async function KudosBanner() {
   const t = dict.kudos;
 
   return (
-    <section id="kudos" className="bg-saa-bg px-4 py-12 sm:px-8 sm:py-20 xl:px-0">
+    <section id="kudos" className="px-4 py-12 sm:px-8 sm:py-20 xl:px-0">
       {/* Shared 1152px column; the card keeps its own 1120px width, centred,
           and locks the design aspect on large screens (per reference). */}
       <div className="mx-auto w-full max-w-[1152px]">

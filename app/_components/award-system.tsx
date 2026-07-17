@@ -14,7 +14,7 @@ export default async function AwardSystem() {
   const t = dict.awardsSection;
 
   return (
-    <section id="awards" className="bg-saa-bg px-4 py-16 sm:px-8 sm:py-20 xl:px-0">
+    <section id="awards" className="px-4 py-16 sm:px-8 sm:py-20 xl:px-0">
       <div className="mx-auto flex w-full max-w-[1152px] flex-col gap-10 sm:gap-20">
         {/* Section header — eyebrow, full-width divider, big gold title */}
         <div className="flex w-full flex-col gap-4">

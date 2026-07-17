@@ -35,7 +35,10 @@ export default async function HomePage() {
   return (
     <>
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
-      <main>
+      {/* Sections below the key-visual flow (awards, kudos) sit on the
+          slightly warmer #0B0F12 like the reference; the key-visual wrapper
+          keeps the page-dark #00101A behind the art. */}
+      <main className="bg-[#0B0F12]">
         {/* The key-visual art flows down out of the hero and behind the ROOT
             FURTHER essay, fading into the page background. Both layers track
             the art's own height (aspect 1512/1392, the asset's native ratio)
@@ -59,7 +62,7 @@ export default async function HomePage() {
             className="pointer-events-none absolute inset-x-0 top-0 aspect-[1512/1392]"
             style={{
               background:
-                "linear-gradient(180deg, rgba(0,16,26,0) 40%, rgba(0,16,26,0.55) 62%, #00101A 82%)",
+                "linear-gradient(180deg, rgba(11,15,18,0) 40%, rgba(11,15,18,0.55) 62%, #0B0F12 82%)",
             }}
           />
           <Hero />
