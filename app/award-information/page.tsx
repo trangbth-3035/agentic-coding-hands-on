@@ -40,7 +40,7 @@ export default async function AwardInformationPage() {
     <>
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
 
-      <main className="pt-20">
+      <main>
         {/* Title block (design item A) overlaid on the keyvisual band */}
         <KeyvisualHero>
           <div className="flex flex-col items-center gap-4">
@@ -53,16 +53,16 @@ export default async function AwardInformationPage() {
         </KeyvisualHero>
 
         {/* Award system: nav rail (C) + award list (D) */}
-        <section className="mx-auto max-w-[1200px] px-6 py-12">
-          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
-            <aside className="lg:sticky lg:top-24 lg:h-fit lg:w-56 lg:shrink-0">
+        <section className="mx-auto w-full max-w-[1152px] px-4 py-12 sm:px-9 sm:py-16 lg:px-0 lg:py-24">
+          <div className="flex w-full flex-col gap-10 lg:flex-row lg:items-start lg:justify-between lg:gap-20">
+            <aside className="lg:w-[178px] lg:shrink-0">
               <AwardNav items={navItems} ariaLabel={t.navAriaLabel} />
             </aside>
 
             <div className="min-w-0 flex-1">
               {AWARDS.map((award, i) => (
                 <Fragment key={award.slug}>
-                  {i > 0 && <div className="my-14 h-px w-full bg-saa-divider" />}
+                  {i > 0 && <div className="my-20 h-px w-full bg-saa-divider" />}
                   <AwardCard award={award} copy={t.awards[award.slug]} labels={t} priority={i === 0} />
                 </Fragment>
               ))}
@@ -71,7 +71,7 @@ export default async function AwardInformationPage() {
         </section>
 
         {/* Sun* Kudos promo (D1) */}
-        <section className="mx-auto max-w-[1200px] px-6 pb-20">
+        <section className="mx-auto w-full max-w-[1152px] px-4 pb-24 sm:px-9 lg:px-0">
           <KudosBlock />
         </section>
       </main>

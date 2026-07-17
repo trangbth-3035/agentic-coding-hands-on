@@ -8,25 +8,34 @@ export async function KudosBlock() {
   const t = dict.kudos;
 
   return (
-    <section className="relative isolate overflow-hidden rounded-2xl border border-saa-divider">
-      <Image src="/saa/kudos-bg.png" alt="" fill sizes="1200px" className="-z-10 object-cover" />
+    <section className="relative overflow-hidden rounded-2xl bg-[#0F0F0F] lg:min-h-[500px]">
+      <Image
+        src="/saa/kudos-bg-awards.png"
+        alt=""
+        fill
+        sizes="(min-width:1024px) 1152px, 100vw"
+        aria-hidden
+        className="object-cover object-right"
+      />
 
-      <div className="flex flex-col items-start gap-10 p-8 md:p-12 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-        <div className="flex max-w-[470px] flex-col gap-4">
-          <span className="text-2xl font-bold text-white">{t.label}</span>
-          <h2 className="text-5xl font-bold leading-none text-saa-gold">{t.title}</h2>
-          <p className="saa-justify text-base font-semibold leading-6 tracking-[0.5px] text-white">
-            <span className="font-bold">{t.caption}</span>
-            <br />
+      <div className="relative z-[1] flex flex-col gap-8 p-6 sm:p-10 lg:h-full lg:min-h-[500px] lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+        <div className="flex max-w-[470px] flex-col items-start gap-4">
+          <p className="text-2xl font-bold leading-8 text-white">{t.label}</p>
+          <h2 className="text-[40px] font-bold leading-[48px] tracking-[-0.25px] text-saa-gold-light sm:text-[57px] sm:leading-[64px]">
+            {t.title}
+          </h2>
+          <p className="whitespace-pre-line text-justify text-base font-bold leading-6 tracking-[0.5px] text-white">
+            {t.caption}
+            {"\n"}
             {t.description}
           </p>
           <a
             href={NAV_HREFS.kudos}
-            className="mt-2 inline-flex w-fit items-center gap-2 rounded bg-saa-gold px-4 py-3 text-base font-bold text-saa-bg transition-transform hover:-translate-y-0.5"
+            className="mt-2 flex w-fit items-center gap-2 rounded-lg bg-saa-gold-light px-6 py-4 text-sm font-bold text-saa-bg transition-shadow hover:shadow-lg"
           >
             {t.detail}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/ic-arrow.svg" alt="" width={24} height={24} className="size-6" />
+            <img src="/saa/ic-arrow.svg" alt="" width={20} height={20} className="size-5" />
           </a>
         </div>
 
@@ -36,7 +45,7 @@ export async function KudosBlock() {
           alt="Sun* Kudos"
           width={383}
           height={74}
-          className="w-[240px] self-center md:w-[320px] lg:mr-8"
+          className="h-auto w-[240px] shrink-0 self-center sm:w-[320px] lg:w-[383px] lg:pr-4"
         />
       </div>
     </section>

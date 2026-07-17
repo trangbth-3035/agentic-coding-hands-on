@@ -32,17 +32,23 @@ export function AwardNav({ items, ariaLabel }: { items: NavItem[]; ariaLabel: st
   }, [items]);
 
   return (
-    <nav aria-label={ariaLabel} className="flex flex-col gap-1">
+    // Horizontal scroll row on mobile; sticky vertical rail at lg (reference).
+    <nav
+      aria-label={ariaLabel}
+      className="flex w-full flex-row gap-1 overflow-x-auto lg:sticky lg:top-24 lg:w-[178px] lg:shrink-0 lg:flex-col lg:gap-4 lg:overflow-visible"
+    >
       {items.map((item) => {
         const isActive = item.slug === active;
         return (
           <a
             key={item.slug}
             href={`#${item.slug}`}
-            aria-current={isActive ? "true" : undefined}
-            className={`group flex items-center gap-2.5 rounded-md px-2 py-2 text-sm font-semibold transition-colors ${
-              isActive ? "text-saa-gold" : "text-white/70 hover:text-white"
-            }`}
+            aria-current={isActive ? "page" : undefined}
+            className={
+              isActive
+                ? "flex shrink-0 items-center gap-1 whitespace-nowrap border-b border-saa-gold-light px-3 py-4 text-sm font-bold leading-5 tracking-[0.25px] text-saa-gold-light lg:whitespace-normal"
+                : "flex shrink-0 items-center gap-1 whitespace-nowrap rounded px-3 py-4 text-sm font-bold leading-5 tracking-[0.25px] text-white transition-colors hover:bg-white/10 lg:whitespace-normal"
+            }
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -50,11 +56,9 @@ export function AwardNav({ items, ariaLabel }: { items: NavItem[]; ariaLabel: st
               alt=""
               width={20}
               height={20}
-              className={`size-5 shrink-0 transition-opacity ${isActive ? "opacity-100" : "opacity-60 group-hover:opacity-100"}`}
+              className={`size-5 shrink-0 ${isActive ? "" : "opacity-80"}`}
             />
-            <span className={isActive ? "underline decoration-saa-gold decoration-2 underline-offset-4" : ""}>
-              {item.label}
-            </span>
+            <span>{item.label}</span>
           </a>
         );
       })}

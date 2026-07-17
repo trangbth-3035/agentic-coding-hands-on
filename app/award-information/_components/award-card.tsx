@@ -21,9 +21,9 @@ export function AwardCard({
   const medalFirst = award.medalSide === "left";
 
   return (
-    <article id={award.slug} className="scroll-mt-28">
+    <article id={award.slug} className="scroll-mt-24">
       <div
-        className={`flex flex-col items-center gap-8 lg:gap-12 ${
+        className={`flex flex-col items-center gap-10 lg:items-start ${
           medalFirst ? "lg:flex-row" : "lg:flex-row-reverse"
         }`}
       >
@@ -31,15 +31,15 @@ export function AwardCard({
           <AwardMedal award={award} altPrefix={labels.medalAltPrefix} priority={priority} />
         </div>
 
-        <div className="flex-1">
-          <div className="flex flex-col gap-6 rounded-2xl">
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3">
+        <div className="w-full flex-1 lg:max-w-[480px]">
+          <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-6">
+              <div className="flex items-center gap-4">
                 <Icon src="/saa/ic-target.svg" />
-                <h3 className="text-2xl font-bold text-saa-gold">{award.title}</h3>
+                <h3 className="text-2xl font-bold leading-8 text-saa-gold-light">{award.title}</h3>
               </div>
               {copy.paragraphs.map((p, i) => (
-                <p key={i} className="saa-justify text-base font-semibold leading-6 tracking-[0.5px] text-white">
+                <p key={i} className="saa-justify text-base font-bold leading-6 tracking-[0.5px] text-white">
                   {p}
                 </p>
               ))}
@@ -47,15 +47,21 @@ export function AwardCard({
 
             <div className="h-px w-full bg-saa-divider" />
 
-            {/* Số lượng giải thưởng */}
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
+            {/* Số lượng giải thưởng — value sits inline right after the label */}
+            <div className="flex flex-col gap-2">
+              <div className="flex flex-wrap items-center gap-4">
                 <Icon src="/saa/ic-diamond.svg" />
-                <span className="text-2xl font-bold text-saa-gold">{labels.quantityLabel}</span>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-bold leading-none text-white">{award.quantity.value}</span>
-                <span className="text-sm font-bold text-white/70">{copy.unit}</span>
+                <span className="text-2xl font-bold leading-8 text-saa-gold-light">
+                  {labels.quantityLabel}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="text-4xl font-bold leading-[44px] text-white">
+                    {award.quantity.value}
+                  </span>
+                  <span className="w-[60px] shrink-0 text-sm font-bold leading-5 tracking-[0.1px] text-white">
+                    {copy.unit}
+                  </span>
+                </span>
               </div>
             </div>
 
@@ -63,16 +69,27 @@ export function AwardCard({
 
             {/* Giá trị giải thưởng */}
             <div className="flex flex-col gap-4">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-4">
                 <Icon src="/saa/ic-license.svg" />
-                <span className="text-2xl font-bold text-saa-gold">{labels.valueLabel}</span>
+                <span className="text-2xl font-bold leading-8 text-saa-gold-light">
+                  {labels.valueLabel}
+                </span>
               </div>
               <div className="flex flex-col gap-3">
                 {award.prizes.map((prize, i) => (
                   <div key={i} className="flex flex-col gap-1">
-                    {i > 0 && <span className="text-sm font-bold text-white/60">{labels.or}</span>}
-                    <span className="text-4xl font-bold leading-none text-white">{prize.value}</span>
-                    {copy.notes[i] && <span className="text-sm font-bold text-white/70">{copy.notes[i]}</span>}
+                    {i > 0 && (
+                      <span className="flex items-center gap-2 text-sm font-bold leading-5 tracking-[0.1px] text-saa-divider">
+                        {labels.or}
+                        <span className="h-px flex-1 bg-saa-divider" />
+                      </span>
+                    )}
+                    <span className="text-4xl font-bold leading-[44px] text-white">{prize.value}</span>
+                    {copy.notes[i] && (
+                      <span className="text-sm font-bold leading-5 tracking-[0.1px] text-white">
+                        {copy.notes[i]}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
