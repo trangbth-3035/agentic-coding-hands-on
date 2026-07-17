@@ -41,10 +41,8 @@ export default async function AwardInformationPage() {
       <SiteHeader user={headerUser} dict={dict} locale={locale} />
 
       <main className="pt-16">
-        <KeyvisualHero />
-
-        {/* Title block (design item A) */}
-        <section className="mx-auto max-w-[1200px] px-6 pb-4 pt-2">
+        {/* Title block (design item A) overlaid on the keyvisual band */}
+        <KeyvisualHero>
           <div className="flex flex-col items-center gap-4">
             <p className="text-2xl font-bold text-white">{t.subtitle}</p>
             <div className="h-px w-full bg-saa-divider" />
@@ -52,7 +50,7 @@ export default async function AwardInformationPage() {
               {t.heading}
             </h1>
           </div>
-        </section>
+        </KeyvisualHero>
 
         {/* Award system: nav rail (C) + award list (D) */}
         <section className="mx-auto max-w-[1200px] px-6 py-12">
