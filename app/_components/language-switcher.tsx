@@ -41,7 +41,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 transition hover:bg-white/10"
+        className="flex h-10 items-center gap-2 rounded-full px-3 transition hover:bg-white/10"
       >
         <Image
           src={current.flag}
