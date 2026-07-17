@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Playwright MCP run artifacts
 .playwright-mcp/
+
+# Local UI reference dump (not part of the app)
+/demoUI/
