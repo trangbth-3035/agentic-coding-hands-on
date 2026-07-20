@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { RANK_BADGE, type KudosPerson, type KudosPost } from "@/lib/saa/kudos";
-import { LikeButton } from "./like-button";
+import Image from 'next/image';
+import { RANK_BADGE, type KudosPerson, type KudosPost } from '@/lib/saa/kudos';
+import { LikeButton } from './like-button';
 
 export type CardLabels = {
   copyLink: string;
@@ -19,9 +19,13 @@ function PersonBlock({ person }: { person: KudosPerson }) {
         className="h-16 w-16 rounded-full border-2 border-white object-cover"
       />
       <div className="flex flex-col items-center gap-0.5">
-        <p className="text-base font-bold leading-6 text-saa-bg">{person.name}</p>
+        <p className="text-base font-bold leading-6 text-saa-bg">
+          {person.name}
+        </p>
         <div className="flex items-center gap-2">
-          <span className="text-sm font-bold leading-5 text-[#999]">{person.role}</span>
+          <span className="text-sm font-bold leading-5 text-[#999]">
+            {person.role}
+          </span>
           <span className="h-1 w-1 rounded-full bg-[#999]/40" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={badge.src} alt={badge.label} className="h-[19px] w-auto" />
@@ -34,30 +38,29 @@ function PersonBlock({ person }: { person: KudosPerson }) {
 export function KudosCard({
   post,
   labels,
-  variant = "full",
+  variant = 'full',
   status,
 }: {
   post: KudosPost;
   labels: CardLabels;
-  variant?: "full" | "highlight";
+  variant?: 'full' | 'highlight';
   /** Optional corner ribbon (e.g. "Spam" on the profile's sent kudos). */
   status?: string;
 }) {
-  const highlight = variant === "highlight";
+  const highlight = variant === 'highlight';
 
   return (
     <article
       className={
         highlight
-          ? "relative flex h-full w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
-          : "relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4"
+          ? 'relative flex h-full w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]'
+          : 'relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4'
       }
     >
       {status && (
-        // Corner ribbon: top-right rounds with the card so it nests in the
-        // corner (not a square tab poking past the rounded edge); bottom-left
-        // rounded, per the profile design.
-        <span className="absolute right-0 top-0 z-10 rounded-bl-xl rounded-tr-3xl bg-[#FF8412] py-1 pl-4 pr-3 text-xs font-bold text-white">
+        // Floating badge inset from the top-right corner (design): a small
+        // fully-rounded orange pill, not a tab glued to the card edge.
+        <span className="absolute right-0 top-4 z-10  bg-[#FF8412] px-3 py-1 text-xs font-bold text-white">
           {status}
         </span>
       )}
@@ -76,22 +79,28 @@ export function KudosCard({
 
       {/* Content */}
       <div className="flex flex-col gap-4">
-        <p className="text-base font-bold tracking-[0.5px] text-[#999]">{post.time}</p>
+        <p className="text-base font-bold tracking-[0.5px] text-[#999]">
+          {post.time}
+        </p>
 
         <div className="relative flex items-center justify-center">
           <span className="text-base font-bold tracking-[0.5px] text-saa-bg">
             {post.hashtagTitle}
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/saa/kudos-ic-pen-dark.svg" alt="" className="absolute right-0 h-8 w-8" />
+          <img
+            src="/saa/kudos-ic-pen-dark.svg"
+            alt=""
+            className="absolute right-0 h-8 w-8"
+          />
         </div>
 
         <div className="rounded-xl border border-saa-gold-light bg-saa-gold-light/40 px-6 py-4">
           <p
             className={
               highlight
-                ? "saa-justify line-clamp-4 text-base font-bold leading-7 text-saa-bg sm:text-lg"
-                : "saa-justify text-lg font-bold leading-8 text-saa-bg sm:text-xl"
+                ? 'saa-justify line-clamp-4 text-base font-bold leading-7 text-saa-bg sm:text-lg'
+                : 'saa-justify text-lg font-bold leading-8 text-saa-bg sm:text-xl'
             }
           >
             {post.body}
@@ -142,8 +151,18 @@ export function KudosCard({
               className="inline-flex items-center gap-1 rounded px-2 py-2 text-base font-bold text-saa-bg transition hover:opacity-70"
             >
               {labels.viewDetails}
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M7 17 17 7M9 7h8v8" strokeLinecap="round" strokeLinejoin="round" />
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+              >
+                <path
+                  d="M7 17 17 7M9 7h8v8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </a>
           )}
