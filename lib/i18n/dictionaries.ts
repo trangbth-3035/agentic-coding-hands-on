@@ -19,9 +19,9 @@ const vi = {
   header: {
     notifications: "Thông báo",
     account: "Tài khoản",
-    profile: "Profile",
+    profile: "Trang cá nhân",
     dashboard: "Dashboard",
-    signOut: "Logout",
+    signOut: "Đăng xuất",
   },
   hero: {
     comingSoon: "Coming soon",

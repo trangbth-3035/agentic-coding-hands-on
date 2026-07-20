@@ -111,7 +111,10 @@ export default function SiteHeader({
               // Regular-user variant (Figma z4sCl3_Qtk): Profile (highlighted)
               // + Logout only — no Dashboard row — with each icon sitting
               // right after its label, not flushed to the panel edge.
-              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-44">
+              // Wide enough that the long VN labels don't fill the row — the
+              // active glow stays tight around the text and the highlight box
+              // keeps its clean #1A1E1B edges like the design.
+              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 w-56">
                 <SaaDropdownItem href="/profile" active onClick={() => setAccountOpen(false)}>
                   <span className="inline-flex items-center gap-2">
                     {dict.header.profile}
