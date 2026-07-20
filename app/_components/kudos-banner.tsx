@@ -8,42 +8,48 @@ export default async function KudosBanner() {
   const t = dict.kudos;
 
   return (
-    <section id="kudos" className="bg-saa-bg px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
-      <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/10 bg-[#0c0f12]">
-        <Image
-          src="/saa/kudos-bg.png"
-          alt=""
-          fill
-          sizes="(min-width:1024px) 1280px, 100vw"
-          className="object-cover object-right"
-        />
-
-        <div className="pointer-events-none absolute right-6 top-1/2 hidden w-72 -translate-y-1/2 md:block lg:right-20 lg:w-96">
+    <section id="kudos" className="px-4 py-12 sm:px-8 sm:py-20 xl:px-0">
+      {/* Shared 1152px column; the card keeps its own 1120px width, centred,
+          and locks the design aspect on large screens (per reference). */}
+      <div className="mx-auto w-full max-w-[1152px]">
+        <div className="relative mx-auto w-full max-w-[1120px] overflow-hidden rounded-2xl bg-[#0F0F0F] lg:aspect-[1120/500]">
           <Image
-            src="/saa/kudos-logo.svg"
-            alt="Sun* Kudos"
-            width={364}
-            height={74}
-            className="h-auto w-full"
+            src="/saa/kudos-bg.png"
+            alt=""
+            fill
+            sizes="(max-width:1120px) 100vw, 1120px"
+            aria-hidden
+            className="object-cover object-right"
           />
-        </div>
 
-        <div className="relative max-w-xl px-7 py-12 sm:px-12 sm:py-16">
-          <p className="text-sm text-white/70">{t.label}</p>
-          <h2 className="mt-1 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Sun<span className="text-saa-red">*</span> Kudos
-          </h2>
-          <p className="mt-6 text-xs font-semibold tracking-[0.15em] text-saa-gold">
-            {t.caption}
-          </p>
-          <p className="mt-3 text-sm leading-7 text-white/60">{t.description}</p>
-          <a
-            href={NAV_HREFS.kudos}
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-saa-gold px-6 py-2.5 text-sm font-bold text-[#1a1300] transition hover:bg-saa-gold-light"
-          >
-            {t.detail}
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
+          <div className="relative z-[1] flex flex-col gap-8 p-6 sm:p-10 lg:h-full lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+            <div className="flex max-w-[470px] flex-col items-start gap-4">
+              <p className="text-2xl font-bold leading-8 text-white">{t.label}</p>
+              <h2 className="text-[40px] font-bold leading-[48px] tracking-[-0.25px] text-saa-gold-light sm:text-[57px] sm:leading-[64px]">
+                {t.title}
+              </h2>
+              <p className="whitespace-pre-line text-justify text-base font-bold leading-6 tracking-[0.5px] text-white">
+                {t.caption}
+                {"\n"}
+                {t.description}
+              </p>
+              <a
+                href={NAV_HREFS.kudos}
+                className="mt-2 flex w-fit items-center gap-2 rounded-lg bg-saa-gold-light px-6 py-4 text-sm font-bold text-saa-bg transition-shadow hover:shadow-lg"
+              >
+                {t.detail}
+                <ArrowUpRight className="h-5 w-5" />
+              </a>
+            </div>
+
+            <Image
+              src="/saa/kudos-logo.svg"
+              alt="Sun* Kudos"
+              width={383}
+              height={72}
+              className="h-auto w-[240px] shrink-0 self-center sm:w-[320px] lg:w-[383px] lg:pr-4"
+            />
+          </div>
         </div>
       </div>
     </section>

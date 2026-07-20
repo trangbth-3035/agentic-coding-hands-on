@@ -36,7 +36,9 @@ export default function SiteHeader({
   ].map((item) => ({ ...item, selected: isNavActive(item.href, pathname) }));
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-gradient-to-b from-saa-bg/95 to-saa-bg/40 backdrop-blur-md">
+    // Sticky translucent strip; on <lg the nav wraps to its own full-width
+    // row under the logo/controls row (per reference).
+    <header className="sticky top-0 z-50 shrink-0 bg-[#101417]/80 px-4 py-2 sm:px-8 lg:py-0">
       {accountOpen && (
         <button
           aria-hidden
@@ -46,19 +48,20 @@ export default function SiteHeader({
         />
       )}
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-10">
-        <div className="flex items-center gap-8">
-          <Link href={NAV_HREFS.about} className="shrink-0" aria-label="Sun* Annual Awards">
-            <Image
-              src="/saa/logo-header.png"
-              alt="Sun* Annual Awards"
-              width={64}
-              height={60}
-              className="h-10 w-auto"
-              priority
-            />
-          </Link>
-          <nav className="hidden items-center gap-7 lg:flex">
+      <div className="mx-auto flex w-full max-w-[1152px] flex-wrap items-center justify-between gap-x-4 lg:h-20">
+        <Link href={NAV_HREFS.about} className="order-1 shrink-0" aria-label="Sun* Annual Awards">
+          <Image
+            src="/saa/logo-header.png"
+            alt="Sun* Annual Awards"
+            width={52}
+            height={48}
+            className="h-12 w-auto"
+            priority
+          />
+        </Link>
+
+        <div className="order-3 w-full overflow-x-auto lg:order-2 lg:ml-16 lg:mr-auto lg:w-auto">
+          <nav className="flex items-center gap-1 sm:gap-6">
             {nav.map((item) => (
               <Link
                 key={item.label}
@@ -66,8 +69,8 @@ export default function SiteHeader({
                 aria-current={item.selected ? "page" : undefined}
                 className={
                   item.selected
-                    ? "relative text-sm font-semibold text-saa-gold after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-full after:bg-saa-gold"
-                    : "text-sm font-medium text-white/80 transition hover:text-white"
+                    ? "flex items-center gap-1 whitespace-nowrap border-b border-saa-gold-light px-3 py-3 text-sm font-bold tracking-[0.1px] text-saa-gold-light [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287] sm:p-4"
+                    : "flex items-center gap-1 whitespace-nowrap rounded px-3 py-3 text-sm font-bold tracking-[0.1px] text-white transition-colors hover:bg-white/10 sm:p-4"
                 }
               >
                 {item.label}
@@ -76,14 +79,14 @@ export default function SiteHeader({
           </nav>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="order-2 flex items-center gap-2 sm:gap-4 lg:order-3">
           <button
             type="button"
             aria-label={dict.header.notifications}
-            className="relative grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
+            className="relative flex h-10 w-10 items-center justify-center rounded p-2 text-white transition-colors hover:bg-white/10"
           >
-            <Image src="/saa/icon-bell.svg" alt="" width={20} height={20} className="h-5 w-5" />
-            <span className="absolute right-2.5 top-2.5 h-2 w-2 rounded-full bg-saa-red ring-2 ring-saa-bg" />
+            <Image src="/saa/icon-bell.svg" alt="" width={24} height={24} className="h-6 w-6" />
+            <span className="absolute right-[9px] top-[9px] h-2 w-2 rounded-full bg-saa-red" />
           </button>
 
           <LanguageSwitcher locale={locale} />
@@ -95,7 +98,7 @@ export default function SiteHeader({
               aria-haspopup="menu"
               aria-expanded={accountOpen}
               aria-label={dict.header.account}
-              className="grid h-10 w-10 place-items-center overflow-hidden rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center overflow-hidden rounded border border-saa-gold-muted bg-transparent p-2 transition-colors hover:bg-white/10"
             >
               {user.avatarUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -105,29 +108,23 @@ export default function SiteHeader({
               )}
             </button>
             {accountOpen && (
-              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-52">
-                <SaaDropdownItem
-                  href="/profile"
-                  onClick={() => setAccountOpen(false)}
-                  icon={
+              // Regular-user variant (Figma z4sCl3_Qtk): Profile (highlighted)
+              // + Logout only — no Dashboard row — with each icon sitting
+              // right after its label, not flushed to the panel edge.
+              // Wide enough that the long VN labels don't fill the row — the
+              // active glow stays tight around the text and the highlight box
+              // keeps its clean #1A1E1B edges like the design.
+              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 w-56">
+                <SaaDropdownItem href="/profile" active onClick={() => setAccountOpen(false)}>
+                  <span className="inline-flex items-center gap-2">
+                    {dict.header.profile}
                     <Image src="/saa/icon-user.svg" alt="" width={24} height={24} className="h-6 w-6" />
-                  }
-                >
-                  {dict.header.profile}
-                </SaaDropdownItem>
-                <SaaDropdownItem
-                  href="/dashboard"
-                  onClick={() => setAccountOpen(false)}
-                  icon={
-                    <Image src="/saa/icon-grid.svg" alt="" width={24} height={24} className="h-6 w-6" />
-                  }
-                >
-                  {dict.header.dashboard}
+                  </span>
                 </SaaDropdownItem>
                 <form action={signOut} className="contents">
-                  <SaaDropdownItem
-                    type="submit"
-                    icon={
+                  <SaaDropdownItem type="submit">
+                    <span className="inline-flex items-center gap-2">
+                      {dict.header.signOut}
                       <Image
                         src="/saa/icon-chevron-right.svg"
                         alt=""
@@ -135,9 +132,7 @@ export default function SiteHeader({
                         height={24}
                         className="h-6 w-6"
                       />
-                    }
-                  >
-                    {dict.header.signOut}
+                    </span>
                   </SaaDropdownItem>
                 </form>
               </SaaDropdownPanel>

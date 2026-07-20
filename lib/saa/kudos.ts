@@ -97,6 +97,14 @@ const POST_SEEDS: PostSeed[] = [
   { id: "k4", department: "CEVC1", hashtags: ["#GET RISKY", "#GO FAST"], sender: ["Nguyễn Văn Quy", "new", AV1], receiver: ["Lê Kiều Trang", "legend", AV2] },
   { id: "k5", department: "OPD", hashtags: ["#WASSHOI", "#High-performing"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Huỳnh Dương Xuân Nhật", "legend", AV2] },
   { id: "k6", department: "Infra", hashtags: ["#THINK OUTSIDE THE BOX", "#WASSHOI"], sender: ["Dương Thúy An", "new", AV1], receiver: ["Đỗ Hoàng Hiệp", "legend", AV2] },
+  // Second lap so the Highlight carousel has enough slides to run and every
+  // filter option returns more than one card.
+  { id: "k7", department: "CEVC2", hashtags: ["#BE OPTIMISTIC", "#GO FAST"], sender: ["Mai Phương Thúy", "rising", AV1], receiver: ["Nguyễn Hoàng Linh", "legend", AV2] },
+  { id: "k8", department: "CEVC3", hashtags: ["#High-performing", "#BE A TEAM"], sender: ["Lê Kiều Trang", "new", AV1], receiver: ["Nguyễn Văn Quy", "rising", AV2] },
+  { id: "k9", department: "CEVC4", hashtags: ["#GET RISKY", "#WASSHOI"], sender: ["Huỳnh Dương Xuân", "legend", AV1], receiver: ["Nguyễn Bá Chức", "new", AV2] },
+  { id: "k10", department: "CEVC1", hashtags: ["#BE PROFESSIONAL", "#THINK OUTSIDE THE BOX"], sender: ["Nguyễn Bá Chức", "rising", AV1], receiver: ["Dương Thúy An", "legend", AV2] },
+  { id: "k11", department: "OPD", hashtags: ["#BE A TEAM", "#GO FAST"], sender: ["Đỗ Hoàng Hiệp", "new", AV1], receiver: ["Mai Phương Thúy", "rising", AV2] },
+  { id: "k12", department: "Infra", hashtags: ["#BE OPTIMISTIC", "#GET RISKY"], sender: ["Nguyễn Văn Quy", "legend", AV1], receiver: ["Lê Kiều Trang", "new", AV2] },
 ];
 
 export const KUDOS_POSTS: KudosPost[] = POST_SEEDS.map((s) => ({
@@ -153,13 +161,19 @@ export const KUDOS_STATS = {
   boxUnopened: 25,
 };
 
-/** "10 Sunner nhận quà mới nhất" list (D.3). */
+/** "10 Sunner nhận quà mới nhất" list (D.3) — ten entries, the panel shows
+ * about five and scrolls for the rest (per design). */
 export const GIFT_RECIPIENTS = [
   "Huỳnh Dương Xuân",
   "Nguyễn Hoàng Linh",
   "Mai Phương Thúy",
   "Đỗ Hoàng Hiệp",
   "Lê Kiều Trang",
+  "Nguyễn Văn Quy",
+  "Nguyễn Bá Chức",
+  "Dương Thúy An",
+  "Huỳnh Dương Xuân Nhật",
+  "Mai Phương Thúy",
 ].map((name, i) => ({ id: `g${i}`, name, avatar: "/saa/kudos-recipient.png" }));
 
 /** Spotlight board (B.7) — total count + live ticker + scattered word-cloud. */
@@ -171,10 +185,12 @@ export const SPOTLIGHT_TICKER = [
   { time: "08:30PM", name: "Nguyễn Bá Chức" },
   { time: "08:30PM", name: "Nguyễn Bá Chức" },
   { time: "08:30PM", name: "Nguyễn Bá Chức" },
+  { time: "08:30PM", name: "Nguyễn Bá Chức" },
 ];
 
-/** Deterministic scatter for the word-cloud (no runtime randomness). Positions
- * are % within the board; one entry is highlighted red like the design. */
+/** Deterministic scatter for the word-cloud (no runtime randomness). The
+ * design fills the board with ~90 tiny repeated names plus a few larger bold
+ * ones; a seeded PRNG keeps the layout identical on server and client. */
 export type CloudName = {
   name: string;
   top: number;
@@ -184,27 +200,77 @@ export type CloudName = {
   highlight?: boolean;
 };
 
-export const SPOTLIGHT_NAMES: CloudName[] = [
-  { name: "Đỗ Hoàng Hiệp", top: 20, left: 18, size: 13, opacity: 0.5 },
-  { name: "Dương Thúy An", top: 16, left: 34, size: 15, opacity: 0.7 },
-  { name: "Nguyễn Văn Quy", top: 24, left: 52, size: 12, opacity: 0.45 },
-  { name: "Mai Phương Thúy", top: 18, left: 68, size: 14, opacity: 0.6 },
-  { name: "Lê Kiều Trang", top: 26, left: 82, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Bá Chức", top: 33, left: 24, size: 13, opacity: 0.55 },
-  { name: "Nguyễn Hoàng Linh", top: 30, left: 44, size: 16, opacity: 0.85 },
-  { name: "Dương Thúy An", top: 36, left: 62, size: 12, opacity: 0.5 },
-  { name: "Đỗ Hoàng Hiệp", top: 34, left: 78, size: 13, opacity: 0.45 },
-  { name: "Mai Phương Thúy", top: 44, left: 14, size: 14, opacity: 0.6 },
-  { name: "Nguyễn Văn Quy", top: 46, left: 32, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 47, left: 50, size: 20, opacity: 1, highlight: true },
-  { name: "Lê Kiều Trang", top: 45, left: 70, size: 13, opacity: 0.55 },
-  { name: "Nguyễn Bá Chức", top: 48, left: 86, size: 12, opacity: 0.4 },
-  { name: "Dương Thúy An", top: 56, left: 20, size: 13, opacity: 0.5 },
-  { name: "Mai Phương Thúy", top: 58, left: 38, size: 14, opacity: 0.6 },
-  { name: "Đỗ Hoàng Hiệp", top: 57, left: 56, size: 12, opacity: 0.45 },
-  { name: "Nguyễn Văn Quy", top: 60, left: 74, size: 13, opacity: 0.5 },
-  { name: "Lê Kiều Trang", top: 64, left: 30, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 66, left: 48, size: 14, opacity: 0.55 },
-  { name: "Nguyễn Bá Chức", top: 65, left: 66, size: 12, opacity: 0.45 },
-  { name: "Dương Thúy An", top: 68, left: 82, size: 13, opacity: 0.5 },
-];
+/** mulberry32 — tiny seeded PRNG so the cloud is stable across renders. */
+function mulberry32(seed: number): () => number {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildCloud(): CloudName[] {
+  const rand = mulberry32(20251226);
+  const out: CloudName[] = [];
+  // Placed bounding boxes in board-% (board ≈ 1150×548): reject any candidate
+  // that would overlap an already-placed name, so nothing renders on top of
+  // anything else. Estimated glyph box: width ≈ chars×size×0.62px.
+  const boxes: Array<[number, number, number, number]> = [];
+  const BOARD_W = 1150;
+  const BOARD_H = 548;
+  // keep-out zones: search pill (top-left), the "388 KUDOS" total (top-centre)
+  // and the ticker block (bottom-left).
+  const ZONES: Array<[number, number, number, number]> = [
+    [0, 30, 0, 16],
+    [30, 72, 0, 14],
+    [0, 46, 64, 100],
+  ];
+  const hits = (l: number, r: number, t: number, b: number) =>
+    ZONES.some(([zl, zr, zt, zb]) => l < zr && r > zl && t < zb && b > zt) ||
+    boxes.some(([bl, br, bt, bb]) => l < br + 0.8 && r > bl - 0.8 && t < bb + 1 && b > bt - 1);
+
+  // Reserve the red highlight's spot (pushed last, rendered on top).
+  {
+    const hw = ((17 * 15 * 0.62) / BOARD_W) * 100;
+    const hh = ((15 + 6) / BOARD_H) * 100;
+    boxes.push([47 - hw / 2, 47 + hw / 2, 45 - hh / 2, 45 + hh / 2]);
+  }
+
+  let attempts = 0;
+  while (out.length < 88 && attempts < 1600) {
+    attempts += 1;
+    const name = SUNNERS[Math.floor(rand() * SUNNERS.length) % SUNNERS.length];
+    const big = rand() > 0.95;
+    const size = big ? 14 + Math.round(rand() * 3) : 9 + Math.round(rand() * 3);
+    const top = 8 + rand() * 70;
+    const left = 4 + rand() * 92;
+    const w = ((name.length * size * 0.62) / BOARD_W) * 100;
+    const h = ((size + 6) / BOARD_H) * 100;
+    const l = left - w / 2;
+    const r = left + w / 2;
+    const t = top - h / 2;
+    const b = top + h / 2;
+    if (l < 1 || r > 99 || hits(l, r, t, b)) continue;
+    boxes.push([l, r, t, b]);
+    out.push({
+      name,
+      top: Math.round(top * 10) / 10,
+      left: Math.round(left * 10) / 10,
+      size,
+      opacity: big ? 0.85 : 0.35 + Math.round(rand() * 30) / 100,
+    });
+  }
+  out.push({
+    name: "Nguyễn Hoàng Linh",
+    top: 45,
+    left: 47,
+    size: 15,
+    opacity: 1,
+    highlight: true,
+  });
+  return out;
+}
+
+export const SPOTLIGHT_NAMES: CloudName[] = buildCloud();

@@ -13,18 +13,25 @@ function StatRow({
 }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-lg font-bold leading-7 text-white sm:text-[22px]">{label}</span>
-      <div className="flex shrink-0 items-center gap-1">
+      <span className="flex items-center text-lg font-bold leading-7 text-white sm:text-[22px]">
+        {label}
+        {/* x2 fire badge right after the label (design D.1.4) — the badge art
+            cropped 1:1 from the Figma render; its dark backing matches the
+            card's #00070C, so it sits flush. */}
         {fire && (
-          <span className="relative grid h-8 w-8 place-items-center text-2xl leading-none">
-            🔥
-            <span className="absolute text-[11px] font-bold text-white [-webkit-text-stroke:0.8px_#000]">
-              {KUDOS_STATS.likeMultiplier}
-            </span>
-          </span>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/saa/kudos-fire-x2.png"
+            alt={`${KUDOS_STATS.likeMultiplier} bonus`}
+            width={48}
+            height={52}
+            className="-mt-1 h-8 w-auto"
+          />
         )}
-        <span className="text-2xl font-bold text-saa-gold-light sm:text-[32px]">{value}</span>
-      </div>
+      </span>
+      <span className="shrink-0 text-2xl font-bold text-saa-gold-light sm:text-[32px]">
+        {value}
+      </span>
     </div>
   );
 }

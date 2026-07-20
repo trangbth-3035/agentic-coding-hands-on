@@ -26,16 +26,17 @@ export function KudosHero({
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-saa-bg via-saa-bg/70 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-saa-bg" />
 
-      <div className="mx-auto max-w-[1200px] px-6 pb-10 pt-28 sm:pt-32">
+      <div className="mx-auto max-w-[1200px] px-6 pb-10 pt-8 sm:pt-12">
         <div className="flex flex-col gap-3">
-          <p className="text-2xl font-bold text-saa-gold-light sm:text-[36px] sm:leading-[44px]">
+          <p className="text-2xl font-bold text-white sm:text-[36px] sm:leading-[44px]">
             {dict.heroTitle}
           </p>
+          {/* Solid white Sun*KUDOS wordmark (design) — not the outline art */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/saa/kudos-kv-wordmark.svg"
+            src="/saa/kudos-logo.svg"
             alt="KUDOS"
-            className="h-16 w-auto sm:h-24"
+            className="h-16 w-auto self-start sm:h-24"
           />
         </div>
 

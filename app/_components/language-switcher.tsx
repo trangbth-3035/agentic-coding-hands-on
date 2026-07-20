@@ -41,7 +41,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="flex h-10 items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 transition hover:bg-white/10"
+        className="flex items-center gap-1 rounded p-3 transition-colors hover:bg-white/10 sm:p-4"
       >
         <Image
           src={current.flag}
@@ -50,36 +50,46 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
           height={18}
           className="h-[18px] w-6 rounded-[3px] object-cover"
         />
-        <span className="text-sm font-medium text-white">{current.code}</span>
-        <Image src="/saa/chevron-down.svg" alt="" width={12} height={12} className="h-3 w-3" />
+        <span className="text-base font-bold tracking-[0.15px] text-white">{current.code}</span>
+        <Image
+          src="/saa/chevron-down.svg"
+          alt=""
+          width={16}
+          height={16}
+          className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+        />
       </button>
 
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-2 w-28 overflow-hidden rounded-xl border border-white/10 bg-black/90 shadow-2xl backdrop-blur"
+          className="absolute right-0 mt-2 w-[124px] rounded-lg border border-saa-gold-muted bg-[#00070C] p-1.5 shadow-2xl"
         >
           {LANGS.map((l) => {
             const selected = l.locale === locale;
             return (
+              // 110×56 row per the Figma node; the flag graphic is 20×15
+              // centred in a 24×24 icon slot (not cropped to fill).
               <button
                 key={l.code}
                 role="menuitemradio"
                 aria-checked={selected}
                 onClick={() => selectLocale(l.locale)}
-                className={`flex w-full items-center gap-2.5 px-4 py-3 text-left text-sm font-medium transition ${
+                className={`flex h-14 w-full items-center gap-2.5 rounded px-4 text-left text-base font-bold text-white transition ${
                   selected
-                    ? "bg-[#2e3940] text-white"
-                    : "text-white/80 hover:bg-white/5"
+                    ? "bg-saa-gold-light/15 [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287]"
+                    : "hover:bg-saa-gold-light/10 hover:[text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287]"
                 }`}
               >
-                <Image
-                  src={l.flag}
-                  alt=""
-                  width={24}
-                  height={18}
-                  className="h-[18px] w-6 rounded-[3px] object-cover"
-                />
+                <span className="flex h-6 w-6 shrink-0 items-center justify-center">
+                  <Image
+                    src={l.flag}
+                    alt=""
+                    width={20}
+                    height={15}
+                    className="h-[15px] w-5"
+                  />
+                </span>
                 {l.code}
               </button>
             );

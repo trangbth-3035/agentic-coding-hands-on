@@ -49,12 +49,12 @@ export function KudosCard({
     <article
       className={
         highlight
-          ? "relative flex w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
+          ? "relative flex h-full w-[300px] shrink-0 flex-col gap-4 overflow-hidden rounded-2xl border-4 border-saa-gold-light bg-[#FFF8E1] p-6 pb-4 sm:w-[420px] lg:w-[528px]"
           : "relative flex flex-col gap-4 overflow-hidden rounded-3xl bg-[#FFF8E1] p-6 pb-4 sm:p-10 sm:pb-4"
       }
     >
       {status && (
-        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-saa-red px-4 py-1.5 text-sm font-bold text-white">
+        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-[#FF8412] px-4 py-1.5 text-sm font-bold text-white">
           {status}
         </span>
       )}
@@ -80,7 +80,7 @@ export function KudosCard({
             {post.hashtagTitle}
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/saa/kudos-ic-pen.svg" alt="" className="absolute right-0 h-8 w-8" />
+          <img src="/saa/kudos-ic-pen-dark.svg" alt="" className="absolute right-0 h-8 w-8" />
         </div>
 
         <div className="rounded-xl border border-saa-gold-light bg-saa-gold-light/40 px-6 py-4">
@@ -125,6 +125,14 @@ export function KudosCard({
       <div className="flex items-center justify-between gap-6">
         <LikeButton hearts={post.hearts} />
         <div className="flex items-center gap-1 sm:gap-3">
+          <button
+            type="button"
+            className="inline-flex items-center gap-1 rounded px-2 py-2 text-base font-bold text-saa-bg transition hover:opacity-70"
+          >
+            {labels.copyLink}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/saa/kudos-ic-link-dark.svg" alt="" className="h-6 w-6" />
+          </button>
           {highlight && (
             <a
               href="#"
@@ -136,14 +144,6 @@ export function KudosCard({
               </svg>
             </a>
           )}
-          <button
-            type="button"
-            className="inline-flex items-center gap-1 rounded px-2 py-2 text-base font-bold text-saa-bg transition hover:opacity-70"
-          >
-            {labels.copyLink}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/kudos-ic-link.svg" alt="" className="h-6 w-6" />
-          </button>
         </div>
       </div>
     </article>

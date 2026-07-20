@@ -14,19 +14,24 @@ export function StatsSidebar({ dict }: { dict: Dictionary["kudosBoard"] }) {
         <p className="text-center text-[22px] font-bold leading-7 text-saa-gold-light">
           {dict.recipientsTitle}
         </p>
-        <div className="mt-4 flex flex-col gap-4">
+        {/* ~5 rows visible, the rest scroll behind a thin light scrollbar */}
+        <div className="mt-4 flex max-h-[368px] flex-col gap-4 overflow-y-auto pr-3 [scrollbar-width:thin] [scrollbar-color:rgba(255,255,255,0.35)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/35">
           {GIFT_RECIPIENTS.map((r) => (
-            <div key={r.id} className="flex items-center gap-3">
+            <div key={r.id} className="flex items-center gap-4">
               <Image
                 src={r.avatar}
                 alt={r.name}
-                width={48}
-                height={48}
-                className="h-12 w-12 shrink-0 rounded-full object-cover"
+                width={56}
+                height={56}
+                className="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-white/70"
               />
-              <div className="flex min-w-0 flex-col">
-                <p className="truncate text-base font-bold text-white">{r.name}</p>
-                <p className="text-sm text-saa-gold-light/80">{dict.recipientGift}</p>
+              <div className="flex min-w-0 flex-col gap-0.5">
+                <p className="truncate text-xl font-bold leading-7 text-saa-gold-light">
+                  {r.name}
+                </p>
+                <p className="text-[15px] font-bold leading-5 text-white">
+                  {dict.recipientGift}
+                </p>
               </div>
             </div>
           ))}

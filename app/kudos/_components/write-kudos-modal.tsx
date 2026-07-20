@@ -54,6 +54,9 @@ export function WriteKudosModal({
   const [images, setImages] = useState<string[]>([]);
   const [anonymous, setAnonymous] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
+  const [linkOpen, setLinkOpen] = useState(false);
+  const [linkText, setLinkText] = useState("");
+  const [linkUrl, setLinkUrl] = useState("");
 
   // Close on Escape and lock background scroll while the modal is open.
   useEffect(() => {
@@ -80,6 +83,24 @@ export function WriteKudosModal({
     setImages([]);
     setAnonymous(false);
     setTagOpen(false);
+    setLinkOpen(false);
+    setLinkText("");
+    setLinkUrl("");
+  };
+
+  const closeLinkBox = () => {
+    setLinkOpen(false);
+    setLinkText("");
+    setLinkUrl("");
+  };
+  /** "Thêm đường dẫn" (Addlink Box, mm:1002:12917): append the link to the
+   * message body — the editor is a plain textarea, so links are plain text. */
+  const saveLink = () => {
+    const url = linkUrl.trim();
+    if (!url) return;
+    const line = linkText.trim() ? `${linkText.trim()} (${url})` : url;
+    setBody((cur) => (cur.trim() ? `${cur}\n${line}` : line));
+    closeLinkBox();
   };
   const close = () => {
     reset();
@@ -254,6 +275,8 @@ export function WriteKudosModal({
                   <button
                     key={tool.key}
                     type="button"
+                    onClick={tool.key === "link" ? () => setLinkOpen((o) => !o) : undefined}
+                    aria-expanded={tool.key === "link" ? linkOpen : undefined}
                     className="grid h-10 w-14 place-items-center border-r border-saa-gold-muted transition hover:bg-saa-gold-light/20"
                     aria-label={tool.key}
                   >
@@ -278,6 +301,64 @@ export function WriteKudosModal({
             <p className="mt-2 text-center text-base font-bold tracking-[0.5px] text-saa-bg">
               {t.mentionHint}
             </p>
+
+            {/* "Thêm đường dẫn" — Addlink Box (mm:1002:12917), opened from the
+                link toolbar button; full modal width like the design card. */}
+            {linkOpen && (
+              <div className="mt-4 flex flex-col gap-6 rounded-2xl border border-black/10 bg-[#FFF8E1] p-6 shadow-lg sm:p-8">
+                <h3 className="text-2xl font-bold text-saa-bg sm:text-[28px]">
+                  {t.linkTitle}
+                </h3>
+                {/* Labels are natural-width per design — the two inputs do NOT
+                    share a column edge. */}
+                <label className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                  <span className="shrink-0 text-xl font-bold text-saa-bg">
+                    {t.linkContentLabel}
+                  </span>
+                  <input
+                    value={linkText}
+                    onChange={(e) => setLinkText(e.target.value)}
+                    className="h-[52px] w-full rounded-lg border border-saa-gold-muted bg-white px-4 text-base font-semibold text-saa-bg outline-none focus:border-saa-gold"
+                  />
+                </label>
+                <label className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                  <span className="shrink-0 text-xl font-bold text-saa-bg">
+                    {t.linkUrlLabel}
+                  </span>
+                  <input
+                    value={linkUrl}
+                    onChange={(e) => setLinkUrl(e.target.value)}
+                    className="h-[52px] w-full rounded-lg border border-saa-gold-muted bg-white px-4 text-base font-semibold text-saa-bg outline-none focus:border-saa-gold"
+                  />
+                </label>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={closeLinkBox}
+                    className="flex items-center gap-2 rounded-lg border border-saa-gold-muted bg-saa-gold-light/10 px-6 py-3 text-base font-bold text-saa-bg transition hover:bg-saa-gold-light/20"
+                  >
+                    {t.cancel}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/saa/kudos-ic-close.svg" alt="" className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveLink}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-saa-gold-light px-6 py-3 text-base font-bold text-saa-bg transition hover:brightness-105"
+                  >
+                    {t.linkSave}
+                    {/* dark chain glyph via currentColor — the white
+                        kudos-ic-link.svg disappears on the gold button */}
+                    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden>
+                      <path
+                        d="M10.9619 13.1547C11.3719 13.5447 11.3719 14.1847 10.9619 14.5747C10.5719 14.9647 9.93189 14.9647 9.54189 14.5747C7.5919 12.6247 7.5919 9.4547 9.54189 7.5047L13.0819 3.9647C15.0319 2.0147 18.2019 2.0147 20.1519 3.9647C22.1019 5.9147 22.1019 9.0847 20.1519 11.0347L18.6619 12.5247C18.6719 11.7047 18.5419 10.8847 18.2619 10.1047L18.7319 9.6247C19.9119 8.4547 19.9119 6.5547 18.7319 5.3847C17.5619 4.2047 15.6619 4.2047 14.4919 5.3847L10.9619 8.9147C9.7819 10.0847 9.7819 11.9847 10.9619 13.1547ZM13.7819 8.9147C14.1719 8.5247 14.8119 8.5247 15.2019 8.9147C17.1519 10.8647 17.1519 14.0347 15.2019 15.9847L11.6619 19.5247C9.71189 21.4747 6.54189 21.4747 4.59189 19.5247C2.64189 17.5747 2.64189 14.4047 4.59189 12.4547L6.08189 10.9647C6.07189 11.7847 6.20189 12.6047 6.48189 13.3947L6.01189 13.8647C4.83189 15.0347 4.83189 16.9347 6.01189 18.1047C7.18189 19.2847 9.08189 19.2847 10.2519 18.1047L13.7819 14.5747C14.9619 13.4047 14.9619 11.5047 13.7819 10.3347C13.3719 9.9447 13.3719 9.3047 13.7819 8.9147Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* E — Hashtag (max 5) */}

@@ -10,13 +10,35 @@ export type CountdownLabels = {
   minutes: string;
 };
 
-function Tile({ value, label }: { value: string; label: string }) {
+/** One LED digit on the shared frosted tile (Figma component 186:2619 at the
+ * homepage "md" scale — the prelaunch page renders the same tile larger). */
+function DigitTile({ digit }: { digit: string }) {
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex h-[72px] w-[72px] items-center justify-center rounded-xl bg-gradient-to-b from-[#e8eaec] to-[#b9bfc4] text-3xl font-bold tabular-nums text-[#1a2227] shadow-lg shadow-black/30 sm:h-20 sm:w-20 sm:text-4xl">
-        {value}
+    <div className="relative flex h-14 w-9 items-center justify-center overflow-hidden rounded-lg sm:h-[82px] sm:w-[51px]">
+      <div
+        aria-hidden
+        className="absolute inset-0 rounded-[inherit] border-[0.5px] border-saa-gold-light opacity-50 backdrop-blur-[17px]"
+        style={{
+          background:
+            "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.10) 100%)",
+        }}
+      />
+      <span className="relative font-dseg text-[32px] font-bold leading-none text-white sm:text-[49px]">
+        {digit}
+      </span>
+    </div>
+  );
+}
+
+function Unit({ value, label }: { value: string; label: string }) {
+  const [tens, ones] = value.split("");
+  return (
+    <div className="flex flex-col items-start gap-2 sm:gap-3.5">
+      <div className="flex items-center gap-2 sm:gap-3.5" role="img" aria-label={value}>
+        <DigitTile digit={tens} />
+        <DigitTile digit={ones} />
       </div>
-      <span className="text-xs font-semibold tracking-[0.2em] text-white/80">
+      <span className="text-base font-bold leading-6 text-white sm:text-2xl sm:leading-8">
         {label}
       </span>
     </div>
@@ -36,7 +58,7 @@ export default function Countdown({
   useEffect(() => {
     const tick = () => setRemaining(computeRemaining(targetMs));
     // First paint via rAF (not synchronously in the effect) to avoid
-    // cascading renders; the UI shows "--" until then, same as before.
+    // cascading renders; the UI shows "00" until then, same as the SSR state.
     const raf = requestAnimationFrame(tick);
     const id = setInterval(tick, 1_000);
     return () => {
@@ -47,16 +69,17 @@ export default function Countdown({
 
   const r = remaining;
   const done = r?.done ?? false;
+  const two = (n: number) => pad2(Math.max(0, Math.min(99, n)));
 
   return (
     <div>
       {!done && (
         <p className="mb-3 text-lg font-medium text-white/90">{labels.comingSoon}</p>
       )}
-      <div className="flex items-start gap-4">
-        <Tile value={r ? pad2(r.days) : "--"} label={labels.days} />
-        <Tile value={r ? pad2(r.hours) : "--"} label={labels.hours} />
-        <Tile value={r ? pad2(r.minutes) : "--"} label={labels.minutes} />
+      <div className="flex items-start gap-4 sm:gap-10">
+        <Unit value={r ? two(r.days) : "00"} label={labels.days} />
+        <Unit value={r ? two(r.hours) : "00"} label={labels.hours} />
+        <Unit value={r ? two(r.minutes) : "00"} label={labels.minutes} />
       </div>
     </div>
   );

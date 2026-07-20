@@ -5,6 +5,20 @@ import { startDemo } from "@/app/auth/actions";
 import { getDict } from "@/lib/i18n/server";
 import LanguageSwitcher from "@/app/_components/language-switcher";
 
+/** Render the tagline with only the "SAA 2025" fragment bold (per design). */
+function TaglineLine({ text }: { text: string }) {
+  const MARK = "SAA 2025";
+  const at = text.indexOf(MARK);
+  if (at === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, at)}
+      <strong className="font-bold">{MARK}</strong>
+      {text.slice(at + MARK.length)}
+    </>
+  );
+}
+
 export default async function LoginPage({
   searchParams,
 }: {
@@ -23,17 +37,20 @@ export default async function LoginPage({
 
   return (
     <div className="relative flex min-h-screen flex-col bg-saa-bg">
-      {/* Decorative key-visual artwork (full-frame, right-anchored) */}
-      <Image
-        src="/saa/keyvisual-bg.png"
-        alt=""
+      {/* Key-visual art as a plain CSS background (not next/image): the
+          grain-heavy asset must skip the optimizer re-encode, which smooths
+          the noise and reads as blur. Cover, pinned to the right edge. */}
+      <div
         aria-hidden
-        fill
-        priority
-        sizes="100vw"
-        className="pointer-events-none z-0 object-cover object-right"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url(/saa/login-keyvisual-art.png)",
+          backgroundSize: "cover",
+          backgroundPosition: "100% 50%",
+          backgroundRepeat: "no-repeat",
+        }}
       />
-      {/* Gradient overlay 1 — darkens the LEFT for text readability */}
+      {/* Overlay 1 — horizontal fade darkening the LEFT for text readability */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 z-0"
@@ -42,38 +59,41 @@ export default async function LoginPage({
             "linear-gradient(90deg, #00101A 0%, #00101A 25.41%, rgba(0,16,26,0) 100%)",
         }}
       />
-      {/* Gradient overlay 2 — darkens the BOTTOM */}
+      {/* Overlay 2 — 400px bottom strip fading into the page background */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[400px]"
         style={{
-          background:
-            "linear-gradient(0deg, #00101A 22.48%, rgba(0,19,32,0) 51.74%)",
+          background: "linear-gradient(0deg, #00101A 0%, rgba(0,19,32,0) 70%)",
         }}
       />
 
-      {/* Fixed header — logo (left) + language switcher (right) */}
-      <header className="fixed inset-x-0 top-0 z-50 flex h-20 items-center justify-between bg-[#0b0f12]/80 px-6 sm:px-12 lg:px-36">
-        <Image
-          src="/saa/logo-header.png"
-          alt="Sun* Annual Awards 2025"
-          width={52}
-          height={48}
-          priority
-          className="h-12 w-auto"
-        />
-        <LanguageSwitcher locale={locale} />
+      {/* Sticky header bar — translucent dark strip; logo (left) + language
+          switcher (right) sit in the same centred 1152px column as the hero. */}
+      <header className="sticky top-0 z-50 shrink-0 bg-[#0b0f12]/80">
+        <div className="mx-auto flex h-20 w-full max-w-[1152px] items-center justify-between px-4 sm:px-8 xl:px-0">
+          <Image
+            src="/saa/logo-header.png"
+            alt="Sun* Annual Awards 2025"
+            width={52}
+            height={48}
+            priority
+            className="h-12 w-auto"
+          />
+          <LanguageSwitcher locale={locale} />
+        </div>
       </header>
 
-      {/* Main content — pushes footer to the bottom, clears the fixed header */}
-      <main className="relative z-10 flex flex-1 flex-col px-6 pb-24 pt-44 sm:px-12 lg:px-36">
+      {/* Main content — vertically centred, same 1152px column as the header */}
+      <main className="relative z-10 flex flex-1 flex-col justify-center px-4 pb-16 sm:px-8">
+        <div className="mx-auto w-full max-w-[1152px]">
         {error && (
           <p className="mb-6 max-w-md rounded-lg border border-saa-red/60 bg-saa-red/15 px-4 py-3 text-sm text-[#fca5a5]">
             {t.error}
           </p>
         )}
 
-        <section className="flex flex-col gap-24 pl-4 sm:gap-30">
+        <section className="flex flex-col gap-14">
           <Image
             src="/saa/root-further-logo.png"
             alt="Root Further"
@@ -83,9 +103,9 @@ export default async function LoginPage({
             className="h-auto w-[280px] sm:w-[360px] lg:w-[451px]"
           />
 
-          <div className="flex flex-col gap-6 pl-4">
-            <p className="max-w-[480px] text-xl font-bold leading-10 tracking-[0.5px] text-white">
-              {t.tagline1}
+          <div className="flex flex-col gap-6 pl-1">
+            <p className="max-w-[480px] text-lg font-normal leading-9 tracking-[0.5px] text-white sm:text-xl sm:leading-10">
+              <TaglineLine text={t.tagline1} />
               <br />
               {t.tagline2}
             </p>
@@ -96,9 +116,9 @@ export default async function LoginPage({
               <button
                 type="submit"
                 aria-label="Login with Google"
-                className="flex h-15 w-[305px] items-center justify-between gap-2 rounded-lg bg-saa-gold-light px-6 text-saa-bg transition hover:bg-[#fff5c2] hover:shadow-[0_4px_16px_rgba(255,234,158,0.35)]"
+                className="flex h-15 items-center justify-center gap-3 rounded-lg bg-saa-gold-light px-7 text-saa-bg transition hover:bg-[#fff5c2] hover:shadow-[0_4px_16px_rgba(255,234,158,0.35)]"
               >
-                <span className="text-[22px] font-bold leading-7 whitespace-nowrap">
+                <span className="whitespace-nowrap text-xl font-semibold leading-7">
                   {t.google}
                 </span>
                 <Image
@@ -113,11 +133,12 @@ export default async function LoginPage({
             </form>
           </div>
         </section>
+        </div>
       </main>
 
-      {/* Footer — top divider, centered copyright */}
-      <footer className="relative z-10 flex w-full items-center justify-center border-t border-saa-divider px-6 py-10 sm:px-24">
-        <p className="text-sm text-white/60">{dict.footer.copyright}</p>
+      {/* Footer — centered bold copyright over the art, no divider (design) */}
+      <footer className="relative z-10 flex w-full items-center justify-center px-6 py-8 sm:px-24">
+        <p className="text-base font-bold text-white">{dict.footer.copyright}</p>
       </footer>
     </div>
   );
