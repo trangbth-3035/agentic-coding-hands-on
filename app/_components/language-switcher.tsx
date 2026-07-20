@@ -63,7 +63,7 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
       {open && (
         <div
           role="menu"
-          className="absolute right-0 mt-2 w-28 overflow-hidden rounded-xl border border-white/10 bg-black/90 shadow-2xl backdrop-blur"
+          className="absolute right-0 mt-2 w-28 rounded-lg border border-saa-gold-muted bg-[#00070C] p-1.5 shadow-2xl"
         >
           {LANGS.map((l) => {
             const selected = l.locale === locale;
@@ -73,10 +73,8 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
                 role="menuitemradio"
                 aria-checked={selected}
                 onClick={() => selectLocale(l.locale)}
-                className={`flex w-full items-center gap-2.5 px-4 py-3 text-left text-sm font-medium transition ${
-                  selected
-                    ? "bg-[#2e3940] text-white"
-                    : "text-white/80 hover:bg-white/5"
+                className={`flex w-full items-center gap-2.5 rounded px-3 py-3 text-left text-base font-bold text-white transition ${
+                  selected ? "bg-saa-gold-light/15" : "hover:bg-white/5"
                 }`}
               >
                 <Image
