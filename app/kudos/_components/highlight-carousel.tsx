@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import type { KudosPost } from "@/lib/saa/kudos";
 import { KudosCard, type CardLabels } from "./kudos-card";
 
@@ -16,6 +16,12 @@ function Chevron({ dir, className }: { dir: "left" | "right"; className?: string
   );
 }
 
+/**
+ * Top-by-hearts carousel (reference B.2/B.5): three cards at a time —
+ * previous / current / next — with the centre card prominent and the sides
+ * faded behind the edge gradients (non-interactive). Arrows disable at both
+ * ends; the pager reads "n/total". No physics-accurate sliding (YAGNI).
+ */
 export function HighlightCarousel({
   posts,
   labels,
@@ -23,97 +29,93 @@ export function HighlightCarousel({
   posts: KudosPost[];
   labels: CardLabels;
 }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [page, setPage] = useState(1);
+  const [index, setIndex] = useState(0);
+  const total = posts.length;
+  const prevDisabled = index === 0;
+  const nextDisabled = index === total - 1;
 
-  const step = () => {
-    const el = trackRef.current;
-    if (!el) return 552;
-    const card = el.querySelector("article");
-    return card ? card.getBoundingClientRect().width + 24 : 552;
-  };
-
-  const onScroll = () => {
-    const el = trackRef.current;
-    if (!el) return;
-    setPage(Math.min(posts.length, Math.round(el.scrollLeft / step()) + 1));
-  };
-
-  const go = (delta: number) => {
-    trackRef.current?.scrollBy({ left: delta * step(), behavior: "smooth" });
-  };
-
-  // Open on the second slide so cards peek in from BOTH edges (the design's
-  // resting state); at slide 1 the left half of the bleed would sit empty.
-  useEffect(() => {
-    const el = trackRef.current;
-    if (el && posts.length > 1) el.scrollLeft = step();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const slots = [index - 1, index, index + 1].map((i) =>
+    i >= 0 && i < total ? posts[i] : null,
+  );
 
   return (
-    <div className="flex flex-col gap-8">
-      {/* Full-bleed centre-mode carousel: the active card snaps to the
-          viewport centre and the neighbours peek in from both edges. */}
-      <div className="relative left-1/2 w-screen -translate-x-1/2">
-        <div
-          ref={trackRef}
-          onScroll={onScroll}
-          className="saa-no-scrollbar flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none]"
-          style={{ paddingInline: "max(16px, calc(50vw - 276px))" }}
-        >
-          {posts.map((post) => (
-            <div key={post.id} className="flex shrink-0 snap-center">
+    // Break out of the page column so the side cards can peek to the viewport
+    // edges like the reference (Frame 528/527).
+    <div className="isolate -mx-4 flex flex-col items-center gap-8 sm:-mx-9 lg:-mx-36">
+      <div className="relative flex w-full items-center justify-center gap-6 overflow-hidden">
+        {slots.map((post, slot) =>
+          post ? (
+            <div
+              key={post.id}
+              inert={slot !== 1 ? true : undefined}
+              className={`flex shrink-0 transition-opacity duration-300 ${
+                slot === 1 ? "opacity-100" : "pointer-events-none"
+              }`}
+            >
               <KudosCard post={post} labels={labels} variant="highlight" />
             </div>
-          ))}
-        </div>
+          ) : (
+            <div key={`empty-${slot}`} className="hidden w-[320px] shrink-0 sm:block" aria-hidden />
+          ),
+        )}
 
-        {/* Edge scrims + big arrows: the fades span the whole peeking side
-            card (up to the centre card's edge) so the neighbours read dimmed
-            into the dark page like the design, not full-brightness cream. */}
-        <button
-          type="button"
-          aria-label="Previous"
-          onClick={() => go(-1)}
-          style={{ width: "max(160px, calc(50vw - 288px))" }}
-          className="absolute inset-y-0 left-0 hidden items-center justify-start bg-gradient-to-r from-saa-bg from-25% via-saa-bg/70 to-transparent pl-20 text-white transition hover:text-saa-gold-light md:flex"
+        {/* Edge fades (Frame 528/527): dissolve the peeking side cards into the
+            page bg #00101A; the nav chevron sits inside the dark part. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 left-0 z-[1] flex w-[calc((100%-320px)/2)] min-w-[64px] items-center justify-start pl-3 sm:w-[calc((100%-420px)/2)] lg:w-[calc((100%-528px)/2)] lg:pl-20"
+          style={{ background: "linear-gradient(90deg, #00101A 40%, rgba(0,16,26,0) 100%)" }}
         >
-          <Chevron dir="left" className="h-[60px] w-[60px]" />
-        </button>
-        <button
-          type="button"
-          aria-label="Next"
-          onClick={() => go(1)}
-          style={{ width: "max(160px, calc(50vw - 288px))" }}
-          className="absolute inset-y-0 right-0 hidden items-center justify-end bg-gradient-to-l from-saa-bg from-25% via-saa-bg/70 to-transparent pr-20 text-white transition hover:text-saa-gold-light md:flex"
+          <button
+            type="button"
+            onClick={() => setIndex((i) => Math.max(0, i - 1))}
+            disabled={prevDisabled}
+            aria-label="Previous"
+            className="pointer-events-auto flex items-center justify-center p-2 text-white transition-opacity disabled:opacity-30"
+          >
+            <Chevron dir="left" className="h-10 w-10 lg:h-14 lg:w-14" />
+          </button>
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 z-[1] flex w-[calc((100%-320px)/2)] min-w-[64px] items-center justify-end pr-3 sm:w-[calc((100%-420px)/2)] lg:w-[calc((100%-528px)/2)] lg:pr-20"
+          style={{ background: "linear-gradient(270deg, #00101A 40%, rgba(0,16,26,0) 100%)" }}
         >
-          <Chevron dir="right" className="h-[60px] w-[60px]" />
-        </button>
+          <button
+            type="button"
+            onClick={() => setIndex((i) => Math.min(total - 1, i + 1))}
+            disabled={nextDisabled}
+            aria-label="Next"
+            className="pointer-events-auto flex items-center justify-center p-2 text-white transition-opacity disabled:opacity-30"
+          >
+            <Chevron dir="right" className="h-10 w-10 lg:h-14 lg:w-14" />
+          </button>
+        </div>
       </div>
 
-      {/* pager */}
-      <div className="flex items-center justify-center gap-8">
+      {/* Pager — big gold current + dimmed grey total */}
+      <div className="flex items-center gap-8">
         <button
           type="button"
+          onClick={() => setIndex((i) => Math.max(0, i - 1))}
+          disabled={prevDisabled}
           aria-label="Previous"
-          onClick={() => go(-1)}
-          className="grid h-10 w-10 place-items-center text-white transition hover:text-saa-gold-light"
+          className="flex h-12 w-12 items-center justify-center rounded text-white transition-opacity disabled:opacity-30"
         >
-          <Chevron dir="left" className="h-5 w-5" />
+          <Chevron dir="left" className="h-7 w-7" />
         </button>
-        {/* current page highlighted gold, the /total dimmed (design pager) */}
-        <span className="flex items-baseline gap-0.5">
-          <span className="text-[32px] font-bold leading-10 text-saa-gold-light">{page}</span>
-          <span className="text-lg font-bold text-[#999]">/{posts.length}</span>
+        <span className="font-bold">
+          <span className="text-[45px] leading-none text-saa-gold-light">{index + 1}</span>
+          <span className="text-[28px] text-[#999]">/{total}</span>
         </span>
         <button
           type="button"
+          onClick={() => setIndex((i) => Math.min(total - 1, i + 1))}
+          disabled={nextDisabled}
           aria-label="Next"
-          onClick={() => go(1)}
-          className="grid h-10 w-10 place-items-center text-white transition hover:text-saa-gold-light"
+          className="flex h-12 w-12 items-center justify-center rounded text-white transition-opacity disabled:opacity-30"
         >
-          <Chevron dir="right" className="h-5 w-5" />
+          <Chevron dir="right" className="h-7 w-7" />
         </button>
       </div>
     </div>

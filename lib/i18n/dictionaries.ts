@@ -180,8 +180,8 @@ const vi = {
       hint: "Click vào box để mở",
       unopenedLabel: "Secretbox chưa mở",
     },
-    recipientsTitle: "10 SUNNER NHẬN QUÀ MỚI NHẤT",
-    recipientGift: "Nhận được 1 áo phòng SAA",
+    recipientsTitle: "TOP 10 SUNNER NHẬN QUÀ NHIỀU NHẤT",
+    recipientGift: "Nhận được 1 áo phông SAA",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
     writeKudos: {
       title: "Gửi lời cám ơn và ghi nhận đến đồng đội",
@@ -444,7 +444,7 @@ const en: typeof vi = {
       hint: "Click on the box to open",
       unopenedLabel: "Unopened Secret Box",
     },
-    recipientsTitle: "10 LATEST SUNNERS TO RECEIVE GIFTS",
+    recipientsTitle: "TOP 10 SUNNERS WITH THE MOST GIFTS",
     recipientGift: "Received 1 SAA team shirt",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
     writeKudos: {

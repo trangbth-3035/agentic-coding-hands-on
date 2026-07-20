@@ -20,7 +20,9 @@ describe("LanguageSwitcher", () => {
     render(<LanguageSwitcher locale="vi" />);
 
     await user.click(screen.getByRole("button", { name: /VN/ }));
-    await user.click(screen.getByRole("menuitemradio", { name: /EN/ }));
+    // Panel is a listbox; the EN row is the only "EN"-named button (the
+    // trigger reads "VN"), so this uniquely targets the option button.
+    await user.click(screen.getByRole("button", { name: /EN/ }));
 
     expect(document.cookie).toContain("saa_lang=en");
     expect(mockRefresh).toHaveBeenCalledTimes(1);

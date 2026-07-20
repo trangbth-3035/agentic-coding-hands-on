@@ -66,9 +66,10 @@ const AV2 = "/saa/kudos-avatar-2.png";
 const BODY =
   "Cảm ơn người em bình thường nhưng phi thường :D Cảm ơn sự chăm chỉ, cần mẫn của em đã tạo động lực rất nhiều cho team, để luôn nhắc mình luôn phải nỗ lực hơn nữa trong công việc. <3 và cuộc sống...";
 
-/** Repeat a post's hashtags into the long red tag line the card renders. */
+/** The red tag line the card renders — a single pass of the post's hashtags
+ * (the reference UI shows them once, not repeated). */
 function tagLine(hashtags: string[]): string {
-  return `${[...hashtags, ...hashtags, ...hashtags].join(" ")}...`;
+  return hashtags.join(" ");
 }
 
 function person(
