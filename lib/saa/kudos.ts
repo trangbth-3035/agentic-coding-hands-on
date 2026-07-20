@@ -161,13 +161,19 @@ export const KUDOS_STATS = {
   boxUnopened: 25,
 };
 
-/** "10 Sunner nhận quà mới nhất" list (D.3). */
+/** "10 Sunner nhận quà mới nhất" list (D.3) — ten entries, the panel shows
+ * about five and scrolls for the rest (per design). */
 export const GIFT_RECIPIENTS = [
   "Huỳnh Dương Xuân",
   "Nguyễn Hoàng Linh",
   "Mai Phương Thúy",
   "Đỗ Hoàng Hiệp",
   "Lê Kiều Trang",
+  "Nguyễn Văn Quy",
+  "Nguyễn Bá Chức",
+  "Dương Thúy An",
+  "Huỳnh Dương Xuân Nhật",
+  "Mai Phương Thúy",
 ].map((name, i) => ({ id: `g${i}`, name, avatar: "/saa/kudos-recipient.png" }));
 
 /** Spotlight board (B.7) — total count + live ticker + scattered word-cloud. */
