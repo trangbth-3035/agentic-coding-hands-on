@@ -188,8 +188,9 @@ export const SPOTLIGHT_TICKER = [
   { time: "08:30PM", name: "Nguyễn Bá Chức" },
 ];
 
-/** Deterministic scatter for the word-cloud (no runtime randomness). Positions
- * are % within the board; one entry is highlighted red like the design. */
+/** Deterministic scatter for the word-cloud (no runtime randomness). The
+ * design fills the board with ~90 tiny repeated names plus a few larger bold
+ * ones; a seeded PRNG keeps the layout identical on server and client. */
 export type CloudName = {
   name: string;
   top: number;
@@ -199,64 +200,46 @@ export type CloudName = {
   highlight?: boolean;
 };
 
-export const SPOTLIGHT_NAMES: CloudName[] = [
-  { name: "Đỗ Hoàng Hiệp", top: 20, left: 18, size: 13, opacity: 0.5 },
-  { name: "Dương Thúy An", top: 16, left: 34, size: 15, opacity: 0.7 },
-  { name: "Nguyễn Văn Quy", top: 24, left: 52, size: 12, opacity: 0.45 },
-  { name: "Mai Phương Thúy", top: 18, left: 68, size: 14, opacity: 0.6 },
-  { name: "Lê Kiều Trang", top: 26, left: 82, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Bá Chức", top: 33, left: 24, size: 13, opacity: 0.55 },
-  { name: "Nguyễn Hoàng Linh", top: 30, left: 44, size: 16, opacity: 0.85 },
-  { name: "Dương Thúy An", top: 36, left: 62, size: 12, opacity: 0.5 },
-  { name: "Đỗ Hoàng Hiệp", top: 34, left: 78, size: 13, opacity: 0.45 },
-  { name: "Mai Phương Thúy", top: 44, left: 14, size: 14, opacity: 0.6 },
-  { name: "Nguyễn Văn Quy", top: 46, left: 32, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 47, left: 50, size: 20, opacity: 1, highlight: true },
-  { name: "Lê Kiều Trang", top: 45, left: 70, size: 13, opacity: 0.55 },
-  { name: "Nguyễn Bá Chức", top: 48, left: 86, size: 12, opacity: 0.4 },
-  { name: "Dương Thúy An", top: 56, left: 20, size: 13, opacity: 0.5 },
-  { name: "Mai Phương Thúy", top: 58, left: 38, size: 14, opacity: 0.6 },
-  { name: "Đỗ Hoàng Hiệp", top: 57, left: 56, size: 12, opacity: 0.45 },
-  { name: "Nguyễn Văn Quy", top: 60, left: 74, size: 13, opacity: 0.5 },
-  { name: "Lê Kiều Trang", top: 64, left: 30, size: 12, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 66, left: 48, size: 14, opacity: 0.55 },
-  { name: "Nguyễn Bá Chức", top: 65, left: 66, size: 12, opacity: 0.45 },
-  { name: "Dương Thúy An", top: 68, left: 82, size: 13, opacity: 0.5 },
-  // Densifying lap — the design cloud fills the whole board with small
-  // repeated names plus a few larger bold ones.
-  { name: "Đỗ Hoàng Hiệp", top: 12, left: 26, size: 11, opacity: 0.4 },
-  { name: "Dương Thúy An", top: 11, left: 44, size: 12, opacity: 0.5 },
-  { name: "Mai Phương Thúy", top: 13, left: 60, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Văn Quy", top: 11, left: 76, size: 12, opacity: 0.5 },
-  { name: "Lê Kiều Trang", top: 14, left: 92, size: 11, opacity: 0.45 },
-  { name: "Nguyễn Bá Chức", top: 20, left: 8, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 26, left: 6, size: 12, opacity: 0.5 },
-  { name: "Mai Phương Thúy", top: 40, left: 6, size: 11, opacity: 0.4 },
-  { name: "Lê Kiều Trang", top: 52, left: 8, size: 12, opacity: 0.5 },
-  { name: "Dương Thúy An", top: 22, left: 92, size: 12, opacity: 0.5 },
-  { name: "Nguyễn Văn Quy", top: 38, left: 94, size: 11, opacity: 0.4 },
-  { name: "Đỗ Hoàng Hiệp", top: 50, left: 93, size: 12, opacity: 0.5 },
-  { name: "Nguyễn Bá Chức", top: 62, left: 94, size: 11, opacity: 0.4 },
-  { name: "Huỳnh Dương Xuân", top: 23, left: 36, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Bá Chức", top: 27, left: 60, size: 11, opacity: 0.45 },
-  { name: "Lê Kiều Trang", top: 30, left: 14, size: 12, opacity: 0.5 },
-  { name: "Huỳnh Dương Xuân", top: 38, left: 24, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Văn Quy", top: 27, left: 88, size: 16, opacity: 0.9 },
-  { name: "Nguyễn Hoàng Linh", top: 40, left: 84, size: 18, opacity: 0.95 },
-  { name: "Nguyễn Văn Quy", top: 52, left: 40, size: 17, opacity: 0.9 },
-  { name: "Nguyễn Hoàng Linh", top: 60, left: 78, size: 16, opacity: 0.85 },
-  { name: "Mai Phương Thúy", top: 41, left: 44, size: 11, opacity: 0.4 },
-  { name: "Đỗ Hoàng Hiệp", top: 44, left: 60, size: 12, opacity: 0.5 },
-  { name: "Dương Thúy An", top: 50, left: 24, size: 11, opacity: 0.4 },
-  { name: "Lê Kiều Trang", top: 55, left: 58, size: 11, opacity: 0.45 },
-  { name: "Huỳnh Dương Xuân", top: 60, left: 12, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Bá Chức", top: 71, left: 30, size: 11, opacity: 0.4 },
-  { name: "Mai Phương Thúy", top: 72, left: 50, size: 12, opacity: 0.5 },
-  { name: "Đỗ Hoàng Hiệp", top: 70, left: 70, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Văn Quy", top: 73, left: 88, size: 12, opacity: 0.5 },
-  { name: "Dương Thúy An", top: 75, left: 62, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Hoàng Linh", top: 18, left: 52, size: 12, opacity: 0.55 },
-  { name: "Lê Kiều Trang", top: 33, left: 70, size: 11, opacity: 0.45 },
-  { name: "Huỳnh Dương Xuân", top: 47, left: 76, size: 11, opacity: 0.4 },
-  { name: "Nguyễn Bá Chức", top: 36, left: 54, size: 11, opacity: 0.4 },
-];
+/** mulberry32 — tiny seeded PRNG so the cloud is stable across renders. */
+function mulberry32(seed: number): () => number {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildCloud(): CloudName[] {
+  const rand = mulberry32(20251226);
+  const out: CloudName[] = [];
+  const COLS = 13;
+  const ROWS = 8;
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      if (rand() < 0.12) continue; // leave a few gaps like the design
+      const top = 8 + ((r + 0.15 + rand() * 0.7) * 70) / ROWS;
+      const left = 3 + ((c + 0.1 + rand() * 0.8) * 94) / COLS;
+      const big = rand() > 0.94;
+      out.push({
+        name: SUNNERS[Math.floor(rand() * SUNNERS.length) % SUNNERS.length],
+        top: Math.round(top * 10) / 10,
+        left: Math.round(left * 10) / 10,
+        size: big ? 14 + Math.round(rand() * 3) : 9 + Math.round(rand() * 3),
+        opacity: big ? 0.85 : 0.35 + Math.round(rand() * 30) / 100,
+      });
+    }
+  }
+  out.push({
+    name: "Nguyễn Hoàng Linh",
+    top: 45,
+    left: 47,
+    size: 15,
+    opacity: 1,
+    highlight: true,
+  });
+  return out;
+}
+
+export const SPOTLIGHT_NAMES: CloudName[] = buildCloud();

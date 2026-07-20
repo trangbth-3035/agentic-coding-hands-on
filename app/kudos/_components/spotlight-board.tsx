@@ -20,7 +20,7 @@ const LINKS: Array<[number, number, number, number]> = [
   [9, 62, 19, 80], [49, 44, 59, 22], [69, 38, 79, 16], [89, 30, 97, 12],
 ];
 const TRIANGLES: Array<[number, number]> = [
-  [22, 40], [58, 14], [86, 72],
+  [22, 40], [58, 14], [86, 72], [70, 30], [90, 20], [78, 55], [40, 78],
 ];
 
 /** B.7 — dark word-cloud board: key-visual art bleeding in on the left, a
