@@ -54,6 +54,9 @@ export function WriteKudosModal({
   const [images, setImages] = useState<string[]>([]);
   const [anonymous, setAnonymous] = useState(false);
   const [tagOpen, setTagOpen] = useState(false);
+  const [linkOpen, setLinkOpen] = useState(false);
+  const [linkText, setLinkText] = useState("");
+  const [linkUrl, setLinkUrl] = useState("");
 
   // Close on Escape and lock background scroll while the modal is open.
   useEffect(() => {
@@ -80,6 +83,24 @@ export function WriteKudosModal({
     setImages([]);
     setAnonymous(false);
     setTagOpen(false);
+    setLinkOpen(false);
+    setLinkText("");
+    setLinkUrl("");
+  };
+
+  const closeLinkBox = () => {
+    setLinkOpen(false);
+    setLinkText("");
+    setLinkUrl("");
+  };
+  /** "Thêm đường dẫn" (Addlink Box, mm:1002:12917): append the link to the
+   * message body — the editor is a plain textarea, so links are plain text. */
+  const saveLink = () => {
+    const url = linkUrl.trim();
+    if (!url) return;
+    const line = linkText.trim() ? `${linkText.trim()} (${url})` : url;
+    setBody((cur) => (cur.trim() ? `${cur}\n${line}` : line));
+    closeLinkBox();
   };
   const close = () => {
     reset();
@@ -254,6 +275,8 @@ export function WriteKudosModal({
                   <button
                     key={tool.key}
                     type="button"
+                    onClick={tool.key === "link" ? () => setLinkOpen((o) => !o) : undefined}
+                    aria-expanded={tool.key === "link" ? linkOpen : undefined}
                     className="grid h-10 w-14 place-items-center border-r border-saa-gold-muted transition hover:bg-saa-gold-light/20"
                     aria-label={tool.key}
                   >
@@ -278,6 +301,56 @@ export function WriteKudosModal({
             <p className="mt-2 text-center text-base font-bold tracking-[0.5px] text-saa-bg">
               {t.mentionHint}
             </p>
+
+            {/* "Thêm đường dẫn" — Addlink Box (mm:1002:12917), opened from the
+                link toolbar button; full modal width like the design card. */}
+            {linkOpen && (
+              <div className="mt-4 flex flex-col gap-6 rounded-2xl border border-saa-gold-muted bg-[#FFF8E1] p-6 shadow-lg sm:p-8">
+                <h3 className="text-2xl font-bold text-saa-bg sm:text-[28px]">
+                  {t.linkTitle}
+                </h3>
+                <label className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                  <span className="shrink-0 text-lg font-bold text-saa-bg sm:w-[104px]">
+                    {t.linkContentLabel}
+                  </span>
+                  <input
+                    value={linkText}
+                    onChange={(e) => setLinkText(e.target.value)}
+                    className="h-12 w-full rounded-lg border border-saa-gold-muted bg-white px-4 text-base font-semibold text-saa-bg outline-none focus:border-saa-gold"
+                  />
+                </label>
+                <label className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                  <span className="shrink-0 text-lg font-bold text-saa-bg sm:w-[104px]">
+                    {t.linkUrlLabel}
+                  </span>
+                  <input
+                    value={linkUrl}
+                    onChange={(e) => setLinkUrl(e.target.value)}
+                    className="h-12 w-full rounded-lg border border-saa-gold-muted bg-white px-4 text-base font-semibold text-saa-bg outline-none focus:border-saa-gold"
+                  />
+                </label>
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={closeLinkBox}
+                    className="flex items-center gap-2 rounded-lg border border-saa-gold-muted bg-saa-gold-light/10 px-6 py-3 text-base font-bold text-saa-bg transition hover:bg-saa-gold-light/20"
+                  >
+                    {t.cancel}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/saa/kudos-ic-close.svg" alt="" className="h-5 w-5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={saveLink}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-saa-gold-light px-6 py-3 text-base font-bold text-saa-bg transition hover:brightness-105"
+                  >
+                    {t.linkSave}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/saa/kudos-ic-link.svg" alt="" className="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* E — Hashtag (max 5) */}

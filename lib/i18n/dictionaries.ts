@@ -192,6 +192,10 @@ const vi = {
       titleHint:
         "Ví dụ: Người truyền động lực cho tôi.\nDanh hiệu sẽ hiển thị làm tiêu đề Kudos của bạn.",
       communityStandards: "Tiêu chuẩn cộng đồng",
+      linkTitle: "Thêm đường dẫn",
+      linkContentLabel: "Nội dung",
+      linkUrlLabel: "URL",
+      linkSave: "Lưu",
       bodyPlaceholder:
         "Hãy gửi gắm lời cám ơn và ghi nhận đến đồng đội tại đây nhé!",
       mentionHint: "Bạn có thể “@ + tên” để nhắc tới đồng nghiệp khác",
@@ -452,6 +456,10 @@ const en: typeof vi = {
       titleHint:
         "Example: The person who motivates me.\nThe title will appear as your Kudos heading.",
       communityStandards: "Community Standards",
+      linkTitle: "Add link",
+      linkContentLabel: "Content",
+      linkUrlLabel: "URL",
+      linkSave: "Save",
       bodyPlaceholder:
         "Please send your thanks and recognition to your teammates here!",
       mentionHint: "You can “@ + name” to mention another colleague",
