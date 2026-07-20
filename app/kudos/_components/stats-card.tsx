@@ -13,18 +13,25 @@ function StatRow({
 }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <span className="text-lg font-bold leading-7 text-white sm:text-[22px]">{label}</span>
-      <div className="flex shrink-0 items-center gap-1">
+      <span className="flex items-center text-lg font-bold leading-7 text-white sm:text-[22px]">
+        {label}
+        {/* x2 fire badge sits right after the label (design D.1.4): orange
+            flame with a black bold "x2" inside its base */}
         {fire && (
-          <span className="relative grid h-8 w-8 place-items-center text-2xl leading-none">
+          <span
+            aria-label={`${KUDOS_STATS.likeMultiplier} bonus`}
+            className="relative -mt-1 grid h-8 w-8 place-items-center text-[26px] leading-none"
+          >
             🔥
-            <span className="absolute text-[11px] font-bold text-white [-webkit-text-stroke:0.8px_#000]">
+            <span className="absolute bottom-[3px] text-[10px] font-bold leading-none text-black">
               {KUDOS_STATS.likeMultiplier}
             </span>
           </span>
         )}
-        <span className="text-2xl font-bold text-saa-gold-light sm:text-[32px]">{value}</span>
-      </div>
+      </span>
+      <span className="shrink-0 text-2xl font-bold text-saa-gold-light sm:text-[32px]">
+        {value}
+      </span>
     </div>
   );
 }
