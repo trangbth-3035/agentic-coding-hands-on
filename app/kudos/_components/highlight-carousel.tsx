@@ -69,12 +69,15 @@ export function HighlightCarousel({
           ))}
         </div>
 
-        {/* edge fades + big arrows */}
+        {/* Edge scrims + big arrows: the fades span the whole peeking side
+            card (up to the centre card's edge) so the neighbours read dimmed
+            into the dark page like the design, not full-brightness cream. */}
         <button
           type="button"
           aria-label="Previous"
           onClick={() => go(-1)}
-          className="absolute inset-y-0 left-0 hidden w-28 items-center justify-start bg-gradient-to-r from-saa-bg via-saa-bg/80 to-transparent pl-2 text-white/80 transition hover:text-white md:flex"
+          style={{ width: "max(96px, calc(50vw - 288px))" }}
+          className="absolute inset-y-0 left-0 hidden items-center justify-start bg-gradient-to-r from-saa-bg from-25% via-saa-bg/70 to-transparent pl-3 text-white transition hover:text-saa-gold-light md:flex"
         >
           <Chevron dir="left" className="h-12 w-12" />
         </button>
@@ -82,7 +85,8 @@ export function HighlightCarousel({
           type="button"
           aria-label="Next"
           onClick={() => go(1)}
-          className="absolute inset-y-0 right-0 hidden w-28 items-center justify-end bg-gradient-to-l from-saa-bg via-saa-bg/80 to-transparent pr-2 text-white/80 transition hover:text-white md:flex"
+          style={{ width: "max(96px, calc(50vw - 288px))" }}
+          className="absolute inset-y-0 right-0 hidden items-center justify-end bg-gradient-to-l from-saa-bg from-25% via-saa-bg/70 to-transparent pr-3 text-white transition hover:text-saa-gold-light md:flex"
         >
           <Chevron dir="right" className="h-12 w-12" />
         </button>
