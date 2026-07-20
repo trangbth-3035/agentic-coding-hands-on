@@ -182,6 +182,8 @@ const vi = {
     },
     recipientsTitle: "10 SUNNER NHẬN QUÀ MỚI NHẤT",
     recipientGift: "Nhận được 1 áo phòng SAA",
+    rankUpsTitle: "10 SUNNER CÓ SỰ THĂNG HẠNG MỚI NHẤT",
+    rankUpNote: "Vừa đạt hạng Rising Hero",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
     writeKudos: {
       title: "Gửi lời cám ơn và ghi nhận đến đồng đội",
@@ -446,6 +448,8 @@ const en: typeof vi = {
     },
     recipientsTitle: "10 LATEST SUNNERS TO RECEIVE GIFTS",
     recipientGift: "Received 1 SAA team shirt",
+    rankUpsTitle: "TOP 10 LATEST RANK-UPS",
+    rankUpNote: "Just reached Rising Hero",
     // "Viết Kudo" compose modal (Figma screenId ihQ26W78P2)
     writeKudos: {
       title: "Send thanks and recognition to teammates",

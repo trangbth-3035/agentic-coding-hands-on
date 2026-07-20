@@ -6,22 +6,44 @@ import {
   SPOTLIGHT_TOTAL,
 } from "@/lib/saa/kudos";
 
-/** Deterministic constellation texture (per design): tiny dots, thin links and
- * a few faint triangles scattered over the board. Fixed coords — no runtime
- * randomness, so SSR output is stable. Values are % of the board. */
-const DOTS: Array<[number, number]> = [
-  [4, 18], [9, 62], [14, 35], [19, 80], [24, 12], [29, 55], [34, 28], [39, 70],
-  [44, 8], [49, 44], [54, 76], [59, 22], [64, 58], [69, 38], [74, 84], [79, 16],
-  [84, 50], [89, 30], [94, 68], [97, 12], [7, 88], [52, 90], [91, 88], [37, 92],
-];
-const LINKS: Array<[number, number, number, number]> = [
-  [4, 18, 14, 35], [14, 35, 24, 12], [29, 55, 39, 70], [44, 8, 49, 44],
-  [54, 76, 64, 58], [64, 58, 74, 84], [79, 16, 84, 50], [84, 50, 94, 68],
-  [9, 62, 19, 80], [49, 44, 59, 22], [69, 38, 79, 16], [89, 30, 97, 12],
-];
-const TRIANGLES: Array<[number, number]> = [
-  [22, 40], [58, 14], [86, 72], [70, 30], [90, 20], [78, 55], [40, 78],
-];
+/** Deterministic constellation texture: the reference board is covered in a
+ * dense network of dots, thin connecting lines and faint triangles. A seeded
+ * PRNG keeps the layout identical on server and client. Values are % of the
+ * board. */
+function mulberry32(seed: number): () => number {
+  return () => {
+    seed |= 0;
+    seed = (seed + 0x6d2b79f5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+const { DOTS, LINKS, TRIANGLES } = (() => {
+  const rand = mulberry32(3881226);
+  const dots: Array<[number, number]> = [];
+  for (let i = 0; i < 70; i++) {
+    dots.push([Math.round(rand() * 980) / 10, Math.round(rand() * 980) / 10]);
+  }
+  // connect each dot to its nearest few neighbours for the web look
+  const links: Array<[number, number, number, number]> = [];
+  for (let i = 0; i < dots.length; i++) {
+    const [x, y] = dots[i];
+    const near = dots
+      .map((d, j) => ({ j, d2: (d[0] - x) ** 2 + (d[1] - y) ** 2 }))
+      .filter((n) => n.j !== i && n.d2 < 220)
+      .slice(0, 2);
+    for (const n of near) {
+      if (n.j > i) links.push([x, y, dots[n.j][0], dots[n.j][1]]);
+    }
+  }
+  const triangles: Array<[number, number]> = [];
+  for (let i = 0; i < 12; i++) {
+    triangles.push([Math.round(rand() * 940) / 10, Math.round(rand() * 900) / 10]);
+  }
+  return { DOTS: dots, LINKS: links, TRIANGLES: triangles };
+})();
 
 /** B.7 — dark word-cloud board: key-visual art bleeding in on the left, a
  * constellation texture, the running total, the scattered name cloud, a live
@@ -54,19 +76,19 @@ export function SpotlightBoard({ dict }: { dict: Dictionary["kudosBoard"] }) {
             x2={x2}
             y2={y2}
             stroke="white"
-            strokeOpacity="0.12"
+            strokeOpacity="0.18"
             strokeWidth="0.08"
           />
         ))}
         {DOTS.map(([x, y], i) => (
-          <circle key={`d${i}`} cx={x} cy={y} r="0.22" fill="white" fillOpacity="0.3" />
+          <circle key={`d${i}`} cx={x} cy={y} r="0.22" fill="white" fillOpacity="0.45" />
         ))}
         {TRIANGLES.map(([x, y], i) => (
           <path
             key={`t${i}`}
             d={`M${x} ${y} l3.5 1.6 l-2.4 2.6 Z`}
             fill="white"
-            fillOpacity="0.06"
+            fillOpacity="0.1"
           />
         ))}
       </svg>
