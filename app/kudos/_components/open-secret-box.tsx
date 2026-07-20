@@ -28,7 +28,7 @@ export function OpenSecretBox({
       >
         {label}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/saa/kudos-ic-gift.svg" alt="" className="h-6 w-6" />
+        <img src="/saa/kudos-ic-gift-dark.svg" alt="" className="h-6 w-6" />
       </button>
 
       <SecretBoxModal
