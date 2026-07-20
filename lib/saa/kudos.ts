@@ -177,20 +177,6 @@ export const GIFT_RECIPIENTS = [
   "Mai Phương Thúy",
 ].map((name, i) => ({ id: `g${i}`, name, avatar: "/saa/kudos-recipient.png" }));
 
-/** "10 Sunner có sự thăng hạng mới nhất" list (reference sidebar, 2nd panel). */
-export const RANK_UPS = [
-  "Huỳnh Dương Xuân",
-  "Huỳnh Dương Xuân Nhật",
-  "Nguyễn Hoàng Linh",
-  "Nguyễn Bá Chức",
-  "Mai Phương Thúy",
-  "Đỗ Hoàng Hiệp",
-  "Lê Kiều Trang",
-  "Nguyễn Văn Quy",
-  "Dương Thúy An",
-  "Nguyễn Hoàng Linh",
-].map((name, i) => ({ id: `r${i}`, name, avatar: "/saa/kudos-recipient.png" }));
-
 /** Spotlight board (B.7) — total count + live ticker + scattered word-cloud. */
 export const SPOTLIGHT_TOTAL = 388;
 

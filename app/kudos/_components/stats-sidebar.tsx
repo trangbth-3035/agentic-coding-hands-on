@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
-import { RANK_UPS } from "@/lib/saa/kudos";
+import { GIFT_RECIPIENTS } from "@/lib/saa/kudos";
 import { StatsCard } from "./stats-card";
 
 type Entry = { id: string; name: string; avatar: string };
@@ -47,9 +47,12 @@ export function StatsSidebar({ dict }: { dict: Dictionary["kudosBoard"] }) {
       {/* D.1 — overview stats */}
       <StatsCard dict={dict} />
 
-      {/* Latest rank-ups leaderboard (the gift-recipients panel was removed
-          per the reference — this feature has no gift list). */}
-      <LeaderboardPanel title={dict.rankUpsTitle} note={dict.rankUpNote} entries={RANK_UPS} />
+      {/* Top gift recipients leaderboard */}
+      <LeaderboardPanel
+        title={dict.recipientsTitle}
+        note={dict.recipientGift}
+        entries={GIFT_RECIPIENTS}
+      />
     </aside>
   );
 }
