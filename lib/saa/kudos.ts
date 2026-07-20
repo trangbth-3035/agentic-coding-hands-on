@@ -214,22 +214,53 @@ function mulberry32(seed: number): () => number {
 function buildCloud(): CloudName[] {
   const rand = mulberry32(20251226);
   const out: CloudName[] = [];
-  const COLS = 13;
-  const ROWS = 8;
-  for (let r = 0; r < ROWS; r++) {
-    for (let c = 0; c < COLS; c++) {
-      if (rand() < 0.12) continue; // leave a few gaps like the design
-      const top = 8 + ((r + 0.15 + rand() * 0.7) * 70) / ROWS;
-      const left = 3 + ((c + 0.1 + rand() * 0.8) * 94) / COLS;
-      const big = rand() > 0.94;
-      out.push({
-        name: SUNNERS[Math.floor(rand() * SUNNERS.length) % SUNNERS.length],
-        top: Math.round(top * 10) / 10,
-        left: Math.round(left * 10) / 10,
-        size: big ? 14 + Math.round(rand() * 3) : 9 + Math.round(rand() * 3),
-        opacity: big ? 0.85 : 0.35 + Math.round(rand() * 30) / 100,
-      });
-    }
+  // Placed bounding boxes in board-% (board ≈ 1150×548): reject any candidate
+  // that would overlap an already-placed name, so nothing renders on top of
+  // anything else. Estimated glyph box: width ≈ chars×size×0.62px.
+  const boxes: Array<[number, number, number, number]> = [];
+  const BOARD_W = 1150;
+  const BOARD_H = 548;
+  // keep-out zones: search pill (top-left), the "388 KUDOS" total (top-centre)
+  // and the ticker block (bottom-left).
+  const ZONES: Array<[number, number, number, number]> = [
+    [0, 30, 0, 16],
+    [30, 72, 0, 14],
+    [0, 46, 64, 100],
+  ];
+  const hits = (l: number, r: number, t: number, b: number) =>
+    ZONES.some(([zl, zr, zt, zb]) => l < zr && r > zl && t < zb && b > zt) ||
+    boxes.some(([bl, br, bt, bb]) => l < br + 0.8 && r > bl - 0.8 && t < bb + 1 && b > bt - 1);
+
+  // Reserve the red highlight's spot (pushed last, rendered on top).
+  {
+    const hw = ((17 * 15 * 0.62) / BOARD_W) * 100;
+    const hh = ((15 + 6) / BOARD_H) * 100;
+    boxes.push([47 - hw / 2, 47 + hw / 2, 45 - hh / 2, 45 + hh / 2]);
+  }
+
+  let attempts = 0;
+  while (out.length < 88 && attempts < 1600) {
+    attempts += 1;
+    const name = SUNNERS[Math.floor(rand() * SUNNERS.length) % SUNNERS.length];
+    const big = rand() > 0.95;
+    const size = big ? 14 + Math.round(rand() * 3) : 9 + Math.round(rand() * 3);
+    const top = 8 + rand() * 70;
+    const left = 4 + rand() * 92;
+    const w = ((name.length * size * 0.62) / BOARD_W) * 100;
+    const h = ((size + 6) / BOARD_H) * 100;
+    const l = left - w / 2;
+    const r = left + w / 2;
+    const t = top - h / 2;
+    const b = top + h / 2;
+    if (l < 1 || r > 99 || hits(l, r, t, b)) continue;
+    boxes.push([l, r, t, b]);
+    out.push({
+      name,
+      top: Math.round(top * 10) / 10,
+      left: Math.round(left * 10) / 10,
+      size,
+      opacity: big ? 0.85 : 0.35 + Math.round(rand() * 30) / 100,
+    });
   }
   out.push({
     name: "Nguyễn Hoàng Linh",
