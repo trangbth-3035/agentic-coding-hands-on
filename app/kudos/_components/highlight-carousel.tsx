@@ -76,19 +76,19 @@ export function HighlightCarousel({
           type="button"
           aria-label="Previous"
           onClick={() => go(-1)}
-          style={{ width: "max(96px, calc(50vw - 288px))" }}
-          className="absolute inset-y-0 left-0 hidden items-center justify-start bg-gradient-to-r from-saa-bg from-25% via-saa-bg/70 to-transparent pl-3 text-white transition hover:text-saa-gold-light md:flex"
+          style={{ width: "max(160px, calc(50vw - 288px))" }}
+          className="absolute inset-y-0 left-0 hidden items-center justify-start bg-gradient-to-r from-saa-bg from-25% via-saa-bg/70 to-transparent pl-20 text-white transition hover:text-saa-gold-light md:flex"
         >
-          <Chevron dir="left" className="h-12 w-12" />
+          <Chevron dir="left" className="h-[60px] w-[60px]" />
         </button>
         <button
           type="button"
           aria-label="Next"
           onClick={() => go(1)}
-          style={{ width: "max(96px, calc(50vw - 288px))" }}
-          className="absolute inset-y-0 right-0 hidden items-center justify-end bg-gradient-to-l from-saa-bg from-25% via-saa-bg/70 to-transparent pr-3 text-white transition hover:text-saa-gold-light md:flex"
+          style={{ width: "max(160px, calc(50vw - 288px))" }}
+          className="absolute inset-y-0 right-0 hidden items-center justify-end bg-gradient-to-l from-saa-bg from-25% via-saa-bg/70 to-transparent pr-20 text-white transition hover:text-saa-gold-light md:flex"
         >
-          <Chevron dir="right" className="h-12 w-12" />
+          <Chevron dir="right" className="h-[60px] w-[60px]" />
         </button>
       </div>
 
