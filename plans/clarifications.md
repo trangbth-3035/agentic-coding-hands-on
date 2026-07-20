@@ -8,11 +8,11 @@ Cross-screen open questions and design↔implementation decisions surfaced while
 
 ### Auth / account menu
 - **Q:** Regular-user vs Admin account dropdown — how is the difference handled?
-  **Decision (as-shipped):** Both live in `app/_components/site-header.tsx` on the shared
-  `saa-dropdown.tsx` shell. The header currently renders all three rows (Profile / Dashboard /
-  Logout) **unconditionally**, i.e. it effectively ships the Admin (3-item) variant for everyone.
-  The header now ships the 2-item regular-user variant (`z4sCl3_Qtk` — Profile highlighted +
-  Logout, icons inline after labels; Dashboard row removed since the user site has no admin). (specs: `z4sCl3_Qtk-dropdown-profile`, `54rekaCHG1-dropdown-profile-admin`)
+  **Decision (as-shipped):** The menu lives in `app/_components/site-header.tsx` on the shared
+  `saa-dropdown.tsx` shell and ships the 2-item **regular-user** variant (`z4sCl3_Qtk` — Profile
+  highlighted + Logout, icons inline after labels). The Dashboard row was removed 2026-07-20:
+  the user site has no admin, so the Admin (3-item, `54rekaCHG1`) variant is not rendered.
+  (specs: `z4sCl3_Qtk-dropdown-profile`, `54rekaCHG1-dropdown-profile-admin`)
 - **Q:** Is `/dashboard` restricted to admins?
   **Decision:** `/dashboard` is **auth-gated but not role-gated** (`lib/supabase/middleware.ts`
   `PROTECTED_PREFIXES = ["/dashboard"]`, wired via `proxy.ts` — Next 16's renamed middleware).
