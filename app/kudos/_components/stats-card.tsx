@@ -15,18 +15,18 @@ function StatRow({
     <div className="flex items-center justify-between gap-3">
       <span className="flex items-center text-lg font-bold leading-7 text-white sm:text-[22px]">
         {label}
-        {/* x2 fire badge sits right after the label (design D.1.4): orange
-            flame with a black bold "x2" inside its base */}
+        {/* x2 fire badge right after the label (design D.1.4) — the badge art
+            cropped 1:1 from the Figma render; its dark backing matches the
+            card's #00070C, so it sits flush. */}
         {fire && (
-          <span
-            aria-label={`${KUDOS_STATS.likeMultiplier} bonus`}
-            className="relative -mt-1 grid h-8 w-8 place-items-center text-[26px] leading-none"
-          >
-            🔥
-            <span className="absolute bottom-[3px] text-[10px] font-bold leading-none text-black">
-              {KUDOS_STATS.likeMultiplier}
-            </span>
-          </span>
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src="/saa/kudos-fire-x2.png"
+            alt={`${KUDOS_STATS.likeMultiplier} bonus`}
+            width={48}
+            height={52}
+            className="-mt-1 h-8 w-auto"
+          />
         )}
       </span>
       <span className="shrink-0 text-2xl font-bold text-saa-gold-light sm:text-[32px]">
