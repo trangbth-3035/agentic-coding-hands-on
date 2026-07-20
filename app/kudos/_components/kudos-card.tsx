@@ -54,7 +54,10 @@ export function KudosCard({
       }
     >
       {status && (
-        <span className="absolute right-0 top-0 z-10 rounded-bl-xl bg-[#FF8412] px-4 py-1.5 text-sm font-bold text-white">
+        // Corner ribbon: top-right rounds with the card so it nests in the
+        // corner (not a square tab poking past the rounded edge); bottom-left
+        // rounded, per the profile design.
+        <span className="absolute right-0 top-0 z-10 rounded-bl-xl rounded-tr-3xl bg-[#FF8412] py-1 pl-4 pr-3 text-xs font-bold text-white">
           {status}
         </span>
       )}
