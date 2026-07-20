@@ -19,9 +19,9 @@ const vi = {
   header: {
     notifications: "Thông báo",
     account: "Tài khoản",
-    profile: "Trang cá nhân",
+    profile: "Profile",
     dashboard: "Dashboard",
-    signOut: "Đăng xuất",
+    signOut: "Logout",
   },
   hero: {
     comingSoon: "Coming soon",
@@ -290,7 +290,7 @@ const en: typeof vi = {
     account: "Account",
     profile: "Profile",
     dashboard: "Dashboard",
-    signOut: "Sign out",
+    signOut: "Logout",
   },
   hero: {
     comingSoon: "Coming soon",
