@@ -94,20 +94,22 @@ export function HighlightCarousel({
           type="button"
           aria-label="Previous"
           onClick={() => go(-1)}
-          className="grid h-12 w-12 place-items-center text-[#999] transition hover:text-white"
+          className="grid h-10 w-10 place-items-center text-white transition hover:text-saa-gold-light"
         >
-          <Chevron dir="left" className="h-7 w-7" />
+          <Chevron dir="left" className="h-5 w-5" />
         </button>
-        <span className="text-[28px] font-bold leading-9 text-[#999]">
-          {page}/{posts.length}
+        {/* current page highlighted gold, the /total dimmed (design pager) */}
+        <span className="flex items-baseline gap-0.5">
+          <span className="text-[32px] font-bold leading-10 text-saa-gold-light">{page}</span>
+          <span className="text-lg font-bold text-[#999]">/{posts.length}</span>
         </span>
         <button
           type="button"
           aria-label="Next"
           onClick={() => go(1)}
-          className="grid h-12 w-12 place-items-center text-[#999] transition hover:text-white"
+          className="grid h-10 w-10 place-items-center text-white transition hover:text-saa-gold-light"
         >
-          <Chevron dir="right" className="h-7 w-7" />
+          <Chevron dir="right" className="h-5 w-5" />
         </button>
       </div>
     </div>
