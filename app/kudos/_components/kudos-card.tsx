@@ -80,7 +80,7 @@ export function KudosCard({
             {post.hashtagTitle}
           </span>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/saa/kudos-ic-pen.svg" alt="" className="absolute right-0 h-8 w-8" />
+          <img src="/saa/kudos-ic-pen-dark.svg" alt="" className="absolute right-0 h-8 w-8" />
         </div>
 
         <div className="rounded-xl border border-saa-gold-light bg-saa-gold-light/40 px-6 py-4">
@@ -131,7 +131,7 @@ export function KudosCard({
           >
             {labels.copyLink}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/kudos-ic-link.svg" alt="" className="h-6 w-6" />
+            <img src="/saa/kudos-ic-link-dark.svg" alt="" className="h-6 w-6" />
           </button>
           {highlight && (
             <a
