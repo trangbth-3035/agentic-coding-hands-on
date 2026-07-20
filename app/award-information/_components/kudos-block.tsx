@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ArrowUpRight from "@/app/_components/arrow-up-right";
 import { NAV_HREFS } from "@/lib/saa/content";
 import { getDict } from "@/lib/i18n/server";
 
@@ -34,8 +35,9 @@ export async function KudosBlock() {
             className="mt-2 flex w-fit items-center gap-2 rounded-lg bg-saa-gold-light px-6 py-4 text-sm font-bold text-saa-bg transition-shadow hover:shadow-lg"
           >
             {t.detail}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/saa/ic-arrow.svg" alt="" width={20} height={20} className="size-5" />
+            {/* currentColor arrow — the white ic-arrow.svg washed out on the
+                gold button; the design shows it black */}
+            <ArrowUpRight className="h-5 w-5" />
           </a>
         </div>
 
