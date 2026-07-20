@@ -108,29 +108,20 @@ export default function SiteHeader({
               )}
             </button>
             {accountOpen && (
-              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-52">
-                <SaaDropdownItem
-                  href="/profile"
-                  onClick={() => setAccountOpen(false)}
-                  icon={
+              // Regular-user variant (Figma z4sCl3_Qtk): Profile (highlighted)
+              // + Logout only — no Dashboard row — with each icon sitting
+              // right after its label, not flushed to the panel edge.
+              <SaaDropdownPanel className="absolute right-0 z-50 mt-2 min-w-44">
+                <SaaDropdownItem href="/profile" active onClick={() => setAccountOpen(false)}>
+                  <span className="inline-flex items-center gap-2">
+                    {dict.header.profile}
                     <Image src="/saa/icon-user.svg" alt="" width={24} height={24} className="h-6 w-6" />
-                  }
-                >
-                  {dict.header.profile}
-                </SaaDropdownItem>
-                <SaaDropdownItem
-                  href="/dashboard"
-                  onClick={() => setAccountOpen(false)}
-                  icon={
-                    <Image src="/saa/icon-grid.svg" alt="" width={24} height={24} className="h-6 w-6" />
-                  }
-                >
-                  {dict.header.dashboard}
+                  </span>
                 </SaaDropdownItem>
                 <form action={signOut} className="contents">
-                  <SaaDropdownItem
-                    type="submit"
-                    icon={
+                  <SaaDropdownItem type="submit">
+                    <span className="inline-flex items-center gap-2">
+                      {dict.header.signOut}
                       <Image
                         src="/saa/icon-chevron-right.svg"
                         alt=""
@@ -138,9 +129,7 @@ export default function SiteHeader({
                         height={24}
                         className="h-6 w-6"
                       />
-                    }
-                  >
-                    {dict.header.signOut}
+                    </span>
                   </SaaDropdownItem>
                 </form>
               </SaaDropdownPanel>
