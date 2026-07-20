@@ -74,7 +74,9 @@ export default function LanguageSwitcher({ locale }: { locale: Locale }) {
                 aria-checked={selected}
                 onClick={() => selectLocale(l.locale)}
                 className={`flex w-full items-center gap-2.5 rounded px-3 py-3 text-left text-base font-bold text-white transition ${
-                  selected ? "bg-saa-gold-light/15" : "hover:bg-white/5"
+                  selected
+                    ? "bg-saa-gold-light/15 [text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287]"
+                    : "hover:bg-saa-gold-light/10 hover:[text-shadow:0_4px_4px_rgba(0,0,0,0.25),0_0_6px_#FAE287]"
                 }`}
               >
                 <Image
